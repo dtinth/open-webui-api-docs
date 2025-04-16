@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Open WebUI API Reference</title>
+    <title>Open WebUI - API Reference</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -20,6 +20,9 @@
         url: new URL('openapi.json', location.href).toString(),
         baseServerURL: new URLSearchParams(location.search).get('server') ||
           'http://localhost:8080'
+      })
+      fetch('version.json').then(v => v.json()).then(v => {
+        document.title = `Open WebUI v${v.version} - API Reference`
       })
     </script>
   </body>
