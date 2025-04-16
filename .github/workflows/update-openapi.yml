@@ -1,0 +1,43 @@
+name: Update OpenAPI Spec
+
+on:
+  schedule:
+    - cron: "0 0 */3 * *" # every 3 days
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-openapi:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Start services
+        run: docker compose up -d
+
+      - name: Wait for docs endpoint
+        run: pnpm wait-on http-get://127.0.0.1:8080/docs
+
+      - name: Fetch OpenAPI spec
+        run: curl http://127.0.0.1:8080/openapi.json | jq | tee openapi.json
+
+      - name: Commit and push if openapi.json changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet openapi.json; then
+            git add openapi.json
+            git commit -m "chore: update openapi.json [automated]"
+            git push
+          fi
