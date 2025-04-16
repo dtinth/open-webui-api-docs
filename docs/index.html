@@ -1,11 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Open WebUI - API Reference</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body>
@@ -16,14 +14,24 @@
 
     <!-- Initialize the Scalar API Reference -->
     <script>
-      Scalar.createApiReference('#app', {
-        url: new URL('openapi.json', location.href).toString(),
-        baseServerURL: new URLSearchParams(location.search).get('server') ||
-          'http://localhost:8080'
-      })
-      fetch('version.json').then(v => v.json()).then(v => {
-        document.title = `Open WebUI v${v.version} - API Reference`
-      })
+      const baseServerURL =
+        new URLSearchParams(location.search).get("server") ||
+        "http://localhost:8080";
+      Scalar.createApiReference("#app", {
+        url: new URL("openapi.json", location.href).toString(),
+        baseServerURL,
+        servers: [
+          {
+            url: baseServerURL,
+            description: baseServerURL,
+          },
+        ],
+      });
+      fetch("version.json")
+        .then((v) => v.json())
+        .then((v) => {
+          document.title = `Open WebUI v${v.version} - API Reference`;
+        });
     </script>
   </body>
 </html>
