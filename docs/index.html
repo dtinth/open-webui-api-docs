@@ -18,6 +18,8 @@
     <script>
       Scalar.createApiReference('#app', {
         url: new URL('openapi.json', location.href).toString(),
+        baseServerURL: new URLSearchParams(location.search).get('server') ||
+          'http://localhost:8080'
       })
     </script>
   </body>
