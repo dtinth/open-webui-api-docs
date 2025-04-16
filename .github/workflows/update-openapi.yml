@@ -30,14 +30,17 @@ jobs:
         run: pnpm wait-on http-get://127.0.0.1:8080/docs
 
       - name: Fetch OpenAPI spec
-        run: curl http://127.0.0.1:8080/openapi.json | jq | tee openapi.json
+        run: curl http://127.0.0.1:8080/openapi.json | jq | tee docs/openapi.json
 
-      - name: Commit and push if openapi.json changed
+      - name: Fetch API version
+        run: curl http://127.0.0.1:8080/api/version | jq | tee docs/version.json
+
+      - name: Commit and push if openapi.json or version.json changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if ! git diff --quiet openapi.json; then
-            git add openapi.json
-            git commit -m "chore: update openapi.json [automated]"
+          if ! git diff --quiet docs/openapi.json docs/version.json; then
+            git add docs/openapi.json docs/version.json
+            git commit -m "chore: update docs [automated]"
             git push
           fi
