@@ -2455,13 +2455,57 @@
       }
     },
     "/openai/{path}": {
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2505,51 +2549,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2593,7 +2593,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -5696,23 +5696,55 @@
         ],
         "parameters": [
           {
-            "name": "skip",
+            "name": "query",
             "in": "query",
             "required": false,
             "schema": {
               "anyOf": [
                 {
-                  "type": "integer"
+                  "type": "string"
                 },
                 {
                   "type": "null"
                 }
               ],
-              "title": "Skip"
+              "title": "Query"
             }
           },
           {
-            "name": "limit",
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
+            "name": "page",
             "in": "query",
             "required": false,
             "schema": {
@@ -5724,7 +5756,8 @@
                   "type": "null"
                 }
               ],
-              "title": "Limit"
+              "default": 1,
+              "title": "Page"
             }
           }
         ],
@@ -5734,11 +5767,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserModel"
-                  },
-                  "title": "Response Get Users Api V1 Users  Get"
+                  "$ref": "#/components/schemas/UserListResponse"
                 }
               }
             }
@@ -5754,6 +5783,32 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/users/all": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get All Users",
+        "operationId": "get_all_users_api_v1_users_all_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserListResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/users/groups": {
@@ -8809,6 +8864,288 @@
                     }
                   ],
                   "title": "Response Delete All Tags By Id Api V1 Chats  Id  Tags All Delete"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Get Notes",
+        "operationId": "get_notes_api_v1_notes__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/NoteUserResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get Notes Api V1 Notes  Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notes/list": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Get Note List",
+        "operationId": "get_note_list_api_v1_notes_list_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/NoteUserResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get Note List Api V1 Notes List Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notes/create": {
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Create New Note",
+        "operationId": "create_new_note_api_v1_notes_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoteForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/NoteModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Create New Note Api V1 Notes Create Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notes/{id}": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Get Note By Id",
+        "operationId": "get_note_by_id_api_v1_notes__id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/NoteModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Note By Id Api V1 Notes  Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/{id}/update": {
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Update Note By Id",
+        "operationId": "update_note_by_id_api_v1_notes__id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoteForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/NoteModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Update Note By Id Api V1 Notes  Id  Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/{id}/delete": {
+      "delete": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Delete Note By Id",
+        "operationId": "delete_note_by_id_api_v1_notes__id__delete_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Delete Note By Id Api V1 Notes  Id  Delete Delete"
                 }
               }
             }
@@ -14320,6 +14657,10 @@
             "type": "boolean",
             "title": "Enable Channels"
           },
+          "ENABLE_NOTES": {
+            "type": "boolean",
+            "title": "Enable Notes"
+          },
           "ENABLE_USER_WEBHOOKS": {
             "type": "boolean",
             "title": "Enable User Webhooks"
@@ -14338,6 +14679,7 @@
           "ENABLE_COMMUNITY_SHARING",
           "ENABLE_MESSAGE_RATING",
           "ENABLE_CHANNELS",
+          "ENABLE_NOTES",
           "ENABLE_USER_WEBHOOKS"
         ],
         "title": "AdminConfig"
@@ -14576,8 +14918,7 @@
           },
           "file_metadata": {
             "type": "object",
-            "title": "File Metadata",
-            "default": {}
+            "title": "File Metadata"
           }
         },
         "type": "object",
@@ -14876,6 +15217,16 @@
           "edit": {
             "type": "boolean",
             "title": "Edit",
+            "default": true
+          },
+          "share": {
+            "type": "boolean",
+            "title": "Share",
+            "default": true
+          },
+          "export": {
+            "type": "boolean",
+            "title": "Export",
             "default": true
           },
           "stt": {
@@ -15473,6 +15824,11 @@
             "type": "boolean",
             "title": "Code Interpreter",
             "default": true
+          },
+          "notes": {
+            "type": "boolean",
+            "title": "Notes",
+            "default": true
           }
         },
         "type": "object",
@@ -15594,49 +15950,6 @@
         ],
         "title": "FeedbackModel"
       },
-      "FeedbackUserReponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role",
-            "default": "pending"
-          },
-          "last_active_at": {
-            "type": "integer",
-            "title": "Last Active At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "email",
-          "last_active_at",
-          "updated_at",
-          "created_at"
-        ],
-        "title": "FeedbackUserReponse"
-      },
       "FeedbackUserResponse": {
         "properties": {
           "id": {
@@ -15688,7 +16001,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/FeedbackUserReponse"
+                "$ref": "#/components/schemas/open_webui__routers__evaluations__UserResponse"
               },
               {
                 "type": "null"
@@ -16273,6 +16586,9 @@
           "format": {
             "anyOf": [
               {
+                "type": "object"
+              },
+              {
                 "type": "string"
               },
               {
@@ -16805,7 +17121,7 @@
           },
           "files": {
             "items": {
-              "$ref": "#/components/schemas/FileModel"
+              "$ref": "#/components/schemas/FileMetadataResponse"
             },
             "type": "array",
             "title": "Files"
@@ -17787,6 +18103,194 @@
         ],
         "title": "ModelsConfigForm"
       },
+      "NoteForm": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "NoteForm"
+      },
+      "NoteModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "title",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "NoteModel"
+      },
+      "NoteUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "title",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "NoteUserResponse"
+      },
       "ProcessFileForm": {
         "properties": {
           "file_id": {
@@ -18372,6 +18876,14 @@
           "AZURE_LOCALES": {
             "type": "string",
             "title": "Azure Locales"
+          },
+          "AZURE_BASE_URL": {
+            "type": "string",
+            "title": "Azure Base Url"
+          },
+          "AZURE_MAX_SPEAKERS": {
+            "type": "string",
+            "title": "Azure Max Speakers"
           }
         },
         "type": "object",
@@ -18384,7 +18896,9 @@
           "DEEPGRAM_API_KEY",
           "AZURE_API_KEY",
           "AZURE_REGION",
-          "AZURE_LOCALES"
+          "AZURE_LOCALES",
+          "AZURE_BASE_URL",
+          "AZURE_MAX_SPEAKERS"
         ],
         "title": "STTConfigForm"
       },
@@ -18672,6 +19186,10 @@
             "type": "string",
             "title": "Azure Speech Region"
           },
+          "AZURE_SPEECH_BASE_URL": {
+            "type": "string",
+            "title": "Azure Speech Base Url"
+          },
           "AZURE_SPEECH_OUTPUT_FORMAT": {
             "type": "string",
             "title": "Azure Speech Output Format"
@@ -18687,6 +19205,7 @@
           "VOICE",
           "SPLIT_ON",
           "AZURE_SPEECH_REGION",
+          "AZURE_SPEECH_BASE_URL",
           "AZURE_SPEECH_OUTPUT_FORMAT"
         ],
         "title": "TTSConfigForm"
@@ -19247,6 +19766,27 @@
         ],
         "title": "UrlForm"
       },
+      "UserListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserModel"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "UserListResponse"
+      },
       "UserModel": {
         "properties": {
           "id": {
@@ -19588,6 +20128,39 @@
             ],
             "title": "Searxng Query Url"
           },
+          "YACY_QUERY_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Yacy Query Url"
+          },
+          "YACY_USERNAME": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Yacy Username"
+          },
+          "YACY_PASSWORD": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Yacy Password"
+          },
           "GOOGLE_PSE_API_KEY": {
             "anyOf": [
               {
@@ -19907,6 +20480,50 @@
             ],
             "title": "Tavily Extract Depth"
           },
+          "EXTERNAL_WEB_SEARCH_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Search Url"
+          },
+          "EXTERNAL_WEB_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Search Api Key"
+          },
+          "EXTERNAL_WEB_LOADER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Loader Url"
+          },
+          "EXTERNAL_WEB_LOADER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Loader Api Key"
+          },
           "YOUTUBE_LOADER_LANGUAGE": {
             "anyOf": [
               {
@@ -20097,6 +20714,49 @@
           "content"
         ],
         "title": "MessageForm"
+      },
+      "open_webui__routers__evaluations__UserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "pending"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "last_active_at",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "UserResponse"
       },
       "open_webui__routers__images__ConfigForm": {
         "properties": {
@@ -20391,6 +21051,28 @@
               }
             ],
             "title": "Docling Server Url"
+          },
+          "DOCLING_OCR_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Ocr Engine"
+          },
+          "DOCLING_OCR_LANG": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Ocr Lang"
           },
           "DOCUMENT_INTELLIGENCE_ENDPOINT": {
             "anyOf": [
