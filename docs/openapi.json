@@ -2499,7 +2499,7 @@
           }
         }
       },
-      "get": {
+      "delete": {
         "tags": [
           "openai"
         ],
@@ -2543,7 +2543,7 @@
           }
         }
       },
-      "delete": {
+      "get": {
         "tags": [
           "openai"
         ],
@@ -3872,30 +3872,6 @@
         ]
       }
     },
-    "/api/v1/retrieval/reranking": {
-      "get": {
-        "tags": [
-          "retrieval"
-        ],
-        "summary": "Get Reraanking Config",
-        "operationId": "get_reraanking_config_api_v1_retrieval_reranking_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/v1/retrieval/embedding/update": {
       "post": {
         "tags": [
@@ -3908,50 +3884,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/EmbeddingModelUpdateForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
-    "/api/v1/retrieval/reranking/update": {
-      "post": {
-        "tags": [
-          "retrieval"
-        ],
-        "summary": "Update Reranking Config",
-        "operationId": "update_reranking_config_api_v1_retrieval_reranking_update_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RerankingModelUpdateForm"
               }
             }
           },
@@ -18826,19 +18758,6 @@
         ],
         "title": "Reactions"
       },
-      "RerankingModelUpdateForm": {
-        "properties": {
-          "reranking_model": {
-            "type": "string",
-            "title": "Reranking Model"
-          }
-        },
-        "type": "object",
-        "required": [
-          "reranking_model"
-        ],
-        "title": "RerankingModelUpdateForm"
-      },
       "STTConfigForm": {
         "properties": {
           "OPENAI_API_BASE_URL": {
@@ -18904,14 +18823,17 @@
       },
       "SearchForm": {
         "properties": {
-          "query": {
-            "type": "string",
-            "title": "Query"
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Queries"
           }
         },
         "type": "object",
         "required": [
-          "query"
+          "queries"
         ],
         "title": "SearchForm"
       },
@@ -21106,6 +21028,50 @@
               }
             ],
             "title": "Mistral Ocr Api Key"
+          },
+          "RAG_RERANKING_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Model"
+          },
+          "RAG_RERANKING_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Engine"
+          },
+          "RAG_EXTERNAL_RERANKER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Url"
+          },
+          "RAG_EXTERNAL_RERANKER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Api Key"
           },
           "TEXT_SPLITTER": {
             "anyOf": [
