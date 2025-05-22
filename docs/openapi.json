@@ -14596,6 +14596,39 @@
           "ENABLE_USER_WEBHOOKS": {
             "type": "boolean",
             "title": "Enable User Webhooks"
+          },
+          "PENDING_USER_OVERLAY_TITLE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pending User Overlay Title"
+          },
+          "PENDING_USER_OVERLAY_CONTENT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pending User Overlay Content"
+          },
+          "RESPONSE_WATERMARK": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response Watermark"
           }
         },
         "type": "object",
@@ -17403,6 +17436,11 @@
               }
             ],
             "title": "Certificate Path"
+          },
+          "validate_cert": {
+            "type": "boolean",
+            "title": "Validate Cert",
+            "default": true
           },
           "ciphers": {
             "anyOf": [
@@ -20802,6 +20840,17 @@
           "key": {
             "type": "string",
             "title": "Key"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
           }
         },
         "type": "object",
@@ -20952,6 +21001,28 @@
             ],
             "title": "Pdf Extract Images"
           },
+          "EXTERNAL_DOCUMENT_LOADER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Url"
+          },
+          "EXTERNAL_DOCUMENT_LOADER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Api Key"
+          },
           "TIKA_SERVER_URL": {
             "anyOf": [
               {
@@ -20995,6 +21066,17 @@
               }
             ],
             "title": "Docling Ocr Lang"
+          },
+          "DOCLING_DO_PICTURE_DESCRIPTION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Do Picture Description"
           },
           "DOCUMENT_INTELLIGENCE_ENDPOINT": {
             "anyOf": [
@@ -21127,6 +21209,20 @@
               }
             ],
             "title": "File Max Count"
+          },
+          "ALLOWED_FILE_EXTENSIONS": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed File Extensions"
           },
           "ENABLE_GOOGLE_DRIVE_INTEGRATION": {
             "anyOf": [
