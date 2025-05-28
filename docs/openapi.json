@@ -257,6 +257,31 @@
         }
       }
     },
+    "/ollama/api/ps": {
+      "get": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Get Ollama Loaded Models",
+        "description": "List models that are currently loaded into Ollama memory, and which node they are loaded on.",
+        "operationId": "get_ollama_loaded_models_ollama_api_ps_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/ollama/api/version/{url_idx}": {
       "get": {
         "tags": [
@@ -351,20 +376,39 @@
         }
       }
     },
-    "/ollama/api/ps": {
-      "get": {
+    "/ollama/api/unload": {
+      "post": {
         "tags": [
           "ollama"
         ],
-        "summary": "Get Ollama Loaded Models",
-        "description": "List models that are currently loaded into Ollama memory, and which node they are loaded on.",
-        "operationId": "get_ollama_loaded_models_ollama_api_ps_get",
+        "summary": "Unload Model",
+        "operationId": "unload_model_ollama_api_unload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelNameForm"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -2499,7 +2543,7 @@
           }
         }
       },
-      "post": {
+      "get": {
         "tags": [
           "openai"
         ],
@@ -2587,7 +2631,7 @@
           }
         }
       },
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
@@ -7201,23 +7245,67 @@
             }
           },
           {
-            "name": "skip",
+            "name": "page",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "title": "Skip"
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Page"
             }
           },
           {
-            "name": "limit",
+            "name": "query",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 50,
-              "title": "Limit"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
             }
           }
         ],
@@ -7489,7 +7577,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ChatResponse"
+                    "$ref": "#/components/schemas/ChatTitleIdResponse"
                   },
                   "type": "array",
                   "title": "Response Get User Pinned Chats Api V1 Chats Pinned Get"
@@ -7639,23 +7727,67 @@
         ],
         "parameters": [
           {
-            "name": "skip",
+            "name": "page",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "title": "Skip"
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Page"
             }
           },
           {
-            "name": "limit",
+            "name": "query",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 50,
-              "title": "Limit"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
             }
           }
         ],
@@ -11985,6 +12117,16 @@
               "default": true,
               "title": "Process"
             }
+          },
+          {
+            "name": "internal",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Internal"
+            }
           }
         ],
         "requestBody": {
@@ -12550,6 +12692,114 @@
                   },
                   "type": "array",
                   "title": "Response Get Functions Api V1 Functions Export Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/functions/load/url": {
+      "post": {
+        "tags": [
+          "functions"
+        ],
+        "summary": "Load Function From Url",
+        "operationId": "load_function_from_url_api_v1_functions_load_url_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadUrlForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Load Function From Url Api V1 Functions Load Url Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/functions/sync": {
+      "post": {
+        "tags": [
+          "functions"
+        ],
+        "summary": "Sync Functions",
+        "operationId": "sync_functions_api_v1_functions_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncFunctionsForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/FunctionModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Sync Functions Api V1 Functions Sync Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -14866,6 +15116,17 @@
             "type": "string",
             "format": "binary",
             "title": "File"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
           }
         },
         "type": "object",
@@ -14881,9 +15142,19 @@
             "format": "binary",
             "title": "File"
           },
-          "file_metadata": {
-            "type": "object",
-            "title": "File Metadata"
+          "metadata": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
           }
         },
         "type": "object",
@@ -17465,6 +17736,22 @@
         ],
         "title": "LdapServerConfig"
       },
+      "LoadUrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "LoadUrlForm"
+      },
       "MarkdownForm": {
         "properties": {
           "md": {
@@ -19112,6 +19399,41 @@
         "type": "object",
         "title": "SnapshotData"
       },
+      "SyncFunctionsForm": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/FunctionMeta"
+          },
+          "functions": {
+            "items": {
+              "$ref": "#/components/schemas/FunctionModel"
+            },
+            "type": "array",
+            "title": "Functions",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "content",
+          "meta"
+        ],
+        "title": "SyncFunctionsForm"
+      },
       "TTSConfigForm": {
         "properties": {
           "OPENAI_API_BASE_URL": {
@@ -20077,6 +20399,17 @@
             ],
             "title": "Bypass Web Search Embedding And Retrieval"
           },
+          "BYPASS_WEB_SEARCH_WEB_LOADER": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bypass Web Search Web Loader"
+          },
           "SEARXNG_QUERY_URL": {
             "anyOf": [
               {
@@ -20978,6 +21311,17 @@
               }
             ],
             "title": "Relevance Threshold"
+          },
+          "HYBRID_BM25_WEIGHT": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid Bm25 Weight"
           },
           "CONTENT_EXTRACTION_ENGINE": {
             "anyOf": [
