@@ -2499,57 +2499,13 @@
       }
     },
     "/openai/{path}": {
-      "put": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2593,7 +2549,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2631,13 +2587,57 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -10590,6 +10590,60 @@
         ]
       }
     },
+    "/api/v1/tools/load/url": {
+      "post": {
+        "tags": [
+          "tools"
+        ],
+        "summary": "Load Tool From Url",
+        "operationId": "load_tool_from_url_api_v1_tools_load_url_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoadUrlForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Load Tool From Url Api V1 Tools Load Url Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/tools/export": {
       "get": {
         "tags": [
@@ -14992,6 +15046,29 @@
         ],
         "title": "Automatic1111ConfigForm"
       },
+      "AzureOpenAIConfigForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "key",
+          "version"
+        ],
+        "title": "AzureOpenAIConfigForm"
+      },
       "BannerModel": {
         "properties": {
           "id": {
@@ -15987,6 +16064,16 @@
             "anyOf": [
               {
                 "$ref": "#/components/schemas/open_webui__routers__retrieval__OllamaConfigForm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "azure_openai_config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AzureOpenAIConfigForm"
               },
               {
                 "type": "null"
@@ -18880,6 +18967,17 @@
               }
             ],
             "title": "Hybrid"
+          },
+          "hybrid_bm25_weight": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid Bm25 Weight"
           }
         },
         "type": "object",
@@ -21344,6 +21442,105 @@
               }
             ],
             "title": "Pdf Extract Images"
+          },
+          "DATALAB_MARKER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Api Key"
+          },
+          "DATALAB_MARKER_LANGS": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Langs"
+          },
+          "DATALAB_MARKER_SKIP_CACHE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Skip Cache"
+          },
+          "DATALAB_MARKER_FORCE_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Force Ocr"
+          },
+          "DATALAB_MARKER_PAGINATE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Paginate"
+          },
+          "DATALAB_MARKER_STRIP_EXISTING_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Strip Existing Ocr"
+          },
+          "DATALAB_MARKER_DISABLE_IMAGE_EXTRACTION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Disable Image Extraction"
+          },
+          "DATALAB_MARKER_USE_LLM": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Use Llm"
+          },
+          "DATALAB_MARKER_OUTPUT_FORMAT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Output Format"
           },
           "EXTERNAL_DOCUMENT_LOADER_URL": {
             "anyOf": [
