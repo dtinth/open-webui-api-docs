@@ -2499,101 +2499,57 @@
       }
     },
     "/openai/{path}": {
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2637,7 +2593,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -3153,6 +3153,51 @@
         ],
         "summary": "Generate Title",
         "operationId": "generate_title_api_v1_tasks_title_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/follow_up/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Follow Ups",
+        "operationId": "generate_follow_ups_api_v1_tasks_follow_up_completions_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -5882,60 +5927,6 @@
             "content": {
               "application/json": {
                 "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
-    "/api/v1/users/update/role": {
-      "post": {
-        "tags": [
-          "users"
-        ],
-        "summary": "Update User Role",
-        "operationId": "update_user_role_api_v1_users_update_role_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserRoleUpdateForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/UserModel"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "title": "Response Update User Role Api V1 Users Update Role Post"
-                }
               }
             }
           },
@@ -14257,6 +14248,49 @@
         ]
       }
     },
+    "/api/embeddings": {
+      "post": {
+        "summary": "Embeddings",
+        "description": "OpenAI-compatible embeddings endpoint.\n\nThis handler:\n  - Performs user/model checks and dispatches to the correct backend.\n  - Supports OpenAI, Ollama, arena models, pipelines, and any compatible provider.\n\nArgs:\n    request (Request): Request context.\n    form_data (dict): OpenAI-like payload (e.g., {\"model\": \"...\", \"input\": [...]})\n    user (UserModel): Authenticated user.\n\nReturns:\n    dict: OpenAI-compatible embeddings response.",
+        "operationId": "embeddings_api_embeddings_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/chat/completions": {
       "post": {
         "summary": "Chat Completion",
@@ -14760,6 +14794,48 @@
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/{path}": {
+      "get": {
+        "summary": "Serve Cache File",
+        "operationId": "serve_cache_file_cache__path__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -19722,6 +19798,14 @@
             "type": "string",
             "title": "Tags Generation Prompt Template"
           },
+          "FOLLOW_UP_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Follow Up Generation Prompt Template"
+          },
+          "ENABLE_FOLLOW_UP_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Follow Up Generation"
+          },
           "ENABLE_TAGS_GENERATION": {
             "type": "boolean",
             "title": "Enable Tags Generation"
@@ -19753,6 +19837,8 @@
           "ENABLE_AUTOCOMPLETE_GENERATION",
           "AUTOCOMPLETE_GENERATION_INPUT_MAX_LENGTH",
           "TAGS_GENERATION_PROMPT_TEMPLATE",
+          "FOLLOW_UP_GENERATION_PROMPT_TEMPLATE",
+          "ENABLE_FOLLOW_UP_GENERATION",
           "ENABLE_TAGS_GENERATION",
           "ENABLE_SEARCH_QUERY_GENERATION",
           "ENABLE_RETRIEVAL_QUERY_GENERATION",
@@ -20310,24 +20396,6 @@
         ],
         "title": "UserPermissions"
       },
-      "UserRoleUpdateForm": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "role"
-        ],
-        "title": "UserRoleUpdateForm"
-      },
       "UserSettings": {
         "properties": {
           "ui": {
@@ -20349,6 +20417,10 @@
       },
       "UserUpdateForm": {
         "properties": {
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -20375,6 +20447,7 @@
         },
         "type": "object",
         "required": [
+          "role",
           "name",
           "email",
           "profile_image_url"
@@ -20771,6 +20844,28 @@
               }
             ],
             "title": "Perplexity Api Key"
+          },
+          "PERPLEXITY_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perplexity Model"
+          },
+          "PERPLEXITY_SEARCH_CONTEXT_USAGE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perplexity Search Context Usage"
           },
           "SOUGOU_API_SID": {
             "anyOf": [
@@ -21618,6 +21713,39 @@
               }
             ],
             "title": "Docling Do Picture Description"
+          },
+          "DOCLING_PICTURE_DESCRIPTION_MODE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Picture Description Mode"
+          },
+          "DOCLING_PICTURE_DESCRIPTION_LOCAL": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Picture Description Local"
+          },
+          "DOCLING_PICTURE_DESCRIPTION_API": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Picture Description Api"
           },
           "DOCUMENT_INTELLIGENCE_ENDPOINT": {
             "anyOf": [
