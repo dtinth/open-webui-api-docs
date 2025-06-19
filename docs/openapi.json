@@ -2499,57 +2499,13 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2593,7 +2549,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2637,7 +2637,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -5703,6 +5703,31 @@
         ]
       }
     },
+    "/api/v1/users/active": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Active Users",
+        "description": "Get a list of active users.",
+        "operationId": "get_active_users_api_v1_users_active_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/users/": {
       "get": {
         "tags": [
@@ -6193,6 +6218,54 @@
                 "schema": {
                   "type": "boolean",
                   "title": "Response Delete User By Id Api V1 Users  User Id  Delete"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/active": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Active Status By Id",
+        "operationId": "get_user_active_status_by_id_api_v1_users__user_id__active_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Response Get User Active Status By Id Api V1 Users  User Id  Active Get"
                 }
               }
             }
@@ -14662,6 +14735,28 @@
         }
       }
     },
+    "/api/usage": {
+      "get": {
+        "summary": "Get Current Usage",
+        "description": "Get current usage statistics for Open WebUI.\nThis is an experimental endpoint and subject to change.",
+        "operationId": "get_current_usage_api_usage_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/oauth/{provider}/login": {
       "get": {
         "summary": "Oauth Login",
@@ -15591,6 +15686,11 @@
           "controls": {
             "type": "boolean",
             "title": "Controls",
+            "default": true
+          },
+          "system_prompt": {
+            "type": "boolean",
+            "title": "System Prompt",
             "default": true
           },
           "file_upload": {
@@ -19275,6 +19375,14 @@
             "type": "string",
             "title": "Model"
           },
+          "SUPPORTED_CONTENT_TYPES": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supported Content Types",
+            "default": []
+          },
           "WHISPER_MODEL": {
             "type": "string",
             "title": "Whisper Model"
@@ -21878,6 +21986,28 @@
               }
             ],
             "title": "File Max Count"
+          },
+          "FILE_IMAGE_COMPRESSION_WIDTH": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Image Compression Width"
+          },
+          "FILE_IMAGE_COMPRESSION_HEIGHT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Image Compression Height"
           },
           "ALLOWED_FILE_EXTENSIONS": {
             "anyOf": [
