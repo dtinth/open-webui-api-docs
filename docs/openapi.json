@@ -1483,6 +1483,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -1563,6 +1564,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -1626,6 +1628,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -1689,6 +1692,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -1752,6 +1756,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -1815,6 +1820,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -2471,6 +2477,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -2499,13 +2506,57 @@
       }
     },
     "/openai/{path}": {
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2549,7 +2600,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2593,51 +2644,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -3051,6 +3058,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -3157,6 +3165,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3202,6 +3211,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3247,6 +3257,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3292,6 +3303,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3337,6 +3349,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3382,6 +3395,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3427,6 +3441,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -3472,6 +3487,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -4593,6 +4609,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "additionalProperties": true,
                   "type": "object",
                   "title": "Response Import Config Api V1 Configs Import Post"
                 }
@@ -4630,6 +4647,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "additionalProperties": true,
                   "type": "object",
                   "title": "Response Export Config Api V1 Configs Export Get"
                 }
@@ -4644,20 +4662,20 @@
         ]
       }
     },
-    "/api/v1/configs/direct_connections": {
+    "/api/v1/configs/connections": {
       "get": {
         "tags": [
           "configs"
         ],
-        "summary": "Get Direct Connections Config",
-        "operationId": "get_direct_connections_config_api_v1_configs_direct_connections_get",
+        "summary": "Get Connections Config",
+        "operationId": "get_connections_config_api_v1_configs_connections_get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DirectConnectionsConfigForm"
+                  "$ref": "#/components/schemas/ConnectionsConfigForm"
                 }
               }
             }
@@ -4673,13 +4691,13 @@
         "tags": [
           "configs"
         ],
-        "summary": "Set Direct Connections Config",
-        "operationId": "set_direct_connections_config_api_v1_configs_direct_connections_post",
+        "summary": "Set Connections Config",
+        "operationId": "set_connections_config_api_v1_configs_connections_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DirectConnectionsConfigForm"
+                "$ref": "#/components/schemas/ConnectionsConfigForm"
               }
             }
           },
@@ -4691,7 +4709,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DirectConnectionsConfigForm"
+                  "$ref": "#/components/schemas/ConnectionsConfigForm"
                 }
               }
             }
@@ -6068,6 +6086,7 @@
                 "schema": {
                   "anyOf": [
                     {
+                      "additionalProperties": true,
                       "type": "object"
                     },
                     {
@@ -6098,6 +6117,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -6113,6 +6133,7 @@
                 "schema": {
                   "anyOf": [
                     {
+                      "additionalProperties": true,
                       "type": "object"
                     },
                     {
@@ -6265,6 +6286,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "additionalProperties": true,
                   "title": "Response Get User Active Status By Id Api V1 Users  User Id  Active Get"
                 }
               }
@@ -6366,6 +6388,36 @@
                   },
                   "type": "array",
                   "title": "Response Get Channels Api V1 Channels  Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/channels/list": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get All Channels",
+        "operationId": "get_all_channels_api_v1_channels_list_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ChannelModel"
+                  },
+                  "type": "array",
+                  "title": "Response Get All Channels Api V1 Channels List Get"
                 }
               }
             }
@@ -9053,7 +9105,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NoteUserResponse"
+                    "$ref": "#/components/schemas/NoteTitleIdResponse"
                   },
                   "type": "array",
                   "title": "Response Get Note List Api V1 Notes List Get"
@@ -10679,6 +10731,7 @@
                 "schema": {
                   "anyOf": [
                     {
+                      "additionalProperties": true,
                       "type": "object"
                     },
                     {
@@ -10991,7 +11044,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -11046,7 +11100,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -11099,6 +11154,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -11112,7 +11168,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -11167,7 +11224,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -11222,7 +11280,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -11275,6 +11334,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -11288,7 +11348,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -12847,6 +12908,7 @@
                 "schema": {
                   "anyOf": [
                     {
+                      "additionalProperties": true,
                       "type": "object"
                     },
                     {
@@ -13293,7 +13355,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -13348,7 +13411,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -13401,6 +13465,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -13414,7 +13479,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -13469,7 +13535,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -13524,7 +13591,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -13577,6 +13645,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -13590,7 +13659,8 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "type": "object"
+                      "type": "object",
+                      "additionalProperties": true
                     },
                     {
                       "type": "null"
@@ -14283,6 +14353,23 @@
       "get": {
         "summary": "Get Models",
         "operationId": "get_models_api_models_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Refresh"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -14291,13 +14378,18 @@
                 "schema": {}
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/models/base": {
@@ -14330,6 +14422,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -14372,6 +14465,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -14414,6 +14508,7 @@
           "content": {
             "application/json": {
               "schema": {
+                "additionalProperties": true,
                 "type": "object",
                 "title": "Form Data"
               }
@@ -14474,6 +14569,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "additionalProperties": true,
                 "title": "Form Data"
               }
             }
@@ -15393,6 +15489,7 @@
           "metadata": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15478,6 +15575,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15489,6 +15587,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15500,6 +15599,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15554,6 +15654,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15565,6 +15666,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15576,6 +15678,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15623,8 +15726,20 @@
       "ChatForm": {
         "properties": {
           "chat": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Chat"
+          },
+          "folder_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Folder Id"
           }
         },
         "type": "object",
@@ -15636,12 +15751,25 @@
       "ChatImportForm": {
         "properties": {
           "chat": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Chat"
+          },
+          "folder_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Folder Id"
           },
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -15663,16 +15791,27 @@
             "title": "Pinned",
             "default": false
           },
-          "folder_id": {
+          "created_at": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "integer"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Folder Id"
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
           }
         },
         "type": "object",
@@ -15767,6 +15906,7 @@
             "title": "Title"
           },
           "chat": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Chat"
           },
@@ -15806,6 +15946,7 @@
             "default": false
           },
           "meta": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Meta",
             "default": {}
@@ -15870,6 +16011,7 @@
           },
           "messages": {
             "items": {
+              "additionalProperties": true,
               "type": "object"
             },
             "type": "array",
@@ -16089,6 +16231,7 @@
           },
           "COMFYUI_WORKFLOW_NODES": {
             "items": {
+              "additionalProperties": true,
               "type": "object"
             },
             "type": "array",
@@ -16103,6 +16246,24 @@
           "COMFYUI_WORKFLOW_NODES"
         ],
         "title": "ComfyUIConfigForm"
+      },
+      "ConnectionsConfigForm": {
+        "properties": {
+          "ENABLE_DIRECT_CONNECTIONS": {
+            "type": "boolean",
+            "title": "Enable Direct Connections"
+          },
+          "ENABLE_BASE_MODELS_CACHE": {
+            "type": "boolean",
+            "title": "Enable Base Models Cache"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ENABLE_DIRECT_CONNECTIONS",
+          "ENABLE_BASE_MODELS_CACHE"
+        ],
+        "title": "ConnectionsConfigForm"
       },
       "ContentForm": {
         "properties": {
@@ -16211,19 +16372,6 @@
         ],
         "title": "DeletePipelineForm"
       },
-      "DirectConnectionsConfigForm": {
-        "properties": {
-          "ENABLE_DIRECT_CONNECTIONS": {
-            "type": "boolean",
-            "title": "Enable Direct Connections"
-          }
-        },
-        "type": "object",
-        "required": [
-          "ENABLE_DIRECT_CONNECTIONS"
-        ],
-        "title": "DirectConnectionsConfigForm"
-      },
       "EmbeddingModelUpdateForm": {
         "properties": {
           "openai_config": {
@@ -16291,6 +16439,7 @@
             "title": "Type"
           },
           "data": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Data"
           }
@@ -16352,6 +16501,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16399,6 +16549,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16410,6 +16561,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16421,6 +16573,7 @@
           "snapshot": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16470,6 +16623,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16481,6 +16635,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16566,6 +16721,7 @@
             "title": "Id"
           },
           "meta": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Meta"
           },
@@ -16626,6 +16782,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16637,6 +16794,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16648,6 +16806,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16717,6 +16876,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16754,6 +16914,18 @@
           "name": {
             "type": "string",
             "title": "Name"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
           }
         },
         "additionalProperties": true,
@@ -16804,6 +16976,7 @@
           "items": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16815,6 +16988,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -16822,6 +16996,18 @@
               }
             ],
             "title": "Meta"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
           },
           "is_expanded": {
             "type": "boolean",
@@ -16907,6 +17093,7 @@
           "manifest": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17085,6 +17272,7 @@
           "format": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17099,6 +17287,7 @@
           "options": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17222,6 +17411,7 @@
           "options": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17265,6 +17455,7 @@
           "options": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17359,6 +17550,7 @@
           "permissions": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17396,6 +17588,7 @@
           "permissions": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17407,6 +17600,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17418,6 +17612,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17467,6 +17662,7 @@
           "permissions": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17536,6 +17732,7 @@
       "ImportConfigForm": {
         "properties": {
           "config": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Config"
           }
@@ -17580,6 +17777,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17591,6 +17789,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17602,6 +17801,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17651,6 +17851,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17662,6 +17863,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17699,6 +17901,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17710,6 +17913,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17721,6 +17925,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17746,6 +17951,7 @@
                       "$ref": "#/components/schemas/FileMetadataResponse"
                     },
                     {
+                      "additionalProperties": true,
                       "type": "object"
                     }
                   ]
@@ -17791,6 +17997,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17802,6 +18009,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17813,6 +18021,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -17848,6 +18057,7 @@
                       "$ref": "#/components/schemas/FileMetadataResponse"
                     },
                     {
+                      "additionalProperties": true,
                       "type": "object"
                     }
                   ]
@@ -18117,6 +18327,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18128,6 +18339,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18194,6 +18406,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18205,6 +18418,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18291,6 +18505,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18342,6 +18557,7 @@
           "capabilities": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18389,6 +18605,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18425,15 +18642,20 @@
       },
       "ModelNameForm": {
         "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name"
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
           }
         },
+        "additionalProperties": true,
         "type": "object",
-        "required": [
-          "name"
-        ],
         "title": "ModelNameForm"
       },
       "ModelParams": {
@@ -18476,6 +18698,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18544,6 +18767,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18632,6 +18856,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18643,6 +18868,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18654,6 +18880,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18686,6 +18913,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18697,6 +18925,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18708,6 +18937,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18735,6 +18965,34 @@
         ],
         "title": "NoteModel"
       },
+      "NoteTitleIdResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "NoteTitleIdResponse"
+      },
       "NoteUserResponse": {
         "properties": {
           "id": {
@@ -18752,6 +19010,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18763,6 +19022,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18774,6 +19034,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18916,6 +19177,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -18958,6 +19220,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -19023,6 +19286,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -19054,9 +19318,9 @@
       },
       "PushModelForm": {
         "properties": {
-          "name": {
+          "model": {
             "type": "string",
-            "title": "Name"
+            "title": "Model"
           },
           "insecure": {
             "anyOf": [
@@ -19083,7 +19347,7 @@
         },
         "type": "object",
         "required": [
-          "name"
+          "model"
         ],
         "title": "PushModelForm"
       },
@@ -19488,6 +19752,7 @@
           "permissions": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -19668,6 +19933,7 @@
           "chat": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -19841,6 +20107,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -19975,6 +20242,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20009,6 +20277,7 @@
           "manifest": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20042,6 +20311,7 @@
           },
           "specs": {
             "items": {
+              "additionalProperties": true,
               "type": "object"
             },
             "type": "array",
@@ -20053,6 +20323,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20103,6 +20374,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20166,6 +20438,7 @@
           "config": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20222,6 +20495,7 @@
           "access_control": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20277,6 +20551,7 @@
             "anyOf": [
               {
                 "items": {
+                  "additionalProperties": true,
                   "type": "object"
                 },
                 "type": "array"
@@ -20420,6 +20695,7 @@
           "info": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -20509,6 +20785,7 @@
           "ui": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -21237,6 +21514,7 @@
           "data": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -21248,6 +21526,7 @@
           "meta": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -21454,6 +21733,7 @@
             "title": "Ollama Base Urls"
           },
           "OLLAMA_API_CONFIGS": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Ollama Api Configs"
           }
@@ -21478,6 +21758,7 @@
           "config": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -21522,6 +21803,7 @@
             "title": "Openai Api Keys"
           },
           "OPENAI_API_CONFIGS": {
+            "additionalProperties": true,
             "type": "object",
             "title": "Openai Api Configs"
           }
@@ -21836,6 +22118,7 @@
           "DOCLING_PICTURE_DESCRIPTION_LOCAL": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
@@ -21847,6 +22130,7 @@
           "DOCLING_PICTURE_DESCRIPTION_API": {
             "anyOf": [
               {
+                "additionalProperties": true,
                 "type": "object"
               },
               {
