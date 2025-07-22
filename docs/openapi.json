@@ -2506,101 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2556,95 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -5862,7 +5862,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserListResponse"
+                  "$ref": "#/components/schemas/UserInfoListResponse"
                 }
               }
             }
@@ -12226,6 +12226,136 @@
         }
       }
     },
+    "/api/v1/groups/id/{id}/users/add": {
+      "post": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Add User To Group",
+        "operationId": "add_user_to_group_api_v1_groups_id__id__users_add_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserIdsForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GroupResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Add User To Group Api V1 Groups Id  Id  Users Add Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/groups/id/{id}/users/remove": {
+      "post": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Remove Users From Group",
+        "operationId": "remove_users_from_group_api_v1_groups_id__id__users_remove_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserIdsForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GroupResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Remove Users From Group Api V1 Groups Id  Id  Users Remove Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/groups/id/{id}/delete": {
       "delete": {
         "tags": [
@@ -17651,6 +17781,20 @@
       },
       "GroupUpdateForm": {
         "properties": {
+          "user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Ids"
+          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -17670,20 +17814,6 @@
               }
             ],
             "title": "Permissions"
-          },
-          "user_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "User Ids"
           }
         },
         "type": "object",
@@ -20614,6 +20744,75 @@
           "url"
         ],
         "title": "UrlForm"
+      },
+      "UserIdsForm": {
+        "properties": {
+          "user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Ids"
+          }
+        },
+        "type": "object",
+        "title": "UserIdsForm"
+      },
+      "UserInfoListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserInfoResponse"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "UserInfoListResponse"
+      },
+      "UserInfoResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "role"
+        ],
+        "title": "UserInfoResponse"
       },
       "UserListResponse": {
         "properties": {
