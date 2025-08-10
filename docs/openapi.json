@@ -2506,101 +2506,57 @@
       }
     },
     "/openai/{path}": {
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2600,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -6256,6 +6256,51 @@
         }
       }
     },
+    "/api/v1/users/{user_id}/profile/image": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Profile Image By Id",
+        "operationId": "get_user_profile_image_by_id_api_v1_users__user_id__profile_image_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/users/{user_id}/active": {
       "get": {
         "tags": [
@@ -9463,6 +9508,86 @@
                     }
                   ],
                   "title": "Response Create New Model Api V1 Models Create Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/models/export": {
+      "get": {
+        "tags": [
+          "models"
+        ],
+        "summary": "Export Models",
+        "operationId": "export_models_api_v1_models_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ModelModel"
+                  },
+                  "type": "array",
+                  "title": "Response Export Models Api V1 Models Export Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/models/sync": {
+      "post": {
+        "tags": [
+          "models"
+        ],
+        "summary": "Sync Models",
+        "operationId": "sync_models_api_v1_models_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncModelsForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ModelModel"
+                  },
+                  "type": "array",
+                  "title": "Response Sync Models Api V1 Models Sync Post"
                 }
               }
             }
@@ -13091,14 +13216,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/FunctionModel"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
+                  "items": {
+                    "$ref": "#/components/schemas/FunctionModel"
+                  },
+                  "type": "array",
                   "title": "Response Sync Functions Api V1 Functions Sync Post"
                 }
               }
@@ -15957,9 +16078,19 @@
             "title": "Controls",
             "default": true
           },
+          "valves": {
+            "type": "boolean",
+            "title": "Valves",
+            "default": true
+          },
           "system_prompt": {
             "type": "boolean",
             "title": "System Prompt",
+            "default": true
+          },
+          "params": {
+            "type": "boolean",
+            "title": "Params",
             "default": true
           },
           "file_upload": {
@@ -20079,21 +20210,6 @@
       },
       "SyncFunctionsForm": {
         "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content"
-          },
-          "meta": {
-            "$ref": "#/components/schemas/FunctionMeta"
-          },
           "functions": {
             "items": {
               "$ref": "#/components/schemas/FunctionModel"
@@ -20104,13 +20220,21 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "content",
-          "meta"
-        ],
         "title": "SyncFunctionsForm"
+      },
+      "SyncModelsForm": {
+        "properties": {
+          "models": {
+            "items": {
+              "$ref": "#/components/schemas/ModelModel"
+            },
+            "type": "array",
+            "title": "Models",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "SyncModelsForm"
       },
       "TTSConfigForm": {
         "properties": {
@@ -22138,7 +22262,7 @@
             ],
             "title": "Datalab Marker Api Key"
           },
-          "DATALAB_MARKER_LANGS": {
+          "DATALAB_MARKER_API_BASE_URL": {
             "anyOf": [
               {
                 "type": "string"
@@ -22147,7 +22271,18 @@
                 "type": "null"
               }
             ],
-            "title": "Datalab Marker Langs"
+            "title": "Datalab Marker Api Base Url"
+          },
+          "DATALAB_MARKER_ADDITIONAL_CONFIG": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Additional Config"
           },
           "DATALAB_MARKER_SKIP_CACHE": {
             "anyOf": [
@@ -22203,6 +22338,17 @@
               }
             ],
             "title": "Datalab Marker Disable Image Extraction"
+          },
+          "DATALAB_MARKER_FORMAT_LINES": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Format Lines"
           },
           "DATALAB_MARKER_USE_LLM": {
             "anyOf": [
