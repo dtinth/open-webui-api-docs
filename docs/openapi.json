@@ -2506,57 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2556,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2638,13 +2594,57 @@
           }
         }
       },
-      "put": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -5128,7 +5128,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SessionUserResponse"
+                  "$ref": "#/components/schemas/SessionUserInfoResponse"
                 }
               }
             }
@@ -12596,16 +12596,6 @@
               "default": true,
               "title": "Process"
             }
-          },
-          {
-            "name": "internal",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Internal"
-            }
           }
         ],
         "requestBody": {
@@ -12853,6 +12843,61 @@
             "schema": {
               "type": "string",
               "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/files/{id}/process/status": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Get File Process Status",
+        "operationId": "get_file_process_status_api_v1_files__id__process_status_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "stream",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Stream"
             }
           }
         ],
@@ -20144,6 +20189,106 @@
         ],
         "title": "SearchForm"
       },
+      "SessionUserInfoResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "permissions": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Permissions"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role",
+          "profile_image_url",
+          "token",
+          "token_type"
+        ],
+        "title": "SessionUserInfoResponse"
+      },
       "SessionUserResponse": {
         "properties": {
           "id": {
@@ -21022,6 +21167,40 @@
           "name": {
             "type": "string",
             "title": "Name"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
           }
         },
         "type": "object",
@@ -21148,6 +21327,17 @@
             "type": "string",
             "title": "Email"
           },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Username"
+          },
           "role": {
             "type": "string",
             "title": "Role",
@@ -21157,19 +21347,7 @@
             "type": "string",
             "title": "Profile Image Url"
           },
-          "last_active_at": {
-            "type": "integer",
-            "title": "Last Active At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "api_key": {
+          "bio": {
             "anyOf": [
               {
                 "type": "string"
@@ -21178,17 +21356,30 @@
                 "type": "null"
               }
             ],
-            "title": "Api Key"
+            "title": "Bio"
           },
-          "settings": {
+          "gender": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserSettings"
+                "type": "string"
               },
               {
                 "type": "null"
               }
-            ]
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
           },
           "info": {
             "anyOf": [
@@ -21202,6 +21393,27 @@
             ],
             "title": "Info"
           },
+          "settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
           "oauth_sub": {
             "anyOf": [
               {
@@ -21212,6 +21424,18 @@
               }
             ],
             "title": "Oauth Sub"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
           }
         },
         "type": "object",
@@ -21426,6 +21650,17 @@
               }
             ],
             "title": "Web Search Concurrent Requests"
+          },
+          "WEB_LOADER_CONCURRENT_REQUESTS": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Loader Concurrent Requests"
           },
           "WEB_SEARCH_DOMAIN_FILTER_LIST": {
             "anyOf": [
