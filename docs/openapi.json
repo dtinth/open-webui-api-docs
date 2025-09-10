@@ -2506,57 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
+      "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2556,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2638,13 +2594,57 @@
           }
         }
       },
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -6239,6 +6239,62 @@
                 "schema": {
                   "type": "boolean",
                   "title": "Response Delete User By Id Api V1 Users  User Id  Delete"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/oauth/sessions": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Oauth Sessions By Id",
+        "operationId": "get_user_oauth_sessions_by_id_api_v1_users__user_id__oauth_sessions_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get User Oauth Sessions By Id Api V1 Users  User Id  Oauth Sessions Get"
                 }
               }
             }
@@ -10317,6 +10373,16 @@
               "type": "string",
               "title": "Id"
             }
+          },
+          {
+            "name": "delete_file",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Delete File"
+            }
           }
         ],
         "requestBody": {
@@ -12055,7 +12121,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FolderForm"
+                "$ref": "#/components/schemas/FolderUpdateForm"
               }
             }
           }
@@ -13215,27 +13281,56 @@
         ],
         "summary": "Get Functions",
         "operationId": "get_functions_api_v1_functions_export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "include_valves",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Valves"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/FunctionModel"
-                  },
                   "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/FunctionModel"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FunctionWithValvesModel"
+                      }
+                    ]
+                  },
                   "title": "Response Get Functions Api V1 Functions Export Get"
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/functions/load/url": {
@@ -13317,7 +13412,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/FunctionModel"
+                    "$ref": "#/components/schemas/FunctionWithValvesModel"
                   },
                   "type": "array",
                   "title": "Response Sync Functions Api V1 Functions Sync Post"
@@ -17437,6 +17532,18 @@
               }
             ],
             "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
           }
         },
         "additionalProperties": true,
@@ -17560,6 +17667,48 @@
         },
         "type": "object",
         "title": "FolderParentIdForm"
+      },
+      "FolderUpdateForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "title": "FolderUpdateForm"
       },
       "FunctionForm": {
         "properties": {
@@ -17726,6 +17875,75 @@
           "created_at"
         ],
         "title": "FunctionResponse"
+      },
+      "FunctionWithValvesModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/FunctionMeta"
+          },
+          "valves": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valves"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active",
+            "default": false
+          },
+          "is_global": {
+            "type": "boolean",
+            "title": "Is Global",
+            "default": false
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "type",
+          "content",
+          "meta",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "FunctionWithValvesModel"
       },
       "GeminiConfigForm": {
         "properties": {
@@ -20562,7 +20780,7 @@
         "properties": {
           "functions": {
             "items": {
-              "$ref": "#/components/schemas/FunctionModel"
+              "$ref": "#/components/schemas/FunctionWithValvesModel"
             },
             "type": "array",
             "title": "Functions",
@@ -22439,6 +22657,10 @@
             "type": "string",
             "title": "Openai Api Base Url"
           },
+          "OPENAI_API_VERSION": {
+            "type": "string",
+            "title": "Openai Api Version"
+          },
           "OPENAI_API_KEY": {
             "type": "string",
             "title": "Openai Api Key"
@@ -22447,6 +22669,7 @@
         "type": "object",
         "required": [
           "OPENAI_API_BASE_URL",
+          "OPENAI_API_VERSION",
           "OPENAI_API_KEY"
         ],
         "title": "OpenAIConfigForm"
@@ -22856,6 +23079,28 @@
             ],
             "title": "Docling Server Url"
           },
+          "DOCLING_DO_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Do Ocr"
+          },
+          "DOCLING_FORCE_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Force Ocr"
+          },
           "DOCLING_OCR_ENGINE": {
             "anyOf": [
               {
@@ -22877,6 +23122,39 @@
               }
             ],
             "title": "Docling Ocr Lang"
+          },
+          "DOCLING_PDF_BACKEND": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Pdf Backend"
+          },
+          "DOCLING_TABLE_MODE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Table Mode"
+          },
+          "DOCLING_PIPELINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Pipeline"
           },
           "DOCLING_DO_PICTURE_DESCRIPTION": {
             "anyOf": [
