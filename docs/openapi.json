@@ -2506,13 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2550,13 +2550,13 @@
           }
         }
       },
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2600,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2638,13 +2638,13 @@
           }
         }
       },
-      "put": {
+      "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -4732,6 +4732,68 @@
         ]
       }
     },
+    "/api/v1/configs/oauth/clients/register": {
+      "post": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Register Oauth Client",
+        "operationId": "register_oauth_client_api_v1_configs_oauth_clients_register_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuthClientRegistrationForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/configs/tool_servers": {
       "get": {
         "tags": [
@@ -6715,7 +6777,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/ChannelModel"
+                      "$ref": "#/components/schemas/ChannelResponse"
                     },
                     {
                       "type": "null"
@@ -7425,6 +7487,23 @@
               ],
               "title": "Page"
             }
+          },
+          {
+            "name": "include_folders",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": false,
+              "title": "Include Folders"
+            }
           }
         ],
         "responses": {
@@ -7482,6 +7561,23 @@
                 }
               ],
               "title": "Page"
+            }
+          },
+          {
+            "name": "include_folders",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": false,
+              "title": "Include Folders"
             }
           }
         ],
@@ -15556,6 +15652,90 @@
         ]
       }
     },
+    "/oauth/clients/{client_id}/authorize": {
+      "get": {
+        "summary": "Oauth Client Authorize",
+        "operationId": "oauth_client_authorize_oauth_clients__client_id__authorize_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oauth/clients/{client_id}/callback": {
+      "get": {
+        "summary": "Oauth Client Callback",
+        "operationId": "oauth_client_callback_oauth_clients__client_id__callback_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Client Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/oauth/{provider}/login": {
       "get": {
         "summary": "Oauth Login",
@@ -15595,8 +15775,45 @@
     },
     "/oauth/{provider}/callback": {
       "get": {
-        "summary": "Oauth Callback",
-        "operationId": "oauth_callback_oauth__provider__callback_get",
+        "summary": "Oauth Login Callback",
+        "operationId": "oauth_login_callback_oauth__provider__callback_get",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Provider"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oauth/{provider}/login/callback": {
+      "get": {
+        "summary": "Oauth Login Callback",
+        "operationId": "oauth_login_callback_oauth__provider__login_callback_get",
         "parameters": [
           {
             "name": "provider",
@@ -16408,6 +16625,102 @@
           "updated_at"
         ],
         "title": "ChannelModel"
+      },
+      "ChannelResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "write_access": {
+            "type": "boolean",
+            "title": "Write Access",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ChannelResponse"
       },
       "ChatFolderIdForm": {
         "properties": {
@@ -19929,6 +20242,35 @@
         ],
         "title": "NoteUserResponse"
       },
+      "OAuthClientRegistrationForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id"
+          },
+          "client_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "client_id"
+        ],
+        "title": "OAuthClientRegistrationForm"
+      },
       "ProcessFileForm": {
         "properties": {
           "file_id": {
@@ -21363,6 +21705,18 @@
             "type": "string",
             "title": "Path"
           },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "default": "openapi"
+          },
           "auth_type": {
             "anyOf": [
               {
@@ -21473,6 +21827,7 @@
             ]
           }
         },
+        "additionalProperties": true,
         "type": "object",
         "required": [
           "id",
@@ -22113,6 +22468,17 @@
               }
             ],
             "title": "Bypass Web Search Web Loader"
+          },
+          "OLLAMA_CLOUD_WEB_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ollama Cloud Web Search Api Key"
           },
           "SEARXNG_QUERY_URL": {
             "anyOf": [
