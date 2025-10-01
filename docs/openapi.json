@@ -2506,101 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2556,95 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -6965,7 +6965,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MessageUserResponse"
+                    "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
                   },
                   "title": "Response Get Channel Messages Api V1 Channels  Id  Messages Get"
                 }
@@ -7090,7 +7090,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/MessageUserResponse"
+                      "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
                     },
                     {
                       "type": "null"
@@ -7174,7 +7174,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MessageUserResponse"
+                    "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
                   },
                   "title": "Response Get Channel Thread Messages Api V1 Channels  Id  Messages  Message Id  Thread Get"
                 }
@@ -7975,6 +7975,68 @@
         }
       }
     },
+    "/api/v1/chats/folder/{folder_id}/list": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Get Chat List By Folder Id",
+        "operationId": "get_chat_list_by_folder_id_api_v1_chats_folder__folder_id__list_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "folder_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Folder Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/chats/pinned": {
       "get": {
         "tags": [
@@ -8246,6 +8308,33 @@
                 "schema": {
                   "type": "boolean",
                   "title": "Response Archive All Chats Api V1 Chats Archive All Post"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/chats/unarchive/all": {
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Unarchive All Chats",
+        "operationId": "unarchive_all_chats_api_v1_chats_unarchive_all_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Unarchive All Chats Api V1 Chats Unarchive All Post"
                 }
               }
             }
@@ -9827,6 +9916,53 @@
                   },
                   "type": "array",
                   "title": "Response Export Models Api V1 Models Export Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/models/import": {
+      "post": {
+        "tags": [
+          "models"
+        ],
+        "summary": "Import Models",
+        "operationId": "import_models_api_v1_models_import_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ModelsImportForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Import Models Api V1 Models Import Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -12160,7 +12296,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/FolderModel"
+                    "$ref": "#/components/schemas/FolderNameIdResponse"
                   },
                   "type": "array",
                   "title": "Response Get Folders Api V1 Folders  Get"
@@ -18006,6 +18142,23 @@
         ],
         "title": "FolderIsExpandedForm"
       },
+      "FolderMetadataResponse": {
+        "properties": {
+          "icon": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon"
+          }
+        },
+        "type": "object",
+        "title": "FolderMetadataResponse"
+      },
       "FolderModel": {
         "properties": {
           "id": {
@@ -18090,6 +18243,60 @@
           "updated_at"
         ],
         "title": "FolderModel"
+      },
+      "FolderNameIdResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FolderMetadataResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "is_expanded": {
+            "type": "boolean",
+            "title": "Is Expanded",
+            "default": false
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "FolderNameIdResponse"
       },
       "FolderParentIdForm": {
         "properties": {
@@ -19479,6 +19686,17 @@
             ],
             "title": "Channel Id"
           },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
           "parent_id": {
             "anyOf": [
               {
@@ -19536,114 +19754,6 @@
           "updated_at"
         ],
         "title": "MessageModel"
-      },
-      "MessageUserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "channel_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Channel Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "latest_reply_at": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Latest Reply At"
-          },
-          "reply_count": {
-            "type": "integer",
-            "title": "Reply Count"
-          },
-          "reactions": {
-            "items": {
-              "$ref": "#/components/schemas/Reactions"
-            },
-            "type": "array",
-            "title": "Reactions"
-          },
-          "user": {
-            "$ref": "#/components/schemas/UserNameResponse"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "content",
-          "created_at",
-          "updated_at",
-          "latest_reply_at",
-          "reply_count",
-          "reactions",
-          "user"
-        ],
-        "title": "MessageUserResponse"
       },
       "ModelForm": {
         "properties": {
@@ -20016,6 +20126,23 @@
           "MODEL_ORDER_LIST"
         ],
         "title": "ModelsConfigForm"
+      },
+      "ModelsImportForm": {
+        "properties": {
+          "models": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Models"
+          }
+        },
+        "type": "object",
+        "required": [
+          "models"
+        ],
+        "title": "ModelsImportForm"
       },
       "NoteForm": {
         "properties": {
@@ -21125,6 +21252,11 @@
           "public_tools": {
             "type": "boolean",
             "title": "Public Tools",
+            "default": true
+          },
+          "public_notes": {
+            "type": "boolean",
+            "title": "Public Notes",
             "default": true
           }
         },
@@ -23014,6 +23146,17 @@
             "type": "string",
             "title": "Content"
           },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
           "parent_id": {
             "anyOf": [
               {
@@ -23056,6 +23199,106 @@
         ],
         "title": "MessageForm"
       },
+      "open_webui__models__messages__MessageUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Id"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserNameResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "content",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "MessageUserResponse"
+      },
       "open_webui__models__users__UserResponse": {
         "properties": {
           "id": {
@@ -23088,6 +23331,141 @@
           "profile_image_url"
         ],
         "title": "UserResponse"
+      },
+      "open_webui__routers__channels__MessageUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Id"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserNameResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reply_to_message": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/open_webui__models__messages__MessageUserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "latest_reply_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Reply At"
+          },
+          "reply_count": {
+            "type": "integer",
+            "title": "Reply Count"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/Reactions"
+            },
+            "type": "array",
+            "title": "Reactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "content",
+          "created_at",
+          "updated_at",
+          "latest_reply_at",
+          "reply_count",
+          "reactions"
+        ],
+        "title": "MessageUserResponse"
       },
       "open_webui__routers__chats__MessageForm": {
         "properties": {
