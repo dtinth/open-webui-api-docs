@@ -2550,7 +2550,7 @@
           }
         }
       },
-      "delete": {
+      "get": {
         "tags": [
           "openai"
         ],
@@ -2594,7 +2594,7 @@
           }
         }
       },
-      "get": {
+      "delete": {
         "tags": [
           "openai"
         ],
