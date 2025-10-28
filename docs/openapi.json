@@ -2506,13 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
+      "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2550,13 +2550,13 @@
           }
         }
       },
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2600,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2644,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
