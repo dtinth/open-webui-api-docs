@@ -2506,13 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "get": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2550,13 +2550,13 @@
           }
         }
       },
-      "put": {
+      "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2600,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2644,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -3534,7 +3534,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ImagesConfig"
+                }
               }
             }
           }
@@ -3557,7 +3559,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__images__ConfigForm"
+                "$ref": "#/components/schemas/ImagesConfig"
               }
             }
           },
@@ -3614,74 +3616,6 @@
         ]
       }
     },
-    "/api/v1/images/image/config": {
-      "get": {
-        "tags": [
-          "images"
-        ],
-        "summary": "Get Image Config",
-        "operationId": "get_image_config_api_v1_images_image_config_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
-    "/api/v1/images/image/config/update": {
-      "post": {
-        "tags": [
-          "images"
-        ],
-        "summary": "Update Image Config",
-        "operationId": "update_image_config_api_v1_images_image_config_update_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ImageConfigForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/v1/images/models": {
       "get": {
         "tags": [
@@ -3717,7 +3651,51 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GenerateImageForm"
+                "$ref": "#/components/schemas/CreateImageForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/images/edit": {
+      "post": {
+        "tags": [
+          "images"
+        ],
+        "summary": "Image Edits",
+        "operationId": "image_edits_api_v1_images_edit_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditImageForm"
               }
             }
           },
@@ -4056,7 +4034,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__retrieval__ConfigForm"
+                "$ref": "#/components/schemas/ConfigForm"
               }
             }
           },
@@ -6400,18 +6378,7 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "type": "object",
-                      "additionalProperties": true
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "title": "Response Get User Oauth Sessions By Id Api V1 Users  User Id  Oauth Sessions Get"
-                }
+                "schema": {}
               }
             }
           },
@@ -9790,13 +9757,13 @@
         }
       }
     },
-    "/api/v1/models/": {
+    "/api/v1/models/list": {
       "get": {
         "tags": [
           "models"
         ],
         "summary": "Get Models",
-        "operationId": "get_models_api_v1_models__get",
+        "operationId": "get_models_api_v1_models_list_get",
         "security": [
           {
             "HTTPBearer": []
@@ -9830,7 +9797,7 @@
                   "items": {
                     "$ref": "#/components/schemas/ModelUserResponse"
                   },
-                  "title": "Response Get Models Api V1 Models  Get"
+                  "title": "Response Get Models Api V1 Models List Get"
                 }
               }
             }
@@ -16373,66 +16340,6 @@
         ],
         "title": "AudioConfigUpdateForm"
       },
-      "Automatic1111ConfigForm": {
-        "properties": {
-          "AUTOMATIC1111_BASE_URL": {
-            "type": "string",
-            "title": "Automatic1111 Base Url"
-          },
-          "AUTOMATIC1111_API_AUTH": {
-            "type": "string",
-            "title": "Automatic1111 Api Auth"
-          },
-          "AUTOMATIC1111_CFG_SCALE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "number"
-              },
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Automatic1111 Cfg Scale"
-          },
-          "AUTOMATIC1111_SAMPLER": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Automatic1111 Sampler"
-          },
-          "AUTOMATIC1111_SCHEDULER": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Automatic1111 Scheduler"
-          }
-        },
-        "type": "object",
-        "required": [
-          "AUTOMATIC1111_BASE_URL",
-          "AUTOMATIC1111_API_AUTH",
-          "AUTOMATIC1111_CFG_SCALE",
-          "AUTOMATIC1111_SAMPLER",
-          "AUTOMATIC1111_SCHEDULER"
-        ],
-        "title": "Automatic1111ConfigForm"
-      },
       "AzureOpenAIConfigForm": {
         "properties": {
           "url": {
@@ -17461,37 +17368,677 @@
         ],
         "title": "CodeInterpreterConfigForm"
       },
-      "ComfyUIConfigForm": {
+      "ConfigForm": {
         "properties": {
-          "COMFYUI_BASE_URL": {
-            "type": "string",
-            "title": "Comfyui Base Url"
+          "RAG_TEMPLATE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Template"
           },
-          "COMFYUI_API_KEY": {
-            "type": "string",
-            "title": "Comfyui Api Key"
+          "TOP_K": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top K"
           },
-          "COMFYUI_WORKFLOW": {
-            "type": "string",
-            "title": "Comfyui Workflow"
+          "BYPASS_EMBEDDING_AND_RETRIEVAL": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bypass Embedding And Retrieval"
           },
-          "COMFYUI_WORKFLOW_NODES": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Comfyui Workflow Nodes"
+          "RAG_FULL_CONTEXT": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Full Context"
+          },
+          "ENABLE_RAG_HYBRID_SEARCH": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Rag Hybrid Search"
+          },
+          "TOP_K_RERANKER": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top K Reranker"
+          },
+          "RELEVANCE_THRESHOLD": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relevance Threshold"
+          },
+          "HYBRID_BM25_WEIGHT": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid Bm25 Weight"
+          },
+          "CONTENT_EXTRACTION_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Extraction Engine"
+          },
+          "PDF_EXTRACT_IMAGES": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Extract Images"
+          },
+          "DATALAB_MARKER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Api Key"
+          },
+          "DATALAB_MARKER_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Api Base Url"
+          },
+          "DATALAB_MARKER_ADDITIONAL_CONFIG": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Additional Config"
+          },
+          "DATALAB_MARKER_SKIP_CACHE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Skip Cache"
+          },
+          "DATALAB_MARKER_FORCE_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Force Ocr"
+          },
+          "DATALAB_MARKER_PAGINATE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Paginate"
+          },
+          "DATALAB_MARKER_STRIP_EXISTING_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Strip Existing Ocr"
+          },
+          "DATALAB_MARKER_DISABLE_IMAGE_EXTRACTION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Disable Image Extraction"
+          },
+          "DATALAB_MARKER_FORMAT_LINES": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Format Lines"
+          },
+          "DATALAB_MARKER_USE_LLM": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Use Llm"
+          },
+          "DATALAB_MARKER_OUTPUT_FORMAT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Output Format"
+          },
+          "EXTERNAL_DOCUMENT_LOADER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Url"
+          },
+          "EXTERNAL_DOCUMENT_LOADER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Api Key"
+          },
+          "TIKA_SERVER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tika Server Url"
+          },
+          "DOCLING_SERVER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Server Url"
+          },
+          "DOCLING_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Params"
+          },
+          "DOCLING_DO_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Do Ocr"
+          },
+          "DOCLING_FORCE_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Force Ocr"
+          },
+          "DOCLING_OCR_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Ocr Engine"
+          },
+          "DOCLING_OCR_LANG": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Ocr Lang"
+          },
+          "DOCLING_PDF_BACKEND": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Pdf Backend"
+          },
+          "DOCLING_TABLE_MODE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Table Mode"
+          },
+          "DOCLING_PIPELINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Pipeline"
+          },
+          "DOCLING_DO_PICTURE_DESCRIPTION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Do Picture Description"
+          },
+          "DOCLING_PICTURE_DESCRIPTION_MODE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Picture Description Mode"
+          },
+          "DOCLING_PICTURE_DESCRIPTION_LOCAL": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Picture Description Local"
+          },
+          "DOCLING_PICTURE_DESCRIPTION_API": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Picture Description Api"
+          },
+          "DOCUMENT_INTELLIGENCE_ENDPOINT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Intelligence Endpoint"
+          },
+          "DOCUMENT_INTELLIGENCE_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Intelligence Key"
+          },
+          "MISTRAL_OCR_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mistral Ocr Api Base Url"
+          },
+          "MISTRAL_OCR_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mistral Ocr Api Key"
+          },
+          "MINERU_API_MODE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Mode"
+          },
+          "MINERU_API_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Url"
+          },
+          "MINERU_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Key"
+          },
+          "MINERU_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Params"
+          },
+          "RAG_RERANKING_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Model"
+          },
+          "RAG_RERANKING_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Engine"
+          },
+          "RAG_EXTERNAL_RERANKER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Url"
+          },
+          "RAG_EXTERNAL_RERANKER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Api Key"
+          },
+          "TEXT_SPLITTER": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Splitter"
+          },
+          "CHUNK_SIZE": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Size"
+          },
+          "CHUNK_OVERLAP": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Overlap"
+          },
+          "FILE_MAX_SIZE": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Max Size"
+          },
+          "FILE_MAX_COUNT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Max Count"
+          },
+          "FILE_IMAGE_COMPRESSION_WIDTH": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Image Compression Width"
+          },
+          "FILE_IMAGE_COMPRESSION_HEIGHT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Image Compression Height"
+          },
+          "ALLOWED_FILE_EXTENSIONS": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed File Extensions"
+          },
+          "ENABLE_GOOGLE_DRIVE_INTEGRATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Google Drive Integration"
+          },
+          "ENABLE_ONEDRIVE_INTEGRATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Onedrive Integration"
+          },
+          "web": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WebConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "type": "object",
-        "required": [
-          "COMFYUI_BASE_URL",
-          "COMFYUI_API_KEY",
-          "COMFYUI_WORKFLOW",
-          "COMFYUI_WORKFLOW_NODES"
-        ],
-        "title": "ComfyUIConfigForm"
+        "title": "ConfigForm"
       },
       "ConnectionsConfigForm": {
         "properties": {
@@ -17541,6 +18088,57 @@
           "destination"
         ],
         "title": "CopyModelForm"
+      },
+      "CreateImageForm": {
+        "properties": {
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "n": {
+            "type": "integer",
+            "title": "N",
+            "default": 1
+          },
+          "negative_prompt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Negative Prompt"
+          }
+        },
+        "type": "object",
+        "required": [
+          "prompt"
+        ],
+        "title": "CreateImageForm"
       },
       "CreateModelForm": {
         "properties": {
@@ -17617,6 +18215,78 @@
           "urlIdx"
         ],
         "title": "DeletePipelineForm"
+      },
+      "EditImageForm": {
+        "properties": {
+          "image": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            ],
+            "title": "Image"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "n": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "N"
+          },
+          "negative_prompt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Negative Prompt"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image",
+          "prompt"
+        ],
+        "title": "EditImageForm"
       },
       "EmbeddingModelUpdateForm": {
         "properties": {
@@ -18735,24 +19405,6 @@
         ],
         "title": "FunctionWithValvesModel"
       },
-      "GeminiConfigForm": {
-        "properties": {
-          "GEMINI_API_BASE_URL": {
-            "type": "string",
-            "title": "Gemini Api Base Url"
-          },
-          "GEMINI_API_KEY": {
-            "type": "string",
-            "title": "Gemini Api Key"
-          }
-        },
-        "type": "object",
-        "required": [
-          "GEMINI_API_BASE_URL",
-          "GEMINI_API_KEY"
-        ],
-        "title": "GeminiConfigForm"
-      },
       "GenerateCompletionForm": {
         "properties": {
           "model": {
@@ -19006,57 +19658,6 @@
         ],
         "title": "GenerateEmbeddingsForm"
       },
-      "GenerateImageForm": {
-        "properties": {
-          "model": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Model"
-          },
-          "prompt": {
-            "type": "string",
-            "title": "Prompt"
-          },
-          "size": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Size"
-          },
-          "n": {
-            "type": "integer",
-            "title": "N",
-            "default": 1
-          },
-          "negative_prompt": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Negative Prompt"
-          }
-        },
-        "type": "object",
-        "required": [
-          "prompt"
-        ],
-        "title": "GenerateImageForm"
-      },
       "GroupForm": {
         "properties": {
           "name": {
@@ -19226,28 +19827,208 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
-      "ImageConfigForm": {
+      "ImagesConfig": {
         "properties": {
-          "MODEL": {
+          "ENABLE_IMAGE_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Image Generation"
+          },
+          "ENABLE_IMAGE_PROMPT_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Image Prompt Generation"
+          },
+          "IMAGE_GENERATION_ENGINE": {
             "type": "string",
-            "title": "Model"
+            "title": "Image Generation Engine"
+          },
+          "IMAGE_GENERATION_MODEL": {
+            "type": "string",
+            "title": "Image Generation Model"
           },
           "IMAGE_SIZE": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Image Size"
           },
           "IMAGE_STEPS": {
-            "type": "integer",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Image Steps"
+          },
+          "IMAGES_OPENAI_API_BASE_URL": {
+            "type": "string",
+            "title": "Images Openai Api Base Url"
+          },
+          "IMAGES_OPENAI_API_KEY": {
+            "type": "string",
+            "title": "Images Openai Api Key"
+          },
+          "IMAGES_OPENAI_API_VERSION": {
+            "type": "string",
+            "title": "Images Openai Api Version"
+          },
+          "AUTOMATIC1111_BASE_URL": {
+            "type": "string",
+            "title": "Automatic1111 Base Url"
+          },
+          "AUTOMATIC1111_API_AUTH": {
+            "type": "string",
+            "title": "Automatic1111 Api Auth"
+          },
+          "AUTOMATIC1111_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Automatic1111 Params"
+          },
+          "COMFYUI_BASE_URL": {
+            "type": "string",
+            "title": "Comfyui Base Url"
+          },
+          "COMFYUI_API_KEY": {
+            "type": "string",
+            "title": "Comfyui Api Key"
+          },
+          "COMFYUI_WORKFLOW": {
+            "type": "string",
+            "title": "Comfyui Workflow"
+          },
+          "COMFYUI_WORKFLOW_NODES": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Comfyui Workflow Nodes"
+          },
+          "IMAGES_GEMINI_API_BASE_URL": {
+            "type": "string",
+            "title": "Images Gemini Api Base Url"
+          },
+          "IMAGES_GEMINI_API_KEY": {
+            "type": "string",
+            "title": "Images Gemini Api Key"
+          },
+          "IMAGES_GEMINI_ENDPOINT_METHOD": {
+            "type": "string",
+            "title": "Images Gemini Endpoint Method"
+          },
+          "IMAGE_EDIT_ENGINE": {
+            "type": "string",
+            "title": "Image Edit Engine"
+          },
+          "IMAGE_EDIT_MODEL": {
+            "type": "string",
+            "title": "Image Edit Model"
+          },
+          "IMAGE_EDIT_SIZE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Edit Size"
+          },
+          "IMAGES_EDIT_OPENAI_API_BASE_URL": {
+            "type": "string",
+            "title": "Images Edit Openai Api Base Url"
+          },
+          "IMAGES_EDIT_OPENAI_API_KEY": {
+            "type": "string",
+            "title": "Images Edit Openai Api Key"
+          },
+          "IMAGES_EDIT_OPENAI_API_VERSION": {
+            "type": "string",
+            "title": "Images Edit Openai Api Version"
+          },
+          "IMAGES_EDIT_GEMINI_API_BASE_URL": {
+            "type": "string",
+            "title": "Images Edit Gemini Api Base Url"
+          },
+          "IMAGES_EDIT_GEMINI_API_KEY": {
+            "type": "string",
+            "title": "Images Edit Gemini Api Key"
+          },
+          "IMAGES_EDIT_COMFYUI_BASE_URL": {
+            "type": "string",
+            "title": "Images Edit Comfyui Base Url"
+          },
+          "IMAGES_EDIT_COMFYUI_API_KEY": {
+            "type": "string",
+            "title": "Images Edit Comfyui Api Key"
+          },
+          "IMAGES_EDIT_COMFYUI_WORKFLOW": {
+            "type": "string",
+            "title": "Images Edit Comfyui Workflow"
+          },
+          "IMAGES_EDIT_COMFYUI_WORKFLOW_NODES": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Images Edit Comfyui Workflow Nodes"
           }
         },
         "type": "object",
         "required": [
-          "MODEL",
+          "ENABLE_IMAGE_GENERATION",
+          "ENABLE_IMAGE_PROMPT_GENERATION",
+          "IMAGE_GENERATION_ENGINE",
+          "IMAGE_GENERATION_MODEL",
           "IMAGE_SIZE",
-          "IMAGE_STEPS"
+          "IMAGE_STEPS",
+          "IMAGES_OPENAI_API_BASE_URL",
+          "IMAGES_OPENAI_API_KEY",
+          "IMAGES_OPENAI_API_VERSION",
+          "AUTOMATIC1111_BASE_URL",
+          "AUTOMATIC1111_API_AUTH",
+          "AUTOMATIC1111_PARAMS",
+          "COMFYUI_BASE_URL",
+          "COMFYUI_API_KEY",
+          "COMFYUI_WORKFLOW",
+          "COMFYUI_WORKFLOW_NODES",
+          "IMAGES_GEMINI_API_BASE_URL",
+          "IMAGES_GEMINI_API_KEY",
+          "IMAGES_GEMINI_ENDPOINT_METHOD",
+          "IMAGE_EDIT_ENGINE",
+          "IMAGE_EDIT_MODEL",
+          "IMAGE_EDIT_SIZE",
+          "IMAGES_EDIT_OPENAI_API_BASE_URL",
+          "IMAGES_EDIT_OPENAI_API_KEY",
+          "IMAGES_EDIT_OPENAI_API_VERSION",
+          "IMAGES_EDIT_GEMINI_API_BASE_URL",
+          "IMAGES_EDIT_GEMINI_API_KEY",
+          "IMAGES_EDIT_COMFYUI_BASE_URL",
+          "IMAGES_EDIT_COMFYUI_API_KEY",
+          "IMAGES_EDIT_COMFYUI_WORKFLOW",
+          "IMAGES_EDIT_COMFYUI_WORKFLOW_NODES"
         ],
-        "title": "ImageConfigForm"
+        "title": "ImagesConfig"
       },
       "ImportConfigForm": {
         "properties": {
@@ -21143,6 +21924,18 @@
           "AZURE_MAX_SPEAKERS": {
             "type": "string",
             "title": "Azure Max Speakers"
+          },
+          "MISTRAL_API_KEY": {
+            "type": "string",
+            "title": "Mistral Api Key"
+          },
+          "MISTRAL_API_BASE_URL": {
+            "type": "string",
+            "title": "Mistral Api Base Url"
+          },
+          "MISTRAL_USE_CHAT_COMPLETIONS": {
+            "type": "boolean",
+            "title": "Mistral Use Chat Completions"
           }
         },
         "type": "object",
@@ -21157,7 +21950,10 @@
           "AZURE_REGION",
           "AZURE_LOCALES",
           "AZURE_BASE_URL",
-          "AZURE_MAX_SPEAKERS"
+          "AZURE_MAX_SPEAKERS",
+          "MISTRAL_API_KEY",
+          "MISTRAL_API_BASE_URL",
+          "MISTRAL_USE_CHAT_COMPLETIONS"
         ],
         "title": "STTConfigForm"
       },
@@ -23678,68 +24474,6 @@
         ],
         "title": "UserResponse"
       },
-      "open_webui__routers__images__ConfigForm": {
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "title": "Enabled"
-          },
-          "engine": {
-            "type": "string",
-            "title": "Engine"
-          },
-          "prompt_generation": {
-            "type": "boolean",
-            "title": "Prompt Generation"
-          },
-          "openai": {
-            "$ref": "#/components/schemas/open_webui__routers__images__OpenAIConfigForm"
-          },
-          "automatic1111": {
-            "$ref": "#/components/schemas/Automatic1111ConfigForm"
-          },
-          "comfyui": {
-            "$ref": "#/components/schemas/ComfyUIConfigForm"
-          },
-          "gemini": {
-            "$ref": "#/components/schemas/GeminiConfigForm"
-          }
-        },
-        "type": "object",
-        "required": [
-          "enabled",
-          "engine",
-          "prompt_generation",
-          "openai",
-          "automatic1111",
-          "comfyui",
-          "gemini"
-        ],
-        "title": "ConfigForm"
-      },
-      "open_webui__routers__images__OpenAIConfigForm": {
-        "properties": {
-          "OPENAI_API_BASE_URL": {
-            "type": "string",
-            "title": "Openai Api Base Url"
-          },
-          "OPENAI_API_VERSION": {
-            "type": "string",
-            "title": "Openai Api Version"
-          },
-          "OPENAI_API_KEY": {
-            "type": "string",
-            "title": "Openai Api Key"
-          }
-        },
-        "type": "object",
-        "required": [
-          "OPENAI_API_BASE_URL",
-          "OPENAI_API_VERSION",
-          "OPENAI_API_KEY"
-        ],
-        "title": "OpenAIConfigForm"
-      },
       "open_webui__routers__ollama__ConnectionVerificationForm": {
         "properties": {
           "url": {
@@ -23867,667 +24601,6 @@
           "OPENAI_API_CONFIGS"
         ],
         "title": "OpenAIConfigForm"
-      },
-      "open_webui__routers__retrieval__ConfigForm": {
-        "properties": {
-          "RAG_TEMPLATE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rag Template"
-          },
-          "TOP_K": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Top K"
-          },
-          "BYPASS_EMBEDDING_AND_RETRIEVAL": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Bypass Embedding And Retrieval"
-          },
-          "RAG_FULL_CONTEXT": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rag Full Context"
-          },
-          "ENABLE_RAG_HYBRID_SEARCH": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Rag Hybrid Search"
-          },
-          "TOP_K_RERANKER": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Top K Reranker"
-          },
-          "RELEVANCE_THRESHOLD": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Relevance Threshold"
-          },
-          "HYBRID_BM25_WEIGHT": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Hybrid Bm25 Weight"
-          },
-          "CONTENT_EXTRACTION_ENGINE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Content Extraction Engine"
-          },
-          "PDF_EXTRACT_IMAGES": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pdf Extract Images"
-          },
-          "DATALAB_MARKER_API_KEY": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Api Key"
-          },
-          "DATALAB_MARKER_API_BASE_URL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Api Base Url"
-          },
-          "DATALAB_MARKER_ADDITIONAL_CONFIG": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Additional Config"
-          },
-          "DATALAB_MARKER_SKIP_CACHE": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Skip Cache"
-          },
-          "DATALAB_MARKER_FORCE_OCR": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Force Ocr"
-          },
-          "DATALAB_MARKER_PAGINATE": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Paginate"
-          },
-          "DATALAB_MARKER_STRIP_EXISTING_OCR": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Strip Existing Ocr"
-          },
-          "DATALAB_MARKER_DISABLE_IMAGE_EXTRACTION": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Disable Image Extraction"
-          },
-          "DATALAB_MARKER_FORMAT_LINES": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Format Lines"
-          },
-          "DATALAB_MARKER_USE_LLM": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Use Llm"
-          },
-          "DATALAB_MARKER_OUTPUT_FORMAT": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Datalab Marker Output Format"
-          },
-          "EXTERNAL_DOCUMENT_LOADER_URL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Document Loader Url"
-          },
-          "EXTERNAL_DOCUMENT_LOADER_API_KEY": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Document Loader Api Key"
-          },
-          "TIKA_SERVER_URL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tika Server Url"
-          },
-          "DOCLING_SERVER_URL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Server Url"
-          },
-          "DOCLING_PARAMS": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Params"
-          },
-          "DOCLING_DO_OCR": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Do Ocr"
-          },
-          "DOCLING_FORCE_OCR": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Force Ocr"
-          },
-          "DOCLING_OCR_ENGINE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Ocr Engine"
-          },
-          "DOCLING_OCR_LANG": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Ocr Lang"
-          },
-          "DOCLING_PDF_BACKEND": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Pdf Backend"
-          },
-          "DOCLING_TABLE_MODE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Table Mode"
-          },
-          "DOCLING_PIPELINE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Pipeline"
-          },
-          "DOCLING_DO_PICTURE_DESCRIPTION": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Do Picture Description"
-          },
-          "DOCLING_PICTURE_DESCRIPTION_MODE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Picture Description Mode"
-          },
-          "DOCLING_PICTURE_DESCRIPTION_LOCAL": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Picture Description Local"
-          },
-          "DOCLING_PICTURE_DESCRIPTION_API": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Picture Description Api"
-          },
-          "DOCUMENT_INTELLIGENCE_ENDPOINT": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Document Intelligence Endpoint"
-          },
-          "DOCUMENT_INTELLIGENCE_KEY": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Document Intelligence Key"
-          },
-          "MISTRAL_OCR_API_KEY": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mistral Ocr Api Key"
-          },
-          "MINERU_API_MODE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mineru Api Mode"
-          },
-          "MINERU_API_URL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mineru Api Url"
-          },
-          "MINERU_API_KEY": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mineru Api Key"
-          },
-          "MINERU_PARAMS": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mineru Params"
-          },
-          "RAG_RERANKING_MODEL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rag Reranking Model"
-          },
-          "RAG_RERANKING_ENGINE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rag Reranking Engine"
-          },
-          "RAG_EXTERNAL_RERANKER_URL": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rag External Reranker Url"
-          },
-          "RAG_EXTERNAL_RERANKER_API_KEY": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rag External Reranker Api Key"
-          },
-          "TEXT_SPLITTER": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Text Splitter"
-          },
-          "CHUNK_SIZE": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Chunk Size"
-          },
-          "CHUNK_OVERLAP": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Chunk Overlap"
-          },
-          "FILE_MAX_SIZE": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "File Max Size"
-          },
-          "FILE_MAX_COUNT": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "File Max Count"
-          },
-          "FILE_IMAGE_COMPRESSION_WIDTH": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "File Image Compression Width"
-          },
-          "FILE_IMAGE_COMPRESSION_HEIGHT": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "File Image Compression Height"
-          },
-          "ALLOWED_FILE_EXTENSIONS": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Allowed File Extensions"
-          },
-          "ENABLE_GOOGLE_DRIVE_INTEGRATION": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Google Drive Integration"
-          },
-          "ENABLE_ONEDRIVE_INTEGRATION": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Onedrive Integration"
-          },
-          "web": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/WebConfig"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "title": "ConfigForm"
       },
       "open_webui__routers__retrieval__OllamaConfigForm": {
         "properties": {
