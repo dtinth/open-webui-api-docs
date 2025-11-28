@@ -2506,13 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2550,13 +2550,13 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2600,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2638,13 +2638,13 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -4073,6 +4073,7 @@
           "retrieval"
         ],
         "summary": "Process File",
+        "description": "Process a file and save its content to the vector database.",
         "operationId": "process_file_api_v1_retrieval_process_file_post",
         "requestBody": {
           "content": {
@@ -5871,7 +5872,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserListResponse"
+                  "$ref": "#/components/schemas/UserGroupIdsListResponse"
                 }
               }
             }
@@ -6751,6 +6752,118 @@
                     }
                   ],
                   "title": "Response Get Channel By Id Api V1 Channels  Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/users": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get Channel Users By Id",
+        "operationId": "get_channel_users_by_id_api_v1_channels__id__users_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserListResponse"
                 }
               }
             }
@@ -17021,6 +17134,17 @@
             "type": "boolean",
             "title": "Write Access",
             "default": false
+          },
+          "user_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Count"
           }
         },
         "type": "object",
@@ -17876,6 +18000,17 @@
             ],
             "title": "Docling Server Url"
           },
+          "DOCLING_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Api Key"
+          },
           "DOCLING_PARAMS": {
             "anyOf": [
               {
@@ -17887,129 +18022,6 @@
               }
             ],
             "title": "Docling Params"
-          },
-          "DOCLING_DO_OCR": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Do Ocr"
-          },
-          "DOCLING_FORCE_OCR": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Force Ocr"
-          },
-          "DOCLING_OCR_ENGINE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Ocr Engine"
-          },
-          "DOCLING_OCR_LANG": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Ocr Lang"
-          },
-          "DOCLING_PDF_BACKEND": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Pdf Backend"
-          },
-          "DOCLING_TABLE_MODE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Table Mode"
-          },
-          "DOCLING_PIPELINE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Pipeline"
-          },
-          "DOCLING_DO_PICTURE_DESCRIPTION": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Do Picture Description"
-          },
-          "DOCLING_PICTURE_DESCRIPTION_MODE": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Picture Description Mode"
-          },
-          "DOCLING_PICTURE_DESCRIPTION_LOCAL": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Picture Description Local"
-          },
-          "DOCLING_PICTURE_DESCRIPTION_API": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Docling Picture Description Api"
           },
           "DOCUMENT_INTELLIGENCE_ENDPOINT": {
             "anyOf": [
@@ -18551,15 +18563,15 @@
               }
             ]
           },
-          "embedding_engine": {
+          "RAG_EMBEDDING_ENGINE": {
             "type": "string",
-            "title": "Embedding Engine"
+            "title": "Rag Embedding Engine"
           },
-          "embedding_model": {
+          "RAG_EMBEDDING_MODEL": {
             "type": "string",
-            "title": "Embedding Model"
+            "title": "Rag Embedding Model"
           },
-          "embedding_batch_size": {
+          "RAG_EMBEDDING_BATCH_SIZE": {
             "anyOf": [
               {
                 "type": "integer"
@@ -18568,14 +18580,26 @@
                 "type": "null"
               }
             ],
-            "title": "Embedding Batch Size",
+            "title": "Rag Embedding Batch Size",
             "default": 1
+          },
+          "ENABLE_ASYNC_EMBEDDING": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Async Embedding",
+            "default": true
           }
         },
         "type": "object",
         "required": [
-          "embedding_engine",
-          "embedding_model"
+          "RAG_EMBEDDING_ENGINE",
+          "RAG_EMBEDDING_MODEL"
         ],
         "title": "EmbeddingModelUpdateForm"
       },
@@ -23510,6 +23534,27 @@
         ],
         "title": "UrlForm"
       },
+      "UserGroupIdsListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserGroupIdsModel"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "UserGroupIdsListResponse"
+      },
       "UserGroupIdsModel": {
         "properties": {
           "id": {
@@ -23767,7 +23812,7 @@
         "properties": {
           "users": {
             "items": {
-              "$ref": "#/components/schemas/UserGroupIdsModel"
+              "$ref": "#/components/schemas/UserModelResponse"
             },
             "type": "array",
             "title": "Users"
@@ -23920,6 +23965,144 @@
           "created_at"
         ],
         "title": "UserModel"
+      },
+      "UserModelResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Username"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "pending"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          },
+          "info": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Info"
+          },
+          "settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "oauth_sub": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Sub"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "profile_image_url",
+          "last_active_at",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "UserModelResponse"
       },
       "UserNameResponse": {
         "properties": {
