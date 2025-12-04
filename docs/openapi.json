@@ -1987,7 +1987,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UrlForm"
+                "$ref": "#/components/schemas/open_webui__main__UrlForm"
               }
             }
           }
@@ -2049,7 +2049,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UrlForm"
+                "$ref": "#/components/schemas/open_webui__main__UrlForm"
               }
             }
           }
@@ -2506,101 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2556,95 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -5205,7 +5205,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/open_webui__models__auths__UserResponse"
+                  "$ref": "#/components/schemas/UserProfileImageResponse"
                 }
               }
             }
@@ -5762,31 +5762,6 @@
         ]
       }
     },
-    "/api/v1/users/active": {
-      "get": {
-        "tags": [
-          "users"
-        ],
-        "summary": "Get Active Users",
-        "description": "Get a list of active users.",
-        "operationId": "get_active_users_api_v1_users_active_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/v1/users/": {
       "get": {
         "tags": [
@@ -5944,6 +5919,55 @@
               ],
               "title": "Query"
             }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
           }
         ],
         "responses": {
@@ -5952,7 +5976,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserIdNameListResponse"
+                  "$ref": "#/components/schemas/UserInfoListResponse"
                 }
               }
             }
@@ -6166,6 +6190,74 @@
         ]
       }
     },
+    "/api/v1/users/user/status": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Status By Session User",
+        "operationId": "get_user_status_by_session_user_api_v1_users_user_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/user/status/update": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update User Status By Session User",
+        "operationId": "update_user_status_by_session_user_api_v1_users_user_status_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserStatus"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/users/user/info": {
       "get": {
         "tags": [
@@ -6287,7 +6379,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/open_webui__routers__users__UserResponse"
+                  "$ref": "#/components/schemas/UserActiveResponse"
                 }
               }
             }
@@ -6614,7 +6706,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ChannelModel"
+                    "$ref": "#/components/schemas/ChannelListItemResponse"
                   },
                   "type": "array",
                   "title": "Response Get Channels Api V1 Channels  Get"
@@ -6660,6 +6752,61 @@
         ]
       }
     },
+    "/api/v1/channels/users/{user_id}": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get Dm Channel By User Id",
+        "operationId": "get_dm_channel_by_user_id_api_v1_channels_users__user_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ChannelModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Dm Channel By User Id Api V1 Channels Users  User Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/channels/create": {
       "post": {
         "tags": [
@@ -6671,7 +6818,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChannelForm"
+                "$ref": "#/components/schemas/CreateChannelForm"
               }
             }
           },
@@ -6745,7 +6892,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/ChannelResponse"
+                      "$ref": "#/components/schemas/ChannelFullResponse"
                     },
                     {
                       "type": "null"
@@ -6769,13 +6916,13 @@
         }
       }
     },
-    "/api/v1/channels/{id}/users": {
+    "/api/v1/channels/{id}/members": {
       "get": {
         "tags": [
           "channels"
         ],
-        "summary": "Get Channel Users By Id",
-        "operationId": "get_channel_users_by_id_api_v1_channels__id__users_get",
+        "summary": "Get Channel Members By Id",
+        "operationId": "get_channel_members_by_id_api_v1_channels__id__members_get",
         "security": [
           {
             "HTTPBearer": []
@@ -6865,6 +7012,174 @@
                 "schema": {
                   "$ref": "#/components/schemas/UserListResponse"
                 }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/members/active": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Update Is Active Member By Id And User Id",
+        "operationId": "update_is_active_member_by_id_and_user_id_api_v1_channels__id__members_active_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActiveMemberForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Update Is Active Member By Id And User Id Api V1 Channels  Id  Members Active Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/update/members/add": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Add Members By Id",
+        "operationId": "add_members_by_id_api_v1_channels__id__update_members_add_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMembersForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/update/members/remove": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Remove Members By Id",
+        "operationId": "remove_members_by_id_api_v1_channels__id__update_members_remove_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveMembersForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           },
@@ -7065,6 +7380,67 @@
         }
       }
     },
+    "/api/v1/channels/{id}/messages/pinned": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get Pinned Channel Messages",
+        "operationId": "get_pinned_channel_messages_api_v1_channels__id__messages_pinned_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MessageWithReactionsResponse"
+                  },
+                  "title": "Response Get Pinned Channel Messages Api V1 Channels  Id  Messages Pinned Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/channels/{id}/messages/post": {
       "post": {
         "tags": [
@@ -7177,6 +7553,80 @@
                     }
                   ],
                   "title": "Response Get Channel Message Api V1 Channels  Id  Messages  Message Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/messages/{message_id}/pin": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Pin Channel Message",
+        "operationId": "pin_channel_message_api_v1_channels__id__messages__message_id__pin_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Message Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PinMessageForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Pin Channel Message Api V1 Channels  Id  Messages  Message Id  Pin Post"
                 }
               }
             }
@@ -11517,7 +11967,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoadUrlForm"
+                "$ref": "#/components/schemas/open_webui__routers__functions__LoadUrlForm"
               }
             }
           },
@@ -13006,6 +13456,112 @@
         }
       }
     },
+    "/api/v1/groups/id/{id}/export": {
+      "get": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Export Group By Id",
+        "operationId": "export_group_by_id_api_v1_groups_id__id__export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/GroupExportResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Export Group By Id Api V1 Groups Id  Id  Export Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/groups/id/{id}/users": {
+      "post": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Get Users In Group",
+        "operationId": "get_users_in_group_api_v1_groups_id__id__users_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserInfoResponse"
+                  },
+                  "title": "Response Get Users In Group Api V1 Groups Id  Id  Users Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/groups/id/{id}/update": {
       "post": {
         "tags": [
@@ -13983,7 +14539,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoadUrlForm"
+                "$ref": "#/components/schemas/open_webui__routers__functions__LoadUrlForm"
               }
             }
           },
@@ -16023,7 +16579,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UrlForm"
+                "$ref": "#/components/schemas/open_webui__main__UrlForm"
               }
             }
           },
@@ -16559,6 +17115,10 @@
             "type": "boolean",
             "title": "Enable Message Rating"
           },
+          "ENABLE_FOLDERS": {
+            "type": "boolean",
+            "title": "Enable Folders"
+          },
           "ENABLE_CHANNELS": {
             "type": "boolean",
             "title": "Enable Channels"
@@ -16618,6 +17178,7 @@
           "JWT_EXPIRES_IN",
           "ENABLE_COMMUNITY_SHARING",
           "ENABLE_MESSAGE_RATING",
+          "ENABLE_FOLDERS",
           "ENABLE_CHANNELS",
           "ENABLE_NOTES",
           "ENABLE_USER_WEBHOOKS"
@@ -16903,7 +17464,8 @@
         "properties": {
           "name": {
             "type": "string",
-            "title": "Name"
+            "title": "Name",
+            "default": ""
           },
           "description": {
             "anyOf": [
@@ -16915,6 +17477,17 @@
               }
             ],
             "title": "Description"
+          },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
           },
           "data": {
             "anyOf": [
@@ -16951,13 +17524,461 @@
               }
             ],
             "title": "Access Control"
+          },
+          "group_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Ids"
+          },
+          "user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Ids"
+          }
+        },
+        "type": "object",
+        "title": "ChannelForm"
+      },
+      "ChannelFullResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          },
+          "archived_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived At"
+          },
+          "archived_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived By"
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At"
+          },
+          "deleted_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted By"
+          },
+          "is_manager": {
+            "type": "boolean",
+            "title": "Is Manager",
+            "default": false
+          },
+          "write_access": {
+            "type": "boolean",
+            "title": "Write Access",
+            "default": false
+          },
+          "user_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Count"
+          },
+          "user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Ids"
+          },
+          "users": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/UserIdNameStatusResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Users"
+          },
+          "last_read_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Read At"
+          },
+          "unread_count": {
+            "type": "integer",
+            "title": "Unread Count",
+            "default": 0
           }
         },
         "type": "object",
         "required": [
-          "name"
+          "id",
+          "user_id",
+          "name",
+          "created_at",
+          "updated_at"
         ],
-        "title": "ChannelForm"
+        "title": "ChannelFullResponse"
+      },
+      "ChannelListItemResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          },
+          "archived_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived At"
+          },
+          "archived_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived By"
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At"
+          },
+          "deleted_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted By"
+          },
+          "user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Ids"
+          },
+          "users": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/UserIdNameStatusResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Users"
+          },
+          "last_message_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Message At"
+          },
+          "unread_count": {
+            "type": "integer",
+            "title": "Unread Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ChannelListItemResponse"
       },
       "ChannelModel": {
         "properties": {
@@ -16995,6 +18016,17 @@
             ],
             "title": "Description"
           },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
+          },
           "data": {
             "anyOf": [
               {
@@ -17038,6 +18070,61 @@
           "updated_at": {
             "type": "integer",
             "title": "Updated At"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          },
+          "archived_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived At"
+          },
+          "archived_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived By"
+          },
+          "deleted_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted At"
+          },
+          "deleted_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deleted By"
           }
         },
         "type": "object",
@@ -17049,113 +18136,6 @@
           "updated_at"
         ],
         "title": "ChannelModel"
-      },
-      "ChannelResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "type": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Type"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "access_control": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Access Control"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "write_access": {
-            "type": "boolean",
-            "title": "Write Access",
-            "default": false
-          },
-          "user_count": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "User Count"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "name",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "ChannelResponse"
       },
       "ChatFolderIdForm": {
         "properties": {
@@ -18045,6 +19025,17 @@
             ],
             "title": "Document Intelligence Key"
           },
+          "DOCUMENT_INTELLIGENCE_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Intelligence Model"
+          },
           "MISTRAL_OCR_API_BASE_URL": {
             "anyOf": [
               {
@@ -18331,6 +19322,114 @@
           "destination"
         ],
         "title": "CopyModelForm"
+      },
+      "CreateChannelForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "default": ""
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "is_private": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Private"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "group_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Ids"
+          },
+          "user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Ids"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "title": "CreateChannelForm"
       },
       "CreateImageForm": {
         "properties": {
@@ -18629,6 +19728,21 @@
             "title": "Api Keys",
             "default": false
           },
+          "notes": {
+            "type": "boolean",
+            "title": "Notes",
+            "default": true
+          },
+          "channels": {
+            "type": "boolean",
+            "title": "Channels",
+            "default": true
+          },
+          "folders": {
+            "type": "boolean",
+            "title": "Folders",
+            "default": true
+          },
           "direct_tool_servers": {
             "type": "boolean",
             "title": "Direct Tool Servers",
@@ -18647,11 +19761,6 @@
           "code_interpreter": {
             "type": "boolean",
             "title": "Code Interpreter",
-            "default": true
-          },
-          "notes": {
-            "type": "boolean",
-            "title": "Notes",
             "default": true
           }
         },
@@ -20001,6 +21110,99 @@
         ],
         "title": "GenerateEmbeddingsForm"
       },
+      "GroupExportResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "permissions": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Permissions"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "member_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Count"
+          },
+          "user_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "User Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "description",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "GroupExportResponse"
+      },
       "GroupForm": {
         "properties": {
           "name": {
@@ -20061,18 +21263,6 @@
             "type": "string",
             "title": "Description"
           },
-          "permissions": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Permissions"
-          },
           "data": {
             "anyOf": [
               {
@@ -20097,6 +21287,26 @@
             ],
             "title": "Meta"
           },
+          "permissions": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Permissions"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
           "member_count": {
             "anyOf": [
               {
@@ -20107,14 +21317,6 @@
               }
             ],
             "title": "Member Count"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
           }
         },
         "type": "object",
@@ -20463,18 +21665,6 @@
             "type": "string",
             "title": "Description"
           },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
           "meta": {
             "anyOf": [
               {
@@ -20537,18 +21727,6 @@
             "type": "string",
             "title": "Description"
           },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
           "access_control": {
             "anyOf": [
               {
@@ -20586,18 +21764,6 @@
           "description": {
             "type": "string",
             "title": "Description"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
           },
           "meta": {
             "anyOf": [
@@ -20682,18 +21848,6 @@
           "description": {
             "type": "string",
             "title": "Description"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
           },
           "meta": {
             "anyOf": [
@@ -20898,22 +22052,6 @@
         ],
         "title": "LdapServerConfig"
       },
-      "LoadUrlForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "maxLength": 2083,
-            "minLength": 1,
-            "format": "uri",
-            "title": "Url"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "title": "LoadUrlForm"
-      },
       "MarkdownForm": {
         "properties": {
           "md": {
@@ -21020,6 +22158,33 @@
             ],
             "title": "Parent Id"
           },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
+          },
           "content": {
             "type": "string",
             "title": "Content"
@@ -21066,6 +22231,141 @@
           "updated_at"
         ],
         "title": "MessageModel"
+      },
+      "MessageWithReactionsResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Id"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserNameResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/Reactions"
+            },
+            "type": "array",
+            "title": "Reactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "content",
+          "created_at",
+          "updated_at",
+          "reactions"
+        ],
+        "title": "MessageWithReactionsResponse"
       },
       "ModelForm": {
         "properties": {
@@ -21756,6 +23056,19 @@
         ],
         "title": "OAuthClientRegistrationForm"
       },
+      "PinMessageForm": {
+        "properties": {
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned"
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_pinned"
+        ],
+        "title": "PinMessageForm"
+      },
       "ProcessFileForm": {
         "properties": {
           "file_id": {
@@ -22296,12 +23609,13 @@
             "type": "string",
             "title": "Name"
           },
-          "user_ids": {
+          "users": {
             "items": {
-              "type": "string"
+              "additionalProperties": true,
+              "type": "object"
             },
             "type": "array",
-            "title": "User Ids"
+            "title": "Users"
           },
           "count": {
             "type": "integer",
@@ -22311,10 +23625,24 @@
         "type": "object",
         "required": [
           "name",
-          "user_ids",
+          "users",
           "count"
         ],
         "title": "Reactions"
+      },
+      "RemoveMembersForm": {
+        "properties": {
+          "user_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "User Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "RemoveMembersForm"
       },
       "STTConfigForm": {
         "properties": {
@@ -22420,13 +23748,42 @@
       },
       "SessionUserInfoResponse": {
         "properties": {
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
           "id": {
             "type": "string",
             "title": "Id"
-          },
-          "email": {
-            "type": "string",
-            "title": "Email"
           },
           "name": {
             "type": "string",
@@ -22435,6 +23792,10 @@
           "role": {
             "type": "string",
             "title": "Role"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
           },
           "profile_image_url": {
             "type": "string",
@@ -22509,9 +23870,9 @@
         "type": "object",
         "required": [
           "id",
-          "email",
           "name",
           "role",
+          "email",
           "profile_image_url",
           "token",
           "token_type"
@@ -22524,10 +23885,6 @@
             "type": "string",
             "title": "Id"
           },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -22535,6 +23892,10 @@
           "role": {
             "type": "string",
             "title": "Role"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
           },
           "profile_image_url": {
             "type": "string",
@@ -22575,9 +23936,9 @@
         "type": "object",
         "required": [
           "id",
-          "email",
           "name",
           "role",
+          "email",
           "profile_image_url",
           "token",
           "token_type"
@@ -22696,10 +24057,6 @@
             "type": "string",
             "title": "Id"
           },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
           "name": {
             "type": "string",
             "title": "Name"
@@ -22707,6 +24064,10 @@
           "role": {
             "type": "string",
             "title": "Role"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
           },
           "profile_image_url": {
             "type": "string",
@@ -22724,9 +24085,9 @@
         "type": "object",
         "required": [
           "id",
-          "email",
           "name",
           "role",
+          "email",
           "profile_image_url",
           "token",
           "token_type"
@@ -23419,6 +24780,19 @@
         ],
         "title": "ToolUserResponse"
       },
+      "UpdateActiveMemberForm": {
+        "properties": {
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_active"
+        ],
+        "title": "UpdateActiveMemberForm"
+      },
       "UpdateConfigForm": {
         "properties": {
           "ENABLE_EVALUATION_ARENA_MODELS": {
@@ -23450,6 +24824,28 @@
         },
         "type": "object",
         "title": "UpdateConfigForm"
+      },
+      "UpdateMembersForm": {
+        "properties": {
+          "user_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "User Ids",
+            "default": []
+          },
+          "group_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Group Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "title": "UpdateMembersForm"
       },
       "UpdatePasswordForm": {
         "properties": {
@@ -23521,18 +24917,68 @@
         ],
         "title": "UpdateProfileForm"
       },
-      "UrlForm": {
+      "UserActiveResponse": {
         "properties": {
-          "url": {
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
+          "name": {
             "type": "string",
-            "title": "Url"
+            "title": "Name"
+          },
+          "profile_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Image Url"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
           }
         },
+        "additionalProperties": true,
         "type": "object",
         "required": [
-          "url"
+          "name",
+          "is_active"
         ],
-        "title": "UrlForm"
+        "title": "UserActiveResponse"
       },
       "UserGroupIdsListResponse": {
         "properties": {
@@ -23561,10 +25007,6 @@
             "type": "string",
             "title": "Id"
           },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
           "email": {
             "type": "string",
             "title": "Email"
@@ -23585,9 +25027,24 @@
             "title": "Role",
             "default": "pending"
           },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
           "profile_image_url": {
             "type": "string",
             "title": "Profile Image Url"
+          },
+          "profile_banner_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Banner Image Url"
           },
           "bio": {
             "anyOf": [
@@ -23623,6 +25080,61 @@
             ],
             "title": "Date Of Birth"
           },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timezone"
+          },
+          "presence_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Presence State"
+          },
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
           "info": {
             "anyOf": [
               {
@@ -23645,27 +25157,17 @@
               }
             ]
           },
-          "api_key": {
+          "oauth": {
             "anyOf": [
               {
-                "type": "string"
+                "additionalProperties": true,
+                "type": "object"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Api Key"
-          },
-          "oauth_sub": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Oauth Sub"
+            "title": "Oauth"
           },
           "last_active_at": {
             "type": "integer",
@@ -23691,8 +25193,8 @@
         "type": "object",
         "required": [
           "id",
-          "name",
           "email",
+          "name",
           "profile_image_url",
           "last_active_at",
           "updated_at",
@@ -23700,29 +25202,41 @@
         ],
         "title": "UserGroupIdsModel"
       },
-      "UserIdNameListResponse": {
+      "UserIdNameStatusResponse": {
         "properties": {
-          "users": {
-            "items": {
-              "$ref": "#/components/schemas/UserIdNameResponse"
-            },
-            "type": "array",
-            "title": "Users"
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
           },
-          "total": {
-            "type": "integer",
-            "title": "Total"
-          }
-        },
-        "type": "object",
-        "required": [
-          "users",
-          "total"
-        ],
-        "title": "UserIdNameListResponse"
-      },
-      "UserIdNameResponse": {
-        "properties": {
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
           "id": {
             "type": "string",
             "title": "Id"
@@ -23730,6 +25244,17 @@
           "name": {
             "type": "string",
             "title": "Name"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
           }
         },
         "type": "object",
@@ -23737,7 +25262,7 @@
           "id",
           "name"
         ],
-        "title": "UserIdNameResponse"
+        "title": "UserIdNameStatusResponse"
       },
       "UserIdsForm": {
         "properties": {
@@ -23782,6 +25307,39 @@
       },
       "UserInfoResponse": {
         "properties": {
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
           "id": {
             "type": "string",
             "title": "Id"
@@ -23835,10 +25393,6 @@
             "type": "string",
             "title": "Id"
           },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
           "email": {
             "type": "string",
             "title": "Email"
@@ -23859,9 +25413,24 @@
             "title": "Role",
             "default": "pending"
           },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
           "profile_image_url": {
             "type": "string",
             "title": "Profile Image Url"
+          },
+          "profile_banner_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Banner Image Url"
           },
           "bio": {
             "anyOf": [
@@ -23897,6 +25466,61 @@
             ],
             "title": "Date Of Birth"
           },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timezone"
+          },
+          "presence_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Presence State"
+          },
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
           "info": {
             "anyOf": [
               {
@@ -23919,27 +25543,17 @@
               }
             ]
           },
-          "api_key": {
+          "oauth": {
             "anyOf": [
               {
-                "type": "string"
+                "additionalProperties": true,
+                "type": "object"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Api Key"
-          },
-          "oauth_sub": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Oauth Sub"
+            "title": "Oauth"
           },
           "last_active_at": {
             "type": "integer",
@@ -23957,8 +25571,8 @@
         "type": "object",
         "required": [
           "id",
-          "name",
           "email",
+          "name",
           "profile_image_url",
           "last_active_at",
           "updated_at",
@@ -23971,10 +25585,6 @@
           "id": {
             "type": "string",
             "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
           },
           "email": {
             "type": "string",
@@ -23996,9 +25606,24 @@
             "title": "Role",
             "default": "pending"
           },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
           "profile_image_url": {
             "type": "string",
             "title": "Profile Image Url"
+          },
+          "profile_banner_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Banner Image Url"
           },
           "bio": {
             "anyOf": [
@@ -24034,6 +25659,61 @@
             ],
             "title": "Date Of Birth"
           },
+          "timezone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timezone"
+          },
+          "presence_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Presence State"
+          },
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
           "info": {
             "anyOf": [
               {
@@ -24056,27 +25736,17 @@
               }
             ]
           },
-          "api_key": {
+          "oauth": {
             "anyOf": [
               {
-                "type": "string"
+                "additionalProperties": true,
+                "type": "object"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Api Key"
-          },
-          "oauth_sub": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Oauth Sub"
+            "title": "Oauth"
           },
           "last_active_at": {
             "type": "integer",
@@ -24095,8 +25765,8 @@
         "type": "object",
         "required": [
           "id",
-          "name",
           "email",
+          "name",
           "profile_image_url",
           "last_active_at",
           "updated_at",
@@ -24117,18 +25787,13 @@
           "role": {
             "type": "string",
             "title": "Role"
-          },
-          "profile_image_url": {
-            "type": "string",
-            "title": "Profile Image Url"
           }
         },
         "type": "object",
         "required": [
           "id",
           "name",
-          "role",
-          "profile_image_url"
+          "role"
         ],
         "title": "UserNameResponse"
       },
@@ -24156,6 +25821,39 @@
         ],
         "title": "UserPermissions"
       },
+      "UserProfileImageResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "role",
+          "email",
+          "profile_image_url"
+        ],
+        "title": "UserProfileImageResponse"
+      },
       "UserSettings": {
         "properties": {
           "ui": {
@@ -24175,6 +25873,45 @@
         "additionalProperties": true,
         "type": "object",
         "title": "UserSettings"
+      },
+      "UserStatus": {
+        "properties": {
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          }
+        },
+        "type": "object",
+        "title": "UserStatus"
       },
       "UserUpdateForm": {
         "properties": {
@@ -24900,38 +26637,18 @@
         "type": "object",
         "title": "WorkspacePermissions"
       },
-      "open_webui__models__auths__UserResponse": {
+      "open_webui__main__UrlForm": {
         "properties": {
-          "id": {
+          "url": {
             "type": "string",
-            "title": "Id"
-          },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role"
-          },
-          "profile_image_url": {
-            "type": "string",
-            "title": "Profile Image Url"
+            "title": "Url"
           }
         },
         "type": "object",
         "required": [
-          "id",
-          "email",
-          "name",
-          "role",
-          "profile_image_url"
+          "url"
         ],
-        "title": "UserResponse"
+        "title": "UrlForm"
       },
       "open_webui__models__feedbacks__UserResponse": {
         "properties": {
@@ -24978,6 +26695,17 @@
       },
       "open_webui__models__messages__MessageForm": {
         "properties": {
+          "temp_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temp Id"
+          },
           "content": {
             "type": "string",
             "title": "Content"
@@ -25078,6 +26806,33 @@
             ],
             "title": "Parent Id"
           },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
+          },
           "content": {
             "type": "string",
             "title": "Content"
@@ -25145,26 +26900,21 @@
             "type": "string",
             "title": "Name"
           },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
           "role": {
             "type": "string",
             "title": "Role"
           },
-          "profile_image_url": {
+          "email": {
             "type": "string",
-            "title": "Profile Image Url"
+            "title": "Email"
           }
         },
         "type": "object",
         "required": [
           "id",
           "name",
-          "email",
           "role",
-          "profile_image_url"
+          "email"
         ],
         "title": "UserResponse"
       },
@@ -25210,6 +26960,33 @@
               }
             ],
             "title": "Parent Id"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
           },
           "content": {
             "type": "string",
@@ -25315,6 +27092,22 @@
           "content"
         ],
         "title": "MessageForm"
+      },
+      "open_webui__routers__functions__LoadUrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "LoadUrlForm"
       },
       "open_webui__routers__ollama__ConnectionVerificationForm": {
         "properties": {
@@ -25479,35 +27272,6 @@
           "key"
         ],
         "title": "OpenAIConfigForm"
-      },
-      "open_webui__routers__users__UserResponse": {
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "profile_image_url": {
-            "type": "string",
-            "title": "Profile Image Url"
-          },
-          "active": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Active"
-          }
-        },
-        "type": "object",
-        "required": [
-          "name",
-          "profile_image_url"
-        ],
-        "title": "UserResponse"
       }
     },
     "securitySchemes": {
