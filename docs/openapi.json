@@ -2506,101 +2506,13 @@
       }
     },
     "/openai/{path}": {
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2556,95 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -3651,7 +3651,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateImageForm"
+                "$ref": "#/components/schemas/Body_image_generations_api_v1_images_generations_post"
               }
             }
           },
@@ -3695,7 +3695,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EditImageForm"
+                "$ref": "#/components/schemas/Body_image_edits_api_v1_images_edit_post"
               }
             }
           },
@@ -4163,15 +4163,34 @@
         ],
         "summary": "Process Web",
         "operationId": "process_web_api_v1_retrieval_process_web_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "process",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process and save the content",
+              "default": true,
+              "title": "Process"
+            },
+            "description": "Whether to process and save the content"
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ProcessUrlForm"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4192,12 +4211,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/retrieval/process/youtube": {
@@ -4207,15 +4221,34 @@
         ],
         "summary": "Process Web",
         "operationId": "process_web_api_v1_retrieval_process_youtube_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "process",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to process and save the content",
+              "default": true,
+              "title": "Process"
+            },
+            "description": "Whether to process and save the content"
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ProcessUrlForm"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4236,12 +4269,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/retrieval/process/web/search": {
@@ -7360,7 +7388,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
+                    "$ref": "#/components/schemas/MessageUserResponse"
                   },
                   "title": "Response Get Channel Messages Api V1 Channels  Id  Messages Get"
                 }
@@ -7546,13 +7574,78 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
+                      "$ref": "#/components/schemas/MessageResponse"
                     },
                     {
                       "type": "null"
                     }
                   ],
                   "title": "Response Get Channel Message Api V1 Channels  Id  Messages  Message Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/messages/{message_id}/data": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get Channel Message Data",
+        "operationId": "get_channel_message_data_api_v1_channels__id__messages__message_id__data_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Message Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get Channel Message Data Api V1 Channels  Id  Messages  Message Id  Data Get"
                 }
               }
             }
@@ -7620,7 +7713,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
+                      "$ref": "#/components/schemas/MessageUserResponse"
                     },
                     {
                       "type": "null"
@@ -7704,7 +7797,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/open_webui__routers__channels__MessageUserResponse"
+                    "$ref": "#/components/schemas/MessageUserResponse"
                   },
                   "title": "Response Get Channel Thread Messages Api V1 Channels  Id  Messages  Message Id  Thread Get"
                 }
@@ -8191,6 +8284,78 @@
                 "schema": {
                   "type": "boolean",
                   "title": "Response Delete All User Chats Api V1 Chats  Delete"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/stats/usage": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Get Session User Chat Usage Stats",
+        "operationId": "get_session_user_chat_usage_stats_api_v1_chats_stats_usage_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "items_per_page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 50,
+              "title": "Items Per Page"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatUsageStatsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -10013,36 +10178,6 @@
         ],
         "summary": "Get Notes",
         "operationId": "get_notes_api_v1_notes__get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/NoteUserResponse"
-                  },
-                  "type": "array",
-                  "title": "Response Get Notes Api V1 Notes  Get"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
-    "/api/v1/notes/list": {
-      "get": {
-        "tags": [
-          "notes"
-        ],
-        "summary": "Get Note List",
-        "operationId": "get_note_list_api_v1_notes_list_get",
         "security": [
           {
             "HTTPBearer": []
@@ -10074,9 +10209,144 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NoteTitleIdResponse"
+                    "$ref": "#/components/schemas/NoteItemResponse"
                   },
-                  "title": "Response Get Note List Api V1 Notes List Get"
+                  "title": "Response Get Notes Api V1 Notes  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/search": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Search Notes",
+        "operationId": "search_notes_api_v1_notes_search_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "view_option",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "View Option"
+            }
+          },
+          {
+            "name": "permission",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Permission"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteListResponse"
                 }
               }
             }
@@ -10179,7 +10449,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/NoteModel"
+                      "$ref": "#/components/schemas/NoteResponse"
                     },
                     {
                       "type": "null"
@@ -10980,59 +11250,212 @@
         "tags": [
           "knowledge"
         ],
-        "summary": "Get Knowledge",
-        "operationId": "get_knowledge_api_v1_knowledge__get",
+        "summary": "Get Knowledge Bases",
+        "operationId": "get_knowledge_bases_api_v1_knowledge__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/KnowledgeUserResponse"
-                  },
-                  "type": "array",
-                  "title": "Response Get Knowledge Api V1 Knowledge  Get"
+                  "$ref": "#/components/schemas/KnowledgeAccessListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
-    "/api/v1/knowledge/list": {
+    "/api/v1/knowledge/search": {
       "get": {
         "tags": [
           "knowledge"
         ],
-        "summary": "Get Knowledge List",
-        "operationId": "get_knowledge_list_api_v1_knowledge_list_get",
+        "summary": "Search Knowledge Bases",
+        "operationId": "search_knowledge_bases_api_v1_knowledge_search_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "view_option",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "View Option"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/KnowledgeUserResponse"
-                  },
-                  "type": "array",
-                  "title": "Response Get Knowledge List Api V1 Knowledge List Get"
+                  "$ref": "#/components/schemas/KnowledgeAccessListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/api/v1/knowledge/search/files": {
+      "get": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Search Knowledge Files",
+        "operationId": "search_knowledge_files_api_v1_knowledge_search_files_get",
         "security": [
           {
             "HTTPBearer": []
           }
-        ]
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeFileListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/knowledge/create": {
@@ -11219,6 +11642,134 @@
                     }
                   ],
                   "title": "Response Update Knowledge By Id Api V1 Knowledge  Id  Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/files": {
+      "get": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Get Knowledge Files By Id",
+        "operationId": "get_knowledge_files_by_id_api_v1_knowledge__id__files_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "view_option",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "View Option"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeFileListResponse"
                 }
               }
             }
@@ -15443,13 +15994,43 @@
         ]
       }
     },
+    "/api/v1/evaluations/feedbacks/all/ids": {
+      "get": {
+        "tags": [
+          "evaluations"
+        ],
+        "summary": "Get All Feedback Ids",
+        "operationId": "get_all_feedback_ids_api_v1_evaluations_feedbacks_all_ids_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FeedbackIdResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get All Feedback Ids Api V1 Evaluations Feedbacks All Ids Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/evaluations/feedbacks/all/export": {
       "get": {
         "tags": [
           "evaluations"
         ],
-        "summary": "Get All Feedbacks",
-        "operationId": "get_all_feedbacks_api_v1_evaluations_feedbacks_all_export_get",
+        "summary": "Export All Feedbacks",
+        "operationId": "export_all_feedbacks_api_v1_evaluations_feedbacks_all_export_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -15460,7 +16041,7 @@
                     "$ref": "#/components/schemas/FeedbackModel"
                   },
                   "type": "array",
-                  "title": "Response Get All Feedbacks Api V1 Evaluations Feedbacks All Export Get"
+                  "title": "Response Export All Feedbacks Api V1 Evaluations Feedbacks All Export Get"
                 }
               }
             }
@@ -17359,6 +17940,54 @@
         ],
         "title": "BatchProcessFilesResult"
       },
+      "Body_image_edits_api_v1_images_edit_post": {
+        "properties": {
+          "form_data": {
+            "$ref": "#/components/schemas/EditImageForm"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "form_data"
+        ],
+        "title": "Body_image_edits_api_v1_images_edit_post"
+      },
+      "Body_image_generations_api_v1_images_generations_post": {
+        "properties": {
+          "form_data": {
+            "$ref": "#/components/schemas/CreateImageForm"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          }
+        },
+        "type": "object",
+        "required": [
+          "form_data"
+        ],
+        "title": "Body_image_generations_api_v1_images_generations_post"
+      },
       "Body_transcription_api_v1_audio_transcriptions_post": {
         "properties": {
           "file": {
@@ -18486,6 +19115,112 @@
         ],
         "title": "ChatTitleMessagesForm"
       },
+      "ChatUsageStatsListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChatUsageStatsResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "ChatUsageStatsListResponse"
+      },
+      "ChatUsageStatsResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "models": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Models",
+            "default": {}
+          },
+          "message_count": {
+            "type": "integer",
+            "title": "Message Count"
+          },
+          "history_models": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "History Models",
+            "default": {}
+          },
+          "history_message_count": {
+            "type": "integer",
+            "title": "History Message Count"
+          },
+          "history_user_message_count": {
+            "type": "integer",
+            "title": "History User Message Count"
+          },
+          "history_assistant_message_count": {
+            "type": "integer",
+            "title": "History Assistant Message Count"
+          },
+          "average_response_time": {
+            "type": "number",
+            "title": "Average Response Time"
+          },
+          "average_user_message_content_length": {
+            "type": "number",
+            "title": "Average User Message Content Length"
+          },
+          "average_assistant_message_content_length": {
+            "type": "number",
+            "title": "Average Assistant Message Content Length"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "default": []
+          },
+          "last_message_at": {
+            "type": "integer",
+            "title": "Last Message At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "message_count",
+          "history_message_count",
+          "history_user_message_count",
+          "history_assistant_message_count",
+          "average_response_time",
+          "average_user_message_content_length",
+          "average_assistant_message_content_length",
+          "last_message_at",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "ChatUsageStatsResponse"
+      },
       "ChatsImportForm": {
         "properties": {
           "chats": {
@@ -19091,6 +19826,17 @@
             ],
             "title": "Mineru Api Key"
           },
+          "MINERU_API_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Timeout"
+          },
           "MINERU_PARAMS": {
             "anyOf": [
               {
@@ -19146,6 +19892,17 @@
               }
             ],
             "title": "Rag External Reranker Api Key"
+          },
+          "RAG_EXTERNAL_RERANKER_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Timeout"
           },
           "TEXT_SPLITTER": {
             "anyOf": [
@@ -19813,6 +20570,34 @@
         ],
         "title": "FeedbackForm"
       },
+      "FeedbackIdResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "FeedbackIdResponse"
+      },
       "FeedbackListResponse": {
         "properties": {
           "items": {
@@ -20100,8 +20885,15 @@
             "title": "Hash"
           },
           "meta": {
-            "additionalProperties": true,
-            "type": "object",
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Meta"
           },
           "created_at": {
@@ -20116,7 +20908,6 @@
         "type": "object",
         "required": [
           "id",
-          "meta",
           "created_at",
           "updated_at"
         ],
@@ -20287,6 +21078,77 @@
           "updated_at"
         ],
         "title": "FileModelResponse"
+      },
+      "FileUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hash"
+          },
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/FileMeta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "filename",
+          "meta",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "FileUserResponse"
       },
       "FolderForm": {
         "properties": {
@@ -21634,6 +22496,111 @@
         ],
         "title": "ImportConfigForm"
       },
+      "KnowledgeAccessListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeAccessResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "KnowledgeAccessListResponse"
+      },
+      "KnowledgeAccessResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "write_access": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Write Access",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "description",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "KnowledgeAccessResponse"
+      },
       "KnowledgeFileIdForm": {
         "properties": {
           "file_id": {
@@ -21646,6 +22613,27 @@
           "file_id"
         ],
         "title": "KnowledgeFileIdForm"
+      },
+      "KnowledgeFileListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FileUserResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "KnowledgeFileListResponse"
       },
       "KnowledgeFilesResponse": {
         "properties": {
@@ -21698,11 +22686,30 @@
             "title": "Updated At"
           },
           "files": {
-            "items": {
-              "$ref": "#/components/schemas/FileMetadataResponse"
-            },
-            "type": "array",
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FileMetadataResponse"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Files"
+          },
+          "write_access": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Write Access",
+            "default": false
           }
         },
         "type": "object",
@@ -21712,8 +22719,7 @@
           "name",
           "description",
           "created_at",
-          "updated_at",
-          "files"
+          "updated_at"
         ],
         "title": "KnowledgeFilesResponse"
       },
@@ -21830,100 +22836,6 @@
           "updated_at"
         ],
         "title": "KnowledgeResponse"
-      },
-      "KnowledgeUserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "description": {
-            "type": "string",
-            "title": "Description"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "access_control": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Access Control"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "user": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "files": {
-            "anyOf": [
-              {
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/FileMetadataResponse"
-                    },
-                    {
-                      "additionalProperties": true,
-                      "type": "object"
-                    }
-                  ]
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Files"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "name",
-          "description",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "KnowledgeUserResponse"
       },
       "LdapConfigForm": {
         "properties": {
@@ -22232,7 +23144,7 @@
         ],
         "title": "MessageModel"
       },
-      "MessageWithReactionsResponse": {
+      "MessageResponse": {
         "properties": {
           "id": {
             "type": "string",
@@ -22311,6 +23223,454 @@
               {
                 "additionalProperties": true,
                 "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserNameResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reply_to_message": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MessageUserSlimResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "latest_reply_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Reply At"
+          },
+          "reply_count": {
+            "type": "integer",
+            "title": "Reply Count"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/Reactions"
+            },
+            "type": "array",
+            "title": "Reactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "content",
+          "created_at",
+          "updated_at",
+          "latest_reply_at",
+          "reply_count",
+          "reactions"
+        ],
+        "title": "MessageResponse"
+      },
+      "MessageUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Id"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserNameResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reply_to_message": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MessageUserSlimResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "latest_reply_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Reply At"
+          },
+          "reply_count": {
+            "type": "integer",
+            "title": "Reply Count"
+          },
+          "reactions": {
+            "items": {
+              "$ref": "#/components/schemas/Reactions"
+            },
+            "type": "array",
+            "title": "Reactions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "content",
+          "created_at",
+          "updated_at",
+          "latest_reply_at",
+          "reply_count",
+          "reactions"
+        ],
+        "title": "MessageUserResponse"
+      },
+      "MessageUserSlimResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Id"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserNameResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "content",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "MessageUserSlimResponse"
+      },
+      "MessageWithReactionsResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "channel_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Channel Id"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "is_pinned": {
+            "type": "boolean",
+            "title": "Is Pinned",
+            "default": false
+          },
+          "pinned_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned By"
+          },
+          "pinned_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pinned At"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "boolean"
               },
               {
                 "type": "null"
@@ -22851,6 +24211,78 @@
         ],
         "title": "NoteForm"
       },
+      "NoteItemResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "data",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "NoteItemResponse"
+      },
+      "NoteListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NoteUserResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "NoteListResponse"
+      },
       "NoteModel": {
         "properties": {
           "id": {
@@ -22920,33 +24352,79 @@
         ],
         "title": "NoteModel"
       },
-      "NoteTitleIdResponse": {
+      "NoteResponse": {
         "properties": {
           "id": {
             "type": "string",
             "title": "Id"
           },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
           "title": {
             "type": "string",
             "title": "Title"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
           },
           "updated_at": {
             "type": "integer",
             "title": "Updated At"
           },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
+          "write_access": {
+            "type": "boolean",
+            "title": "Write Access",
+            "default": false
           }
         },
         "type": "object",
         "required": [
           "id",
+          "user_id",
           "title",
-          "updated_at",
-          "created_at"
+          "created_at",
+          "updated_at"
         ],
-        "title": "NoteTitleIdResponse"
+        "title": "NoteResponse"
       },
       "NoteUserResponse": {
         "properties": {
@@ -23527,10 +25005,10 @@
           "rating": {
             "anyOf": [
               {
-                "type": "integer"
+                "type": "string"
               },
               {
-                "type": "string"
+                "type": "integer"
               },
               {
                 "type": "null"
@@ -24967,6 +26445,19 @@
             ],
             "title": "Profile Image Url"
           },
+          "groups": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Groups",
+            "default": []
+          },
           "is_active": {
             "type": "boolean",
             "title": "Is Active"
@@ -26112,6 +27603,17 @@
             ],
             "title": "Searxng Query Url"
           },
+          "SEARXNG_LANGUAGE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Searxng Language"
+          },
           "YACY_QUERY_URL": {
             "anyOf": [
               {
@@ -26430,6 +27932,17 @@
               }
             ],
             "title": "Web Loader Engine"
+          },
+          "WEB_LOADER_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Loader Timeout"
           },
           "ENABLE_WEB_LOADER_SSL_VERIFICATION": {
             "anyOf": [
@@ -26763,133 +28276,6 @@
         ],
         "title": "MessageForm"
       },
-      "open_webui__models__messages__MessageUserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "channel_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Channel Id"
-          },
-          "reply_to_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reply To Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "is_pinned": {
-            "type": "boolean",
-            "title": "Is Pinned",
-            "default": false
-          },
-          "pinned_by": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pinned By"
-          },
-          "pinned_at": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pinned At"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "user": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/UserNameResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "content",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "MessageUserResponse"
-      },
       "open_webui__models__users__UserResponse": {
         "properties": {
           "id": {
@@ -26917,168 +28303,6 @@
           "email"
         ],
         "title": "UserResponse"
-      },
-      "open_webui__routers__channels__MessageUserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "channel_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Channel Id"
-          },
-          "reply_to_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reply To Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "is_pinned": {
-            "type": "boolean",
-            "title": "Is Pinned",
-            "default": false
-          },
-          "pinned_by": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pinned By"
-          },
-          "pinned_at": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Pinned At"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "user": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/UserNameResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "reply_to_message": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/open_webui__models__messages__MessageUserResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "latest_reply_at": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Latest Reply At"
-          },
-          "reply_count": {
-            "type": "integer",
-            "title": "Reply Count"
-          },
-          "reactions": {
-            "items": {
-              "$ref": "#/components/schemas/Reactions"
-            },
-            "type": "array",
-            "title": "Reactions"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "content",
-          "created_at",
-          "updated_at",
-          "latest_reply_at",
-          "reply_count",
-          "reactions"
-        ],
-        "title": "MessageUserResponse"
       },
       "open_webui__routers__chats__MessageForm": {
         "properties": {
