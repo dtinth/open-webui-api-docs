@@ -1475,6 +1475,16 @@
               "default": false,
               "title": "Bypass Filter"
             }
+          },
+          {
+            "name": "bypass_system_prompt",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Bypass System Prompt"
+            }
           }
         ],
         "requestBody": {
@@ -1555,6 +1565,16 @@
               ],
               "default": false,
               "title": "Bypass Filter"
+            }
+          },
+          {
+            "name": "bypass_system_prompt",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Bypass System Prompt"
             }
           }
         ],
@@ -1987,7 +2007,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__main__UrlForm"
+                "$ref": "#/components/schemas/UrlForm"
               }
             }
           }
@@ -2049,7 +2069,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__main__UrlForm"
+                "$ref": "#/components/schemas/UrlForm"
               }
             }
           }
@@ -2235,7 +2255,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__openai__OpenAIConfigForm"
+                "$ref": "#/components/schemas/OpenAIConfigForm"
               }
             }
           },
@@ -2407,7 +2427,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__openai__ConnectionVerificationForm"
+                "$ref": "#/components/schemas/ConnectionVerificationForm"
               }
             }
           },
@@ -2469,6 +2489,16 @@
               "default": false,
               "title": "Bypass Filter"
             }
+          },
+          {
+            "name": "bypass_system_prompt",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Bypass System Prompt"
+            }
           }
         ],
         "requestBody": {
@@ -2506,57 +2536,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2600,7 +2586,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2644,7 +2630,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -5235,6 +5265,50 @@
                 "schema": {
                   "$ref": "#/components/schemas/UserProfileImageResponse"
                 }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/update/timezone": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Timezone",
+        "operationId": "update_timezone_api_v1_auths_update_timezone_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTimezoneForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           },
@@ -8082,6 +8156,343 @@
         }
       }
     },
+    "/api/v1/channels/webhooks/{webhook_id}/profile/image": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get Webhook Profile Image",
+        "description": "Get webhook profile image by webhook ID.",
+        "operationId": "get_webhook_profile_image_api_v1_channels_webhooks__webhook_id__profile_image_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Webhook Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/webhooks": {
+      "get": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Get Channel Webhooks",
+        "operationId": "get_channel_webhooks_api_v1_channels__id__webhooks_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChannelWebhookModel"
+                  },
+                  "title": "Response Get Channel Webhooks Api V1 Channels  Id  Webhooks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/webhooks/create": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Create Channel Webhook",
+        "operationId": "create_channel_webhook_api_v1_channels__id__webhooks_create_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelWebhookForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelWebhookModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/webhooks/{webhook_id}/update": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Update Channel Webhook",
+        "operationId": "update_channel_webhook_api_v1_channels__id__webhooks__webhook_id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Webhook Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChannelWebhookForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChannelWebhookModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/{id}/webhooks/{webhook_id}/delete": {
+      "delete": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Delete Channel Webhook",
+        "operationId": "delete_channel_webhook_api_v1_channels__id__webhooks__webhook_id__delete_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Webhook Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Delete Channel Webhook Api V1 Channels  Id  Webhooks  Webhook Id  Delete Delete"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/channels/webhooks/{webhook_id}/{token}": {
+      "post": {
+        "tags": [
+          "channels"
+        ],
+        "summary": "Post Webhook Message",
+        "description": "Public endpoint to post messages via webhook. No authentication required.",
+        "operationId": "post_webhook_message_api_v1_channels_webhooks__webhook_id___token__post",
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Webhook Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Token"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhookMessageForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/chats/list": {
       "get": {
         "tags": [
@@ -8346,6 +8757,143 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ChatUsageStatsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/stats/export": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Export Chat Stats",
+        "operationId": "export_chat_stats_api_v1_chats_stats_export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "updated_at",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Updated At"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          },
+          {
+            "name": "stream",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Stream"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatStatsExportList"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/stats/export/{chat_id}": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Export Single Chat Stats",
+        "description": "Export stats for exactly one chat by ID.\nReturns ChatStatsExport for the specified chat.",
+        "operationId": "export_single_chat_stats_api_v1_chats_stats_export__chat_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ChatStatsExport"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Export Single Chat Stats Api V1 Chats Stats Export  Chat Id  Get"
                 }
               }
             }
@@ -9378,7 +9926,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__chats__MessageForm"
+                "$ref": "#/components/schemas/MessageForm"
               }
             }
           }
@@ -10703,7 +11251,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ModelListResponse"
+                  "$ref": "#/components/schemas/ModelAccessListResponse"
                 }
               }
             }
@@ -10993,7 +11541,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/ModelResponse"
+                      "$ref": "#/components/schemas/ModelAccessResponse"
                     },
                     {
                       "type": "null"
@@ -11527,6 +12075,35 @@
                 "schema": {
                   "type": "boolean",
                   "title": "Response Reindex Knowledge Files Api V1 Knowledge Reindex Post"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/knowledge/metadata/reindex": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Reindex Knowledge Base Metadata Embeddings",
+        "description": "Batch embed all existing knowledge bases. Admin only.",
+        "operationId": "reindex_knowledge_base_metadata_embeddings_api_v1_knowledge_metadata_reindex_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Reindex Knowledge Base Metadata Embeddings Api V1 Knowledge Metadata Reindex Post"
                 }
               }
             }
@@ -12165,6 +12742,52 @@
         }
       }
     },
+    "/api/v1/knowledge/{id}/export": {
+      "get": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Export Knowledge By Id",
+        "description": "Export a knowledge base as a zip file containing .txt files.\nAdmin only.",
+        "operationId": "export_knowledge_by_id_api_v1_knowledge__id__export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/prompts/": {
       "get": {
         "tags": [
@@ -12209,7 +12832,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/PromptUserResponse"
+                    "$ref": "#/components/schemas/PromptAccessResponse"
                   },
                   "type": "array",
                   "title": "Response Get Prompt List Api V1 Prompts List Get"
@@ -12310,7 +12933,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/PromptModel"
+                      "$ref": "#/components/schemas/PromptAccessResponse"
                     },
                     {
                       "type": "null"
@@ -12491,7 +13114,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ToolUserResponse"
+                    "$ref": "#/components/schemas/ToolAccessResponse"
                   },
                   "type": "array",
                   "title": "Response Get Tool List Api V1 Tools List Get"
@@ -12518,7 +13141,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__functions__LoadUrlForm"
+                "$ref": "#/components/schemas/LoadUrlForm"
               }
             }
           },
@@ -12677,7 +13300,7 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/ToolModel"
+                      "$ref": "#/components/schemas/ToolAccessResponse"
                     },
                     {
                       "type": "null"
@@ -14480,7 +15103,7 @@
           "files"
         ],
         "summary": "Search Files",
-        "description": "Search for files by filename with support for wildcard patterns.",
+        "description": "Search for files by filename with support for wildcard patterns.\nUses SQL-based filtering with pagination for better performance.",
         "operationId": "search_files_api_v1_files_search_get",
         "security": [
           {
@@ -14508,6 +15131,33 @@
               "default": true,
               "title": "Content"
             }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of files to skip",
+              "default": 0,
+              "title": "Skip"
+            },
+            "description": "Number of files to skip"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "description": "Maximum number of files to return",
+              "default": 100,
+              "title": "Limit"
+            },
+            "description": "Maximum number of files to return"
           }
         ],
         "responses": {
@@ -15090,7 +15740,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__functions__LoadUrlForm"
+                "$ref": "#/components/schemas/LoadUrlForm"
               }
             }
           },
@@ -15859,6 +16509,119 @@
                     }
                   ],
                   "title": "Response Update Function User Valves By Id Api V1 Functions Id  Id  Valves User Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evaluations/leaderboard": {
+      "get": {
+        "tags": [
+          "evaluations"
+        ],
+        "summary": "Get Leaderboard",
+        "description": "Get model leaderboard with Elo ratings. Query filters by tag similarity.",
+        "operationId": "get_leaderboard_api_v1_evaluations_leaderboard_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LeaderboardResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/evaluations/leaderboard/{model_id}/history": {
+      "get": {
+        "tags": [
+          "evaluations"
+        ],
+        "summary": "Get Model History",
+        "description": "Get daily win/loss history for a specific model.",
+        "operationId": "get_model_history_api_v1_evaluations_leaderboard__model_id__history_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Model Id"
+            }
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30,
+              "title": "Days"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelHistoryResponse"
                 }
               }
             }
@@ -17160,7 +17923,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__main__UrlForm"
+                "$ref": "#/components/schemas/UrlForm"
               }
             }
           },
@@ -17656,6 +18419,17 @@
             "type": "boolean",
             "title": "Show Admin Details"
           },
+          "ADMIN_EMAIL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Admin Email"
+          },
           "WEBUI_URL": {
             "type": "string",
             "title": "Webui Url"
@@ -17700,9 +18474,27 @@
             "type": "boolean",
             "title": "Enable Folders"
           },
+          "FOLDER_MAX_FILE_COUNT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Folder Max File Count"
+          },
           "ENABLE_CHANNELS": {
             "type": "boolean",
             "title": "Enable Channels"
+          },
+          "ENABLE_MEMORIES": {
+            "type": "boolean",
+            "title": "Enable Memories"
           },
           "ENABLE_NOTES": {
             "type": "boolean",
@@ -17711,6 +18503,10 @@
           "ENABLE_USER_WEBHOOKS": {
             "type": "boolean",
             "title": "Enable User Webhooks"
+          },
+          "ENABLE_USER_STATUS": {
+            "type": "boolean",
+            "title": "Enable User Status"
           },
           "PENDING_USER_OVERLAY_TITLE": {
             "anyOf": [
@@ -17761,10 +18557,71 @@
           "ENABLE_MESSAGE_RATING",
           "ENABLE_FOLDERS",
           "ENABLE_CHANNELS",
+          "ENABLE_MEMORIES",
           "ENABLE_NOTES",
-          "ENABLE_USER_WEBHOOKS"
+          "ENABLE_USER_WEBHOOKS",
+          "ENABLE_USER_STATUS"
         ],
         "title": "AdminConfig"
+      },
+      "AggregateChatStats": {
+        "properties": {
+          "average_response_time": {
+            "type": "number",
+            "title": "Average Response Time"
+          },
+          "average_user_message_content_length": {
+            "type": "number",
+            "title": "Average User Message Content Length"
+          },
+          "average_assistant_message_content_length": {
+            "type": "number",
+            "title": "Average Assistant Message Content Length"
+          },
+          "models": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Models"
+          },
+          "message_count": {
+            "type": "integer",
+            "title": "Message Count"
+          },
+          "history_models": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "History Models"
+          },
+          "history_message_count": {
+            "type": "integer",
+            "title": "History Message Count"
+          },
+          "history_user_message_count": {
+            "type": "integer",
+            "title": "History User Message Count"
+          },
+          "history_assistant_message_count": {
+            "type": "integer",
+            "title": "History Assistant Message Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "average_response_time",
+          "average_user_message_content_length",
+          "average_assistant_message_content_length",
+          "models",
+          "message_count",
+          "history_models",
+          "history_message_count",
+          "history_user_message_count",
+          "history_assistant_message_count"
+        ],
+        "title": "AggregateChatStats"
       },
       "ApiKey": {
         "properties": {
@@ -18742,6 +19599,107 @@
         ],
         "title": "ChannelModel"
       },
+      "ChannelWebhookForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "profile_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "ChannelWebhookForm"
+      },
+      "ChannelWebhookModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "channel_id": {
+            "type": "string",
+            "title": "Channel Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "profile_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Image Url"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "last_used_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Used At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "channel_id",
+          "user_id",
+          "name",
+          "token",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "ChannelWebhookModel"
+      },
+      "ChatBody": {
+        "properties": {
+          "history": {
+            "$ref": "#/components/schemas/ChatHistoryStats"
+          }
+        },
+        "type": "object",
+        "required": [
+          "history"
+        ],
+        "title": "ChatBody"
+      },
       "ChatFolderIdForm": {
         "properties": {
           "folder_id": {
@@ -18783,6 +19741,33 @@
           "chat"
         ],
         "title": "ChatForm"
+      },
+      "ChatHistoryStats": {
+        "properties": {
+          "messages": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MessageStats"
+            },
+            "type": "object",
+            "title": "Messages"
+          },
+          "currentId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currentid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "title": "ChatHistoryStats"
       },
       "ChatImportForm": {
         "properties": {
@@ -19040,6 +20025,81 @@
           "archived"
         ],
         "title": "ChatResponse"
+      },
+      "ChatStatsExport": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "default": []
+          },
+          "stats": {
+            "$ref": "#/components/schemas/AggregateChatStats"
+          },
+          "chat": {
+            "$ref": "#/components/schemas/ChatBody"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "created_at",
+          "updated_at",
+          "stats",
+          "chat"
+        ],
+        "title": "ChatStatsExport"
+      },
+      "ChatStatsExportList": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "chats"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChatStatsExport"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "page": {
+            "type": "integer",
+            "title": "Page"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page"
+        ],
+        "title": "ChatStatsExportList"
       },
       "ChatTitleIdResponse": {
         "properties": {
@@ -19891,6 +20951,17 @@
             ],
             "title": "Text Splitter"
           },
+          "ENABLE_MARKDOWN_HEADER_TEXT_SPLITTER": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Markdown Header Text Splitter"
+          },
           "CHUNK_SIZE": {
             "anyOf": [
               {
@@ -19901,6 +20972,17 @@
               }
             ],
             "title": "Chunk Size"
+          },
+          "CHUNK_MIN_SIZE_TARGET": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Min Size Target"
           },
           "CHUNK_OVERLAP": {
             "anyOf": [
@@ -20006,6 +21088,36 @@
         },
         "type": "object",
         "title": "ConfigForm"
+      },
+      "ConnectionVerificationForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "key"
+        ],
+        "title": "ConnectionVerificationForm"
       },
       "ConnectionsConfigForm": {
         "properties": {
@@ -20197,6 +21309,17 @@
             "title": "N",
             "default": 1
           },
+          "steps": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Steps"
+          },
           "negative_prompt": {
             "anyOf": [
               {
@@ -20378,7 +21501,7 @@
           "ollama_config": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__routers__retrieval__OllamaConfigForm"
+                "$ref": "#/components/schemas/OllamaConfigForm"
               },
               {
                 "type": "null"
@@ -20494,6 +21617,11 @@
           "code_interpreter": {
             "type": "boolean",
             "title": "Code Interpreter",
+            "default": true
+          },
+          "memories": {
+            "type": "boolean",
+            "title": "Memories",
             "default": true
           }
         },
@@ -21106,7 +22234,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -22546,7 +23674,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -22940,6 +24068,80 @@
         ],
         "title": "LdapServerConfig"
       },
+      "LeaderboardEntry": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "rating": {
+            "type": "integer",
+            "title": "Rating"
+          },
+          "won": {
+            "type": "integer",
+            "title": "Won"
+          },
+          "lost": {
+            "type": "integer",
+            "title": "Lost"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "top_tags": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Top Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id",
+          "rating",
+          "won",
+          "lost",
+          "count",
+          "top_tags"
+        ],
+        "title": "LeaderboardEntry"
+      },
+      "LeaderboardResponse": {
+        "properties": {
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/LeaderboardEntry"
+            },
+            "type": "array",
+            "title": "Entries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "entries"
+        ],
+        "title": "LeaderboardResponse"
+      },
+      "LoadUrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "maxLength": 2083,
+            "minLength": 1,
+            "format": "uri",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "LoadUrlForm"
+      },
       "MarkdownForm": {
         "properties": {
           "md": {
@@ -23002,6 +24204,19 @@
         },
         "type": "object",
         "title": "MemoryUpdateModel"
+      },
+      "MessageForm": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "title": "MessageForm"
       },
       "MessageModel": {
         "properties": {
@@ -23281,6 +24496,87 @@
           "reactions"
         ],
         "title": "MessageResponse"
+      },
+      "MessageStats": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "content_length": {
+            "type": "integer",
+            "title": "Content Length"
+          },
+          "token_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Token Count"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timestamp"
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rating"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "content_length"
+        ],
+        "title": "MessageStats"
       },
       "MessageUserResponse": {
         "properties": {
@@ -23703,6 +24999,118 @@
         ],
         "title": "MessageWithReactionsResponse"
       },
+      "ModelAccessListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ModelAccessResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "ModelAccessListResponse"
+      },
+      "ModelAccessResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "base_model_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Model Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "params": {
+            "$ref": "#/components/schemas/ModelParams"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ModelMeta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "write_access": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Write Access",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "params",
+          "meta",
+          "is_active",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "ModelAccessResponse"
+      },
       "ModelForm": {
         "properties": {
           "id": {
@@ -23757,6 +25165,50 @@
         ],
         "title": "ModelForm"
       },
+      "ModelHistoryEntry": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "won": {
+            "type": "integer",
+            "title": "Won"
+          },
+          "lost": {
+            "type": "integer",
+            "title": "Lost"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date",
+          "won",
+          "lost"
+        ],
+        "title": "ModelHistoryEntry"
+      },
+      "ModelHistoryResponse": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/ModelHistoryEntry"
+            },
+            "type": "array",
+            "title": "History"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id",
+          "history"
+        ],
+        "title": "ModelHistoryResponse"
+      },
       "ModelIdForm": {
         "properties": {
           "id": {
@@ -23769,27 +25221,6 @@
           "id"
         ],
         "title": "ModelIdForm"
-      },
-      "ModelListResponse": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/ModelUserResponse"
-            },
-            "type": "array",
-            "title": "Items"
-          },
-          "total": {
-            "type": "integer",
-            "title": "Total"
-          }
-        },
-        "type": "object",
-        "required": [
-          "items",
-          "total"
-        ],
-        "title": "ModelListResponse"
       },
       "ModelMeta": {
         "properties": {
@@ -23995,85 +25426,6 @@
         ],
         "title": "ModelResponse"
       },
-      "ModelUserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "base_model_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Base Model Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "params": {
-            "$ref": "#/components/schemas/ModelParams"
-          },
-          "meta": {
-            "$ref": "#/components/schemas/ModelMeta"
-          },
-          "access_control": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Access Control"
-          },
-          "is_active": {
-            "type": "boolean",
-            "title": "Is Active"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "user": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "name",
-          "params",
-          "meta",
-          "is_active",
-          "updated_at",
-          "created_at"
-        ],
-        "title": "ModelUserResponse"
-      },
       "ModelsConfigForm": {
         "properties": {
           "DEFAULT_MODELS": {
@@ -24220,7 +25572,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -24463,7 +25815,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -24509,6 +25861,65 @@
           "client_id"
         ],
         "title": "OAuthClientRegistrationForm"
+      },
+      "OllamaConfigForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "key"
+        ],
+        "title": "OllamaConfigForm"
+      },
+      "OpenAIConfigForm": {
+        "properties": {
+          "ENABLE_OPENAI_API": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Openai Api"
+          },
+          "OPENAI_API_BASE_URLS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openai Api Base Urls"
+          },
+          "OPENAI_API_KEYS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openai Api Keys"
+          },
+          "OPENAI_API_CONFIGS": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Openai Api Configs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "OPENAI_API_BASE_URLS",
+          "OPENAI_API_KEYS",
+          "OPENAI_API_CONFIGS"
+        ],
+        "title": "OpenAIConfigForm"
       },
       "PinMessageForm": {
         "properties": {
@@ -24611,6 +26022,73 @@
         ],
         "title": "ProcessUrlForm"
       },
+      "PromptAccessResponse": {
+        "properties": {
+          "command": {
+            "type": "string",
+            "title": "Command"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "timestamp": {
+            "type": "integer",
+            "title": "Timestamp"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "write_access": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Write Access",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "command",
+          "user_id",
+          "title",
+          "content",
+          "timestamp"
+        ],
+        "title": "PromptAccessResponse"
+      },
       "PromptForm": {
         "properties": {
           "command": {
@@ -24711,61 +26189,6 @@
           "content"
         ],
         "title": "PromptSuggestion"
-      },
-      "PromptUserResponse": {
-        "properties": {
-          "command": {
-            "type": "string",
-            "title": "Command"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
-          "content": {
-            "type": "string",
-            "title": "Content"
-          },
-          "timestamp": {
-            "type": "integer",
-            "title": "Timestamp"
-          },
-          "access_control": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Access Control"
-          },
-          "user": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        },
-        "type": "object",
-        "required": [
-          "command",
-          "user_id",
-          "title",
-          "content",
-          "timestamp"
-        ],
-        "title": "PromptUserResponse"
       },
       "PushModelForm": {
         "properties": {
@@ -24981,10 +26404,10 @@
           "rating": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "integer"
               },
               {
-                "type": "integer"
+                "type": "string"
               },
               {
                 "type": "null"
@@ -25430,6 +26853,17 @@
           "suggestions"
         ],
         "title": "SetDefaultSuggestionsForm"
+      },
+      "SettingsPermissions": {
+        "properties": {
+          "interface": {
+            "type": "boolean",
+            "title": "Interface",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "SettingsPermissions"
       },
       "SharingPermissions": {
         "properties": {
@@ -25894,6 +27328,78 @@
         ],
         "title": "TaskConfigForm"
       },
+      "ToolAccessResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ToolMeta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "write_access": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Write Access",
+            "default": false
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "meta",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "ToolAccessResponse"
+      },
       "ToolForm": {
         "properties": {
           "id": {
@@ -26214,7 +27720,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -26370,6 +27876,32 @@
           "name"
         ],
         "title": "UpdateProfileForm"
+      },
+      "UpdateTimezoneForm": {
+        "properties": {
+          "timezone": {
+            "type": "string",
+            "title": "Timezone"
+          }
+        },
+        "type": "object",
+        "required": [
+          "timezone"
+        ],
+        "title": "UpdateTimezoneForm"
+      },
+      "UrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "UrlForm"
       },
       "UserActiveResponse": {
         "properties": {
@@ -27277,6 +28809,9 @@
           },
           "features": {
             "$ref": "#/components/schemas/FeaturesPermissions"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SettingsPermissions"
           }
         },
         "type": "object",
@@ -27284,7 +28819,8 @@
           "workspace",
           "sharing",
           "chat",
-          "features"
+          "features",
+          "settings"
         ],
         "title": "UserPermissions"
       },
@@ -27320,6 +28856,34 @@
           "profile_image_url"
         ],
         "title": "UserProfileImageResponse"
+      },
+      "UserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "role",
+          "email"
+        ],
+        "title": "UserResponse"
       },
       "UserSettings": {
         "properties": {
@@ -27733,6 +29297,17 @@
             ],
             "title": "Serply Api Key"
           },
+          "DDGS_BACKEND": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ddgs Backend"
+          },
           "TAVILY_API_KEY": {
             "anyOf": [
               {
@@ -27798,6 +29373,17 @@
               }
             ],
             "title": "Jina Api Key"
+          },
+          "JINA_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jina Api Base Url"
           },
           "BING_SEARCH_V7_ENDPOINT": {
             "anyOf": [
@@ -27975,6 +29561,17 @@
             ],
             "title": "Firecrawl Api Base Url"
           },
+          "FIRECRAWL_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Firecrawl Timeout"
+          },
           "TAVILY_EXTRACT_DEPTH": {
             "anyOf": [
               {
@@ -28070,6 +29667,19 @@
         "type": "object",
         "title": "WebConfig"
       },
+      "WebhookMessageForm": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content"
+          }
+        },
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "title": "WebhookMessageForm"
+      },
       "WorkspacePermissions": {
         "properties": {
           "models": {
@@ -28125,19 +29735,6 @@
         },
         "type": "object",
         "title": "WorkspacePermissions"
-      },
-      "open_webui__main__UrlForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "title": "UrlForm"
       },
       "open_webui__models__feedbacks__UserResponse": {
         "properties": {
@@ -28252,63 +29849,6 @@
         ],
         "title": "MessageForm"
       },
-      "open_webui__models__users__UserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role"
-          },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "role",
-          "email"
-        ],
-        "title": "UserResponse"
-      },
-      "open_webui__routers__chats__MessageForm": {
-        "properties": {
-          "content": {
-            "type": "string",
-            "title": "Content"
-          }
-        },
-        "type": "object",
-        "required": [
-          "content"
-        ],
-        "title": "MessageForm"
-      },
-      "open_webui__routers__functions__LoadUrlForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "maxLength": 2083,
-            "minLength": 1,
-            "format": "uri",
-            "title": "Url"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "title": "LoadUrlForm"
-      },
       "open_webui__routers__ollama__ConnectionVerificationForm": {
         "properties": {
           "url": {
@@ -28363,95 +29903,6 @@
         "required": [
           "OLLAMA_BASE_URLS",
           "OLLAMA_API_CONFIGS"
-        ],
-        "title": "OllamaConfigForm"
-      },
-      "open_webui__routers__openai__ConnectionVerificationForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          },
-          "key": {
-            "type": "string",
-            "title": "Key"
-          },
-          "config": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Config"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url",
-          "key"
-        ],
-        "title": "ConnectionVerificationForm"
-      },
-      "open_webui__routers__openai__OpenAIConfigForm": {
-        "properties": {
-          "ENABLE_OPENAI_API": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Openai Api"
-          },
-          "OPENAI_API_BASE_URLS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Openai Api Base Urls"
-          },
-          "OPENAI_API_KEYS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Openai Api Keys"
-          },
-          "OPENAI_API_CONFIGS": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Openai Api Configs"
-          }
-        },
-        "type": "object",
-        "required": [
-          "OPENAI_API_BASE_URLS",
-          "OPENAI_API_KEYS",
-          "OPENAI_API_CONFIGS"
-        ],
-        "title": "OpenAIConfigForm"
-      },
-      "open_webui__routers__retrieval__OllamaConfigForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          },
-          "key": {
-            "type": "string",
-            "title": "Key"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url",
-          "key"
         ],
         "title": "OllamaConfigForm"
       },
