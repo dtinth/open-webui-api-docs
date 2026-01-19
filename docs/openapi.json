@@ -120,7 +120,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__ollama__OllamaConfigForm"
+                "$ref": "#/components/schemas/OllamaConfigForm"
               }
             }
           },
@@ -2536,13 +2536,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
+      "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2580,13 +2580,13 @@
           }
         }
       },
-      "delete": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2630,7 +2630,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2674,7 +2674,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -7571,7 +7571,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__models__messages__MessageForm"
+                "$ref": "#/components/schemas/MessageForm"
               }
             }
           }
@@ -7928,7 +7928,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__models__messages__MessageForm"
+                "$ref": "#/components/schemas/MessageForm"
               }
             }
           }
@@ -9926,7 +9926,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageForm"
+                "$ref": "#/components/schemas/open_webui__routers__chats__MessageForm"
               }
             }
           }
@@ -21501,7 +21501,7 @@
           "ollama_config": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/OllamaConfigForm"
+                "$ref": "#/components/schemas/open_webui__routers__retrieval__OllamaConfigForm"
               },
               {
                 "type": "null"
@@ -24207,9 +24207,66 @@
       },
       "MessageForm": {
         "properties": {
+          "temp_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temp Id"
+          },
           "content": {
             "type": "string",
             "title": "Content"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
           }
         },
         "type": "object",
@@ -25864,19 +25921,34 @@
       },
       "OllamaConfigForm": {
         "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
+          "ENABLE_OLLAMA_API": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Ollama Api"
           },
-          "key": {
-            "type": "string",
-            "title": "Key"
+          "OLLAMA_BASE_URLS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Ollama Base Urls"
+          },
+          "OLLAMA_API_CONFIGS": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Ollama Api Configs"
           }
         },
         "type": "object",
         "required": [
-          "url",
-          "key"
+          "OLLAMA_BASE_URLS",
+          "OLLAMA_API_CONFIGS"
         ],
         "title": "OllamaConfigForm"
       },
@@ -29779,68 +29851,11 @@
         ],
         "title": "UserResponse"
       },
-      "open_webui__models__messages__MessageForm": {
+      "open_webui__routers__chats__MessageForm": {
         "properties": {
-          "temp_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Temp Id"
-          },
           "content": {
             "type": "string",
             "title": "Content"
-          },
-          "reply_to_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reply To Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
           }
         },
         "type": "object",
@@ -29873,36 +29888,21 @@
         ],
         "title": "ConnectionVerificationForm"
       },
-      "open_webui__routers__ollama__OllamaConfigForm": {
+      "open_webui__routers__retrieval__OllamaConfigForm": {
         "properties": {
-          "ENABLE_OLLAMA_API": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Ollama Api"
+          "url": {
+            "type": "string",
+            "title": "Url"
           },
-          "OLLAMA_BASE_URLS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Ollama Base Urls"
-          },
-          "OLLAMA_API_CONFIGS": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Ollama Api Configs"
+          "key": {
+            "type": "string",
+            "title": "Key"
           }
         },
         "type": "object",
         "required": [
-          "OLLAMA_BASE_URLS",
-          "OLLAMA_API_CONFIGS"
+          "url",
+          "key"
         ],
         "title": "OllamaConfigForm"
       },
