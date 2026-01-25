@@ -2536,57 +2536,13 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2630,7 +2586,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2668,13 +2624,57 @@
           }
         }
       },
-      "post": {
+      "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -21912,7 +21912,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__feedbacks__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -22234,7 +22234,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -23674,7 +23674,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -25078,7 +25078,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -25572,7 +25572,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -25815,7 +25815,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -26051,7 +26051,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -27360,7 +27360,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -27712,7 +27712,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -28859,21 +28859,36 @@
             "type": "string",
             "title": "Name"
           },
-          "role": {
-            "type": "string",
-            "title": "Role"
-          },
           "email": {
             "type": "string",
             "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "pending"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
           }
         },
         "type": "object",
         "required": [
           "id",
           "name",
-          "role",
-          "email"
+          "email",
+          "last_active_at",
+          "updated_at",
+          "created_at"
         ],
         "title": "UserResponse"
       },
@@ -29728,49 +29743,6 @@
         "type": "object",
         "title": "WorkspacePermissions"
       },
-      "open_webui__models__feedbacks__UserResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role",
-            "default": "pending"
-          },
-          "last_active_at": {
-            "type": "integer",
-            "title": "Last Active At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "email",
-          "last_active_at",
-          "updated_at",
-          "created_at"
-        ],
-        "title": "UserResponse"
-      },
       "open_webui__models__messages__MessageForm": {
         "properties": {
           "temp_id": {
@@ -29840,6 +29812,34 @@
           "content"
         ],
         "title": "MessageForm"
+      },
+      "open_webui__models__users__UserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "role",
+          "email"
+        ],
+        "title": "UserResponse"
       },
       "open_webui__routers__ollama__ConnectionVerificationForm": {
         "properties": {
