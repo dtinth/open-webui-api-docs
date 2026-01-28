@@ -120,7 +120,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OllamaConfigForm"
+                "$ref": "#/components/schemas/open_webui__routers__ollama__OllamaConfigForm"
               }
             }
           },
@@ -2255,7 +2255,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__openai__OpenAIConfigForm"
+                "$ref": "#/components/schemas/OpenAIConfigForm"
               }
             }
           },
@@ -2536,13 +2536,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
+      "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2586,7 +2586,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -2630,51 +2674,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -21491,7 +21491,7 @@
           "openai_config": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/OpenAIConfigForm"
+                "$ref": "#/components/schemas/open_webui__routers__retrieval__OpenAIConfigForm"
               },
               {
                 "type": "null"
@@ -21501,7 +21501,7 @@
           "ollama_config": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__routers__retrieval__OllamaConfigForm"
+                "$ref": "#/components/schemas/OllamaConfigForm"
               },
               {
                 "type": "null"
@@ -25864,39 +25864,6 @@
       },
       "OllamaConfigForm": {
         "properties": {
-          "ENABLE_OLLAMA_API": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Ollama Api"
-          },
-          "OLLAMA_BASE_URLS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Ollama Base Urls"
-          },
-          "OLLAMA_API_CONFIGS": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Ollama Api Configs"
-          }
-        },
-        "type": "object",
-        "required": [
-          "OLLAMA_BASE_URLS",
-          "OLLAMA_API_CONFIGS"
-        ],
-        "title": "OllamaConfigForm"
-      },
-      "OpenAIConfigForm": {
-        "properties": {
           "url": {
             "type": "string",
             "title": "Url"
@@ -25910,6 +25877,47 @@
         "required": [
           "url",
           "key"
+        ],
+        "title": "OllamaConfigForm"
+      },
+      "OpenAIConfigForm": {
+        "properties": {
+          "ENABLE_OPENAI_API": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Openai Api"
+          },
+          "OPENAI_API_BASE_URLS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openai Api Base Urls"
+          },
+          "OPENAI_API_KEYS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openai Api Keys"
+          },
+          "OPENAI_API_CONFIGS": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Openai Api Configs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "OPENAI_API_BASE_URLS",
+          "OPENAI_API_KEYS",
+          "OPENAI_API_CONFIGS"
         ],
         "title": "OpenAIConfigForm"
       },
@@ -29865,9 +29873,9 @@
         ],
         "title": "ConnectionVerificationForm"
       },
-      "open_webui__routers__openai__OpenAIConfigForm": {
+      "open_webui__routers__ollama__OllamaConfigForm": {
         "properties": {
-          "ENABLE_OPENAI_API": {
+          "ENABLE_OLLAMA_API": {
             "anyOf": [
               {
                 "type": "boolean"
@@ -29876,37 +29884,29 @@
                 "type": "null"
               }
             ],
-            "title": "Enable Openai Api"
+            "title": "Enable Ollama Api"
           },
-          "OPENAI_API_BASE_URLS": {
+          "OLLAMA_BASE_URLS": {
             "items": {
               "type": "string"
             },
             "type": "array",
-            "title": "Openai Api Base Urls"
+            "title": "Ollama Base Urls"
           },
-          "OPENAI_API_KEYS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Openai Api Keys"
-          },
-          "OPENAI_API_CONFIGS": {
+          "OLLAMA_API_CONFIGS": {
             "additionalProperties": true,
             "type": "object",
-            "title": "Openai Api Configs"
+            "title": "Ollama Api Configs"
           }
         },
         "type": "object",
         "required": [
-          "OPENAI_API_BASE_URLS",
-          "OPENAI_API_KEYS",
-          "OPENAI_API_CONFIGS"
+          "OLLAMA_BASE_URLS",
+          "OLLAMA_API_CONFIGS"
         ],
-        "title": "OpenAIConfigForm"
+        "title": "OllamaConfigForm"
       },
-      "open_webui__routers__retrieval__OllamaConfigForm": {
+      "open_webui__routers__retrieval__OpenAIConfigForm": {
         "properties": {
           "url": {
             "type": "string",
@@ -29922,7 +29922,7 @@
           "url",
           "key"
         ],
-        "title": "OllamaConfigForm"
+        "title": "OpenAIConfigForm"
       }
     },
     "securitySchemes": {
