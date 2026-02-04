@@ -52,7 +52,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConnectionVerificationForm"
+                "$ref": "#/components/schemas/open_webui__routers__ollama__ConnectionVerificationForm"
               }
             }
           },
@@ -2427,7 +2427,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__openai__ConnectionVerificationForm"
+                "$ref": "#/components/schemas/ConnectionVerificationForm"
               }
             }
           },
@@ -2536,13 +2536,13 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2586,7 +2586,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2624,13 +2624,13 @@
           }
         }
       },
-      "post": {
+      "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2674,7 +2674,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -7571,7 +7571,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageForm"
+                "$ref": "#/components/schemas/open_webui__models__messages__MessageForm"
               }
             }
           }
@@ -7928,7 +7928,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageForm"
+                "$ref": "#/components/schemas/open_webui__models__messages__MessageForm"
               }
             }
           }
@@ -9926,7 +9926,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__chats__MessageForm"
+                "$ref": "#/components/schemas/MessageForm"
               }
             }
           }
@@ -21096,20 +21096,26 @@
             "title": "Url"
           },
           "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "config": {
             "anyOf": [
               {
-                "type": "string"
+                "additionalProperties": true,
+                "type": "object"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Key"
+            "title": "Config"
           }
         },
         "type": "object",
         "required": [
-          "url"
+          "url",
+          "key"
         ],
         "title": "ConnectionVerificationForm"
       },
@@ -21906,7 +21912,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserResponse"
+                "$ref": "#/components/schemas/open_webui__models__feedbacks__UserResponse"
               },
               {
                 "type": "null"
@@ -22228,7 +22234,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -23668,7 +23674,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -24201,66 +24207,9 @@
       },
       "MessageForm": {
         "properties": {
-          "temp_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Temp Id"
-          },
           "content": {
             "type": "string",
             "title": "Content"
-          },
-          "reply_to_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reply To Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
           }
         },
         "type": "object",
@@ -25129,7 +25078,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -25623,7 +25572,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -25866,7 +25815,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -26087,7 +26036,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -27396,7 +27345,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -27748,7 +27697,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+                "$ref": "#/components/schemas/UserResponse"
               },
               {
                 "type": "null"
@@ -28895,36 +28844,21 @@
             "type": "string",
             "title": "Name"
           },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
           "email": {
             "type": "string",
             "title": "Email"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role",
-            "default": "pending"
-          },
-          "last_active_at": {
-            "type": "integer",
-            "title": "Last Active At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
           }
         },
         "type": "object",
         "required": [
           "id",
           "name",
-          "email",
-          "last_active_at",
-          "updated_at",
-          "created_at"
+          "role",
+          "email"
         ],
         "title": "UserResponse"
       },
@@ -29779,7 +29713,7 @@
         "type": "object",
         "title": "WorkspacePermissions"
       },
-      "open_webui__models__users__UserResponse": {
+      "open_webui__models__feedbacks__UserResponse": {
         "properties": {
           "id": {
             "type": "string",
@@ -29789,29 +29723,101 @@
             "type": "string",
             "title": "Name"
           },
-          "role": {
-            "type": "string",
-            "title": "Role"
-          },
           "email": {
             "type": "string",
             "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "pending"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
           }
         },
         "type": "object",
         "required": [
           "id",
           "name",
-          "role",
-          "email"
+          "email",
+          "last_active_at",
+          "updated_at",
+          "created_at"
         ],
         "title": "UserResponse"
       },
-      "open_webui__routers__chats__MessageForm": {
+      "open_webui__models__messages__MessageForm": {
         "properties": {
+          "temp_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temp Id"
+          },
           "content": {
             "type": "string",
             "title": "Content"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
           }
         },
         "type": "object",
@@ -29819,6 +29825,30 @@
           "content"
         ],
         "title": "MessageForm"
+      },
+      "open_webui__routers__ollama__ConnectionVerificationForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "ConnectionVerificationForm"
       },
       "open_webui__routers__ollama__OllamaConfigForm": {
         "properties": {
@@ -29852,36 +29882,6 @@
           "OLLAMA_API_CONFIGS"
         ],
         "title": "OllamaConfigForm"
-      },
-      "open_webui__routers__openai__ConnectionVerificationForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          },
-          "key": {
-            "type": "string",
-            "title": "Key"
-          },
-          "config": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Config"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url",
-          "key"
-        ],
-        "title": "ConnectionVerificationForm"
       },
       "open_webui__routers__openai__OpenAIConfigForm": {
         "properties": {
