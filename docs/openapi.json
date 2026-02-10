@@ -2255,7 +2255,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OpenAIConfigForm"
+                "$ref": "#/components/schemas/open_webui__routers__openai__OpenAIConfigForm"
               }
             }
           },
@@ -2536,101 +2536,13 @@
       }
     },
     "/openai/{path}": {
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -2674,7 +2586,95 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__put",
         "security": [
           {
             "HTTPBearer": []
@@ -7571,7 +7571,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageForm"
+                "$ref": "#/components/schemas/open_webui__models__messages__MessageForm"
               }
             }
           }
@@ -7928,7 +7928,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageForm"
+                "$ref": "#/components/schemas/open_webui__models__messages__MessageForm"
               }
             }
           }
@@ -9926,7 +9926,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__chats__MessageForm"
+                "$ref": "#/components/schemas/MessageForm"
               }
             }
           }
@@ -21491,7 +21491,7 @@
           "openai_config": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/open_webui__routers__retrieval__OpenAIConfigForm"
+                "$ref": "#/components/schemas/OpenAIConfigForm"
               },
               {
                 "type": "null"
@@ -24207,66 +24207,9 @@
       },
       "MessageForm": {
         "properties": {
-          "temp_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Temp Id"
-          },
           "content": {
             "type": "string",
             "title": "Content"
-          },
-          "reply_to_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reply To Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
           }
         },
         "type": "object",
@@ -25954,42 +25897,19 @@
       },
       "OpenAIConfigForm": {
         "properties": {
-          "ENABLE_OPENAI_API": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Enable Openai Api"
+          "url": {
+            "type": "string",
+            "title": "Url"
           },
-          "OPENAI_API_BASE_URLS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Openai Api Base Urls"
-          },
-          "OPENAI_API_KEYS": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Openai Api Keys"
-          },
-          "OPENAI_API_CONFIGS": {
-            "additionalProperties": true,
-            "type": "object",
-            "title": "Openai Api Configs"
+          "key": {
+            "type": "string",
+            "title": "Key"
           }
         },
         "type": "object",
         "required": [
-          "OPENAI_API_BASE_URLS",
-          "OPENAI_API_KEYS",
-          "OPENAI_API_CONFIGS"
+          "url",
+          "key"
         ],
         "title": "OpenAIConfigForm"
       },
@@ -29823,6 +29743,76 @@
         "type": "object",
         "title": "WorkspacePermissions"
       },
+      "open_webui__models__messages__MessageForm": {
+        "properties": {
+          "temp_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temp Id"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "reply_to_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reply To Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "content"
+        ],
+        "title": "MessageForm"
+      },
       "open_webui__models__users__UserResponse": {
         "properties": {
           "id": {
@@ -29851,19 +29841,6 @@
         ],
         "title": "UserResponse"
       },
-      "open_webui__routers__chats__MessageForm": {
-        "properties": {
-          "content": {
-            "type": "string",
-            "title": "Content"
-          }
-        },
-        "type": "object",
-        "required": [
-          "content"
-        ],
-        "title": "MessageForm"
-      },
       "open_webui__routers__ollama__ConnectionVerificationForm": {
         "properties": {
           "url": {
@@ -29888,6 +29865,47 @@
         ],
         "title": "ConnectionVerificationForm"
       },
+      "open_webui__routers__openai__OpenAIConfigForm": {
+        "properties": {
+          "ENABLE_OPENAI_API": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Openai Api"
+          },
+          "OPENAI_API_BASE_URLS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openai Api Base Urls"
+          },
+          "OPENAI_API_KEYS": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Openai Api Keys"
+          },
+          "OPENAI_API_CONFIGS": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Openai Api Configs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "OPENAI_API_BASE_URLS",
+          "OPENAI_API_KEYS",
+          "OPENAI_API_CONFIGS"
+        ],
+        "title": "OpenAIConfigForm"
+      },
       "open_webui__routers__retrieval__OllamaConfigForm": {
         "properties": {
           "url": {
@@ -29905,24 +29923,6 @@
           "key"
         ],
         "title": "OllamaConfigForm"
-      },
-      "open_webui__routers__retrieval__OpenAIConfigForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          },
-          "key": {
-            "type": "string",
-            "title": "Key"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url",
-          "key"
-        ],
-        "title": "OpenAIConfigForm"
       }
     },
     "securitySchemes": {
