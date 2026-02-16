@@ -2535,6 +2535,51 @@
         }
       }
     },
+    "/openai/responses": {
+      "post": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Responses",
+        "description": "Forward requests to the OpenAI Responses API endpoint.\nRoutes to the correct upstream backend based on the model field.",
+        "operationId": "responses_openai_responses_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResponsesForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/openai/{path}": {
       "put": {
         "tags": [
@@ -2580,7 +2625,7 @@
           }
         }
       },
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
@@ -2668,7 +2713,7 @@
           }
         }
       },
-      "post": {
+      "get": {
         "tags": [
           "openai"
         ],
@@ -29800,6 +29845,186 @@
         "type": "object",
         "title": "RemoveMembersForm"
       },
+      "ResponsesForm": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "input": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input"
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          },
+          "stream": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stream"
+          },
+          "temperature": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temperature"
+          },
+          "max_output_tokens": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Output Tokens"
+          },
+          "top_p": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top P"
+          },
+          "tools": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tools"
+          },
+          "tool_choice": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tool Choice"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "truncation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Truncation"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          },
+          "store": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Store"
+          },
+          "reasoning": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reasoning"
+          },
+          "previous_response_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Response Id"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "title": "ResponsesForm"
+      },
       "STTConfigForm": {
         "properties": {
           "OPENAI_API_BASE_URL": {
@@ -31939,7 +32164,14 @@
             "title": "Name"
           },
           "profile_image_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Profile Image Url"
           },
           "profile_banner_image_url": {
@@ -32076,6 +32308,18 @@
             ],
             "title": "Oauth"
           },
+          "scim": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scim"
+          },
           "last_active_at": {
             "type": "integer",
             "title": "Last Active At"
@@ -32102,7 +32346,6 @@
           "id",
           "email",
           "name",
-          "profile_image_url",
           "last_active_at",
           "updated_at",
           "created_at"
@@ -32354,7 +32597,14 @@
             "title": "Name"
           },
           "profile_image_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Profile Image Url"
           },
           "profile_banner_image_url": {
@@ -32491,6 +32741,18 @@
             ],
             "title": "Oauth"
           },
+          "scim": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scim"
+          },
           "last_active_at": {
             "type": "integer",
             "title": "Last Active At"
@@ -32509,7 +32771,6 @@
           "id",
           "email",
           "name",
-          "profile_image_url",
           "last_active_at",
           "updated_at",
           "created_at"
@@ -32547,7 +32808,14 @@
             "title": "Name"
           },
           "profile_image_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Profile Image Url"
           },
           "profile_banner_image_url": {
@@ -32684,6 +32952,18 @@
             ],
             "title": "Oauth"
           },
+          "scim": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scim"
+          },
           "last_active_at": {
             "type": "integer",
             "title": "Last Active At"
@@ -32703,7 +32983,6 @@
           "id",
           "email",
           "name",
-          "profile_image_url",
           "last_active_at",
           "updated_at",
           "created_at"
