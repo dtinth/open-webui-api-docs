@@ -2581,13 +2581,13 @@
       }
     },
     "/openai/{path}": {
-      "put": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2631,7 +2631,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2669,13 +2669,13 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2719,7 +2719,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -4300,6 +4300,18 @@
               "title": "Process"
             },
             "description": "Whether to process and save the content"
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to overwrite existing collection",
+              "default": true,
+              "title": "Overwrite"
+            },
+            "description": "Whether to overwrite existing collection"
           }
         ],
         "requestBody": {
@@ -4358,6 +4370,18 @@
               "title": "Process"
             },
             "description": "Whether to process and save the content"
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Whether to overwrite existing collection",
+              "default": true,
+              "title": "Overwrite"
+            },
+            "description": "Whether to overwrite existing collection"
           }
         ],
         "requestBody": {
@@ -13888,6 +13912,61 @@
         }
       }
     },
+    "/api/v1/prompts/id/{prompt_id}/toggle": {
+      "post": {
+        "tags": [
+          "prompts"
+        ],
+        "summary": "Toggle Prompt Active",
+        "operationId": "toggle_prompt_active_api_v1_prompts_id__prompt_id__toggle_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "prompt_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Prompt Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/PromptModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Toggle Prompt Active Api V1 Prompts Id  Prompt Id  Toggle Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/prompts/id/{prompt_id}/delete": {
       "delete": {
         "tags": [
@@ -20174,6 +20253,94 @@
         ]
       }
     },
+    "/api/v1/messages": {
+      "post": {
+        "summary": "Generate Messages",
+        "description": "Anthropic Messages API compatible endpoint.\n\nAccepts the Anthropic Messages API format, converts internally to OpenAI\nChat Completions format, routes through the existing chat completion\npipeline, then converts the response back to Anthropic Messages format.\n\nSupports both streaming and non-streaming requests.\nAll models configured in Open WebUI are accessible via this endpoint.\n\nAuthentication: Supports both standard Authorization header and\nAnthropic's x-api-key header (via middleware translation).",
+        "operationId": "generate_messages_api_v1_messages_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/message": {
+      "post": {
+        "summary": "Generate Messages",
+        "description": "Anthropic Messages API compatible endpoint.\n\nAccepts the Anthropic Messages API format, converts internally to OpenAI\nChat Completions format, routes through the existing chat completion\npipeline, then converts the response back to Anthropic Messages format.\n\nSupports both streaming and non-streaming requests.\nAll models configured in Open WebUI are accessible via this endpoint.\n\nAuthentication: Supports both standard Authorization header and\nAnthropic's x-api-key header (via middleware translation).",
+        "operationId": "generate_messages_api_message_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/chat/completed": {
       "post": {
         "summary": "Chat Completed",
@@ -22572,6 +22739,11 @@
             "title": "File Upload",
             "default": true
           },
+          "web_upload": {
+            "type": "boolean",
+            "title": "Web Upload",
+            "default": true
+          },
           "delete": {
             "type": "boolean",
             "title": "Delete",
@@ -24285,6 +24457,18 @@
             ],
             "title": "Enable Async Embedding",
             "default": true
+          },
+          "RAG_EMBEDDING_CONCURRENT_REQUESTS": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Embedding Concurrent Requests",
+            "default": 0
           }
         },
         "type": "object",
@@ -27805,6 +27989,17 @@
             "type": "string",
             "title": "Id"
           },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
           "access_grants": {
             "items": {
               "additionalProperties": true,
@@ -28403,6 +28598,30 @@
               }
             ],
             "title": "Model Order List"
+          },
+          "DEFAULT_MODEL_METADATA": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Model Metadata"
+          },
+          "DEFAULT_MODEL_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Default Model Params"
           }
         },
         "type": "object",
@@ -33911,6 +34130,17 @@
               }
             ],
             "title": "Yandex Web Search Config"
+          },
+          "YOUCOM_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Youcom Api Key"
           }
         },
         "type": "object",
