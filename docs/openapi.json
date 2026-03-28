@@ -1460,23 +1460,6 @@
             }
           },
           {
-            "name": "bypass_filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": false,
-              "title": "Bypass Filter"
-            }
-          },
-          {
             "name": "bypass_system_prompt",
             "in": "query",
             "required": false,
@@ -1548,23 +1531,6 @@
                 }
               ],
               "title": "Url Idx"
-            }
-          },
-          {
-            "name": "bypass_filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": false,
-              "title": "Bypass Filter"
             }
           },
           {
@@ -1811,6 +1777,136 @@
         ],
         "summary": "Generate Openai Chat Completion",
         "operationId": "generate_openai_chat_completion_ollama_v1_chat_completions_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url_idx",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Url Idx"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Form Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ollama/v1/messages/{url_idx}": {
+      "post": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Generate Anthropic Messages",
+        "description": "Proxy for Ollama's Anthropic-compatible /v1/messages endpoint.\n\nForwards the request as-is to the Ollama backend, applying the same\nmodel resolution, access control, and prefix_id handling used by\nthe OpenAI-compatible /v1/chat/completions proxy.\n\nSee https://docs.ollama.com/api/anthropic-compatibility",
+        "operationId": "generate_anthropic_messages_ollama_v1_messages__url_idx__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url_idx",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Url Idx"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Form Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ollama/v1/messages": {
+      "post": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Generate Anthropic Messages",
+        "description": "Proxy for Ollama's Anthropic-compatible /v1/messages endpoint.\n\nForwards the request as-is to the Ollama backend, applying the same\nmodel resolution, access control, and prefix_id handling used by\nthe OpenAI-compatible /v1/chat/completions proxy.\n\nSee https://docs.ollama.com/api/anthropic-compatibility",
+        "operationId": "generate_anthropic_messages_ollama_v1_messages_post",
         "security": [
           {
             "HTTPBearer": []
@@ -2474,23 +2570,6 @@
         ],
         "parameters": [
           {
-            "name": "bypass_filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "default": false,
-              "title": "Bypass Filter"
-            }
-          },
-          {
             "name": "bypass_system_prompt",
             "in": "query",
             "required": false,
@@ -2581,13 +2660,13 @@
       }
     },
     "/openai/{path}": {
-      "put": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2631,7 +2710,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2675,51 +2798,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -5081,6 +5160,96 @@
         ]
       }
     },
+    "/api/v1/configs/terminal_servers/verify": {
+      "post": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Verify Terminal Server Connection",
+        "description": "Verify the connection to a terminal server by detecting its type.\n\nTries GET {url}/api/v1/policies (orchestrator) then GET {url}/api/config\n(plain terminal).  Returns ``{status: true, type: \"orchestrator\"|\"terminal\"}``.",
+        "operationId": "verify_terminal_server_connection_api_v1_configs_terminal_servers_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminalServerConnection"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/configs/terminal_servers/policy": {
+      "post": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Put Terminal Server Policy",
+        "description": "Proxy a policy PUT to an orchestrator terminal server.",
+        "operationId": "put_terminal_server_policy_api_v1_configs_terminal_servers_policy_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminalServerPolicyForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/configs/tool_servers/verify": {
       "post": {
         "tags": [
@@ -5185,6 +5354,30 @@
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
                 }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/configs/models/defaults": {
+      "get": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Get Models Defaults",
+        "operationId": "get_models_defaults_api_v1_configs_models_defaults_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -16900,6 +17093,19 @@
         ],
         "parameters": [
           {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number (1-indexed)",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number (1-indexed)"
+          },
+          {
             "name": "content",
             "in": "query",
             "required": false,
@@ -16916,11 +17122,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FileModelResponse"
-                  },
-                  "title": "Response List Files Api V1 Files  Get"
+                  "$ref": "#/components/schemas/FileListResponse"
                 }
               }
             }
@@ -20117,165 +20319,6 @@
           }
         }
       },
-      "get": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__put",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "options": {
         "tags": [
           "terminals"
@@ -20382,7 +20425,166 @@
           }
         }
       },
+      "get": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
         "tags": [
           "terminals"
         ],
@@ -21389,6 +21591,23 @@
       "get": {
         "summary": "Healthcheck",
         "operationId": "healthcheck_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "summary": "Readiness Check",
+        "description": "Returns 200 only when the application is ready to accept traffic.",
+        "operationId": "readiness_check_ready_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -25338,6 +25557,27 @@
         ],
         "title": "FeedbackUserResponse"
       },
+      "FileListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/FileModelResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "FileListResponse"
+      },
       "FileMeta": {
         "properties": {
           "name": {
@@ -25555,7 +25795,14 @@
             "title": "Data"
           },
           "meta": {
-            "$ref": "#/components/schemas/FileMeta"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FileMeta"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "created_at": {
             "type": "integer",
@@ -25579,7 +25826,6 @@
           "id",
           "user_id",
           "filename",
-          "meta",
           "created_at"
         ],
         "title": "FileModelResponse"
@@ -25622,7 +25868,14 @@
             "title": "Data"
           },
           "meta": {
-            "$ref": "#/components/schemas/FileMeta"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FileMeta"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "created_at": {
             "type": "integer",
@@ -25656,7 +25909,6 @@
           "id",
           "user_id",
           "filename",
-          "meta",
           "created_at"
         ],
         "title": "FileUserResponse"
@@ -26115,30 +26367,24 @@
             "type": "string",
             "title": "User Id"
           },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
           "type": {
             "type": "string",
             "title": "Type"
           },
-          "content": {
+          "name": {
             "type": "string",
-            "title": "Content"
+            "title": "Name"
           },
           "meta": {
             "$ref": "#/components/schemas/FunctionMeta"
           },
           "is_active": {
             "type": "boolean",
-            "title": "Is Active",
-            "default": false
+            "title": "Is Active"
           },
           "is_global": {
             "type": "boolean",
-            "title": "Is Global",
-            "default": false
+            "title": "Is Global"
           },
           "updated_at": {
             "type": "integer",
@@ -26151,7 +26397,7 @@
           "user": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/UserModel"
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
               },
               {
                 "type": "null"
@@ -26163,10 +26409,11 @@
         "required": [
           "id",
           "user_id",
-          "name",
           "type",
-          "content",
+          "name",
           "meta",
+          "is_active",
+          "is_global",
           "updated_at",
           "created_at"
         ],
@@ -29521,6 +29768,17 @@
               }
             ],
             "title": "Client Name"
+          },
+          "client_secret": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Secret"
           }
         },
         "type": "object",
@@ -32146,6 +32404,40 @@
               }
             ],
             "title": "Config"
+          },
+          "server_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Server Type"
+          },
+          "policy_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Id"
+          },
+          "policy": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy"
           }
         },
         "additionalProperties": true,
@@ -32154,6 +32446,54 @@
           "url"
         ],
         "title": "TerminalServerConnection"
+      },
+      "TerminalServerPolicyForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key",
+            "default": ""
+          },
+          "auth_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auth Type",
+            "default": "bearer"
+          },
+          "policy_id": {
+            "type": "string",
+            "title": "Policy Id"
+          },
+          "policy_data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Policy Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "policy_id",
+          "policy_data"
+        ],
+        "title": "TerminalServerPolicyForm"
       },
       "TerminalServersConfigForm": {
         "properties": {
@@ -34129,6 +34469,17 @@
               }
             ],
             "title": "Web Search Concurrent Requests"
+          },
+          "WEB_FETCH_MAX_CONTENT_LENGTH": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Fetch Max Content Length"
           },
           "WEB_LOADER_CONCURRENT_REQUESTS": {
             "anyOf": [
