@@ -1964,6 +1964,132 @@
         }
       }
     },
+    "/ollama/v1/responses/{url_idx}": {
+      "post": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Generate Responses",
+        "description": "Proxy for Ollama's OpenAI-compatible /v1/responses endpoint.\n\nForwards the request as-is to the Ollama backend, applying the same\nmodel resolution, access control, and prefix_id handling used by\nthe OpenAI-compatible /v1/chat/completions proxy.\n\nSee https://ollama.com/blog/responses-api",
+        "operationId": "generate_responses_ollama_v1_responses__url_idx__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url_idx",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Url Idx"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/open_webui__routers__ollama__ResponsesForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ollama/v1/responses": {
+      "post": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Generate Responses",
+        "description": "Proxy for Ollama's OpenAI-compatible /v1/responses endpoint.\n\nForwards the request as-is to the Ollama backend, applying the same\nmodel resolution, access control, and prefix_id handling used by\nthe OpenAI-compatible /v1/chat/completions proxy.\n\nSee https://ollama.com/blog/responses-api",
+        "operationId": "generate_responses_ollama_v1_responses_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url_idx",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Url Idx"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/open_webui__routers__ollama__ResponsesForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ollama/v1/models/{url_idx}": {
       "get": {
         "tags": [
@@ -2626,7 +2752,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ResponsesForm"
+                "$ref": "#/components/schemas/open_webui__routers__openai__ResponsesForm"
               }
             }
           },
@@ -2660,57 +2786,13 @@
       }
     },
     "/openai/{path}": {
-      "get": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2753,8 +2835,8 @@
           "openai"
         ],
         "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2797,8 +2879,52 @@
           "openai"
         ],
         "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API",
-        "operationId": "proxy_openai__path__get",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -4775,17 +4901,32 @@
           "retrieval"
         ],
         "summary": "Process Files Batch",
-        "description": "Process a batch of files and save them to the vector database.\n\nNOTE: We intentionally do NOT use Depends(get_session) here.\nThe save_docs_to_vector_db() call makes external embedding API calls which\ncan take 5-60+ seconds for batch operations. Database operations after\nembedding (Files.update_file_by_id) manage their own short-lived sessions.",
+        "description": "Process a batch of files and save them to the vector database.\n\nNOTE: We intentionally do NOT use Depends(get_async_session) here.\nThe save_docs_to_vector_db() call makes external embedding API calls which\ncan take 5-60+ seconds for batch operations. Database operations after\nembedding (Files.update_file_by_id) manage their own short-lived sessions.",
         "operationId": "process_files_batch_api_v1_retrieval_process_files_batch_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "db",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "title": "Db"
+            }
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BatchProcessFilesForm"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -4808,12 +4949,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/configs/import": {
@@ -11009,6 +11145,120 @@
         }
       }
     },
+    "/api/v1/chats/shared/{id}/access/update": {
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Update Shared Chat Access By Id",
+        "operationId": "update_shared_chat_access_by_id_api_v1_chats_shared__id__access_update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatAccessGrantsForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ChatResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Update Shared Chat Access By Id Api V1 Chats Shared  Id  Access Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/shared/{id}/access": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Get Shared Chat Access By Id",
+        "operationId": "get_shared_chat_access_by_id_api_v1_chats_shared__id__access_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {},
+                  "title": "Response Get Shared Chat Access By Id Api V1 Chats Shared  Id  Access Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/chats/{id}/folder": {
       "post": {
         "tags": [
@@ -11354,6 +11604,36 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/notes/pinned": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Get Pinned Notes",
+        "operationId": "get_pinned_notes_api_v1_notes_pinned_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/NoteItemResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get Pinned Notes Api V1 Notes Pinned Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/notes/search": {
@@ -11713,6 +11993,61 @@
                     }
                   ],
                   "title": "Response Update Note Access By Id Api V1 Notes  Id  Access Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/{id}/pin": {
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Pin Note By Id",
+        "operationId": "pin_note_by_id_api_v1_notes__id__pin_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/NoteModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Pin Note By Id Api V1 Notes  Id  Pin Post"
                 }
               }
             }
@@ -12791,7 +13126,7 @@
           "knowledge"
         ],
         "summary": "Reindex Knowledge Base Metadata Embeddings",
-        "description": "Batch embed all existing knowledge bases. Admin only.\n\nNOTE: We intentionally do NOT use Depends(get_session) here.\nThis endpoint loops through ALL knowledge bases and calls embed_knowledge_base_metadata()\nfor each one, making N external embedding API calls. Holding a session during\nthis entire operation would exhaust the connection pool.",
+        "description": "Batch embed all existing knowledge bases. Admin only.\n\nNOTE: We intentionally do NOT use Depends(get_async_session) here.\nThis endpoint loops through ALL knowledge bases and calls embed_knowledge_base_metadata()\nfor each one, making N external embedding API calls. Holding a session during\nthis entire operation would exhaust the connection pool.",
         "operationId": "reindex_knowledge_base_metadata_embeddings_api_v1_knowledge_metadata_reindex_post",
         "responses": {
           "200": {
@@ -15928,7 +16263,7 @@
           "memories"
         ],
         "summary": "Reset Memory From Vector Db",
-        "description": "Reset user's memory vector embeddings.\n\nCRITICAL: We intentionally do NOT use Depends(get_session) here.\nThis endpoint generates embeddings for ALL user memories in parallel using\nasyncio.gather(). A user with 100 memories would trigger 100 embedding API\ncalls simultaneously. With a session held, this could block a connection\nfor MINUTES, completely exhausting the connection pool.",
+        "description": "Reset user's memory vector embeddings.\n\nCRITICAL: We intentionally do NOT use Depends(get_async_session) here.\nThis endpoint generates embeddings for ALL user memories in parallel using\nasyncio.gather(). A user with 100 memories would trigger 100 embedding API\ncalls simultaneously. With a session held, this could block a connection\nfor MINUTES, completely exhausting the connection pool.",
         "operationId": "reset_memory_from_vector_db_api_v1_memories_reset_post",
         "responses": {
           "200": {
@@ -18748,6 +19083,36 @@
         ]
       }
     },
+    "/api/v1/evaluations/feedbacks/models": {
+      "get": {
+        "tags": [
+          "evaluations"
+        ],
+        "summary": "Get Feedback Model Ids",
+        "operationId": "get_feedback_model_ids_api_v1_evaluations_feedbacks_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array",
+                  "title": "Response Get Feedback Model Ids Api V1 Evaluations Feedbacks Models Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/evaluations/feedbacks/all": {
       "get": {
         "tags": [
@@ -18837,27 +19202,55 @@
         ],
         "summary": "Export All Feedbacks",
         "operationId": "export_all_feedbacks_api_v1_evaluations_feedbacks_all_export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Model Id"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/FeedbackModel"
                   },
-                  "type": "array",
                   "title": "Response Export All Feedbacks Api V1 Evaluations Feedbacks All Export Get"
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/evaluations/feedbacks/user": {
@@ -18977,6 +19370,22 @@
               ],
               "default": 1,
               "title": "Page"
+            }
+          },
+          {
+            "name": "model_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Model Id"
             }
           }
         ],
@@ -20266,278 +20675,13 @@
       }
     },
     "/api/v1/terminals/{server_id}/{path}": {
-      "get": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "options": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "patch": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
         "security": [
           {
             "HTTPBearer": []
@@ -20590,7 +20734,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
         "security": [
           {
             "HTTPBearer": []
@@ -20613,6 +20757,1386 @@
             "schema": {
               "type": "string",
               "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/list": {
+      "get": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Get Automation Items",
+        "operationId": "get_automation_items_api_v1_automations_list_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/create": {
+      "post": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Create New Automation",
+        "operationId": "create_new_automation_api_v1_automations_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/automations/{id}": {
+      "get": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Get Automation By Id",
+        "operationId": "get_automation_by_id_api_v1_automations__id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/{id}/update": {
+      "post": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Update Automation By Id",
+        "operationId": "update_automation_by_id_api_v1_automations__id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/{id}/toggle": {
+      "post": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Toggle Automation By Id",
+        "operationId": "toggle_automation_by_id_api_v1_automations__id__toggle_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/{id}/run": {
+      "post": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Run Automation By Id",
+        "operationId": "run_automation_by_id_api_v1_automations__id__run_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/{id}/delete": {
+      "delete": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Delete Automation By Id",
+        "operationId": "delete_automation_by_id_api_v1_automations__id__delete_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/automations/{id}/runs": {
+      "get": {
+        "tags": [
+          "automations"
+        ],
+        "summary": "Get Automation Runs",
+        "operationId": "get_automation_runs_api_v1_automations__id__runs_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AutomationRunModel"
+                  },
+                  "title": "Response Get Automation Runs Api V1 Automations  Id  Runs Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/": {
+      "get": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Get Calendars",
+        "description": "List user's calendars (owned + shared), plus a virtual Scheduled Tasks calendar\nwhen automations are available.",
+        "operationId": "get_calendars_api_v1_calendars__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarModel"
+                  },
+                  "type": "array",
+                  "title": "Response Get Calendars Api V1 Calendars  Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/calendars/create": {
+      "post": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Create Calendar",
+        "description": "Create a new user calendar.",
+        "operationId": "create_calendar_api_v1_calendars_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/calendars/events": {
+      "get": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Get Events",
+        "description": "Get events in date range.\n\nArgs:\n    start: ISO 8601 datetime string (e.g. 2026-04-01T00:00:00)\n    end:   ISO 8601 datetime string (e.g. 2026-05-01T00:00:00)\n    calendar_ids: optional comma-separated list to filter\n\nIncludes:\n- Stored events from the database\n- Virtual events computed from active automation RRULEs (Scheduled Tasks calendar)",
+        "operationId": "get_events_api_v1_calendars_events_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Start"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "End"
+            }
+          },
+          {
+            "name": "calendar_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Calendar Ids"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/events/create": {
+      "post": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Create Event",
+        "operationId": "create_event_api_v1_calendars_events_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarEventForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarEventModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/calendars/events/search": {
+      "get": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Search Events",
+        "operationId": "search_events_api_v1_calendars_events_search_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarEventListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/events/{event_id}": {
+      "get": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Get Event",
+        "operationId": "get_event_api_v1_calendars_events__event_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarEventModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/events/{event_id}/update": {
+      "post": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Update Event",
+        "operationId": "update_event_api_v1_calendars_events__event_id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarEventUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarEventModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/events/{event_id}/delete": {
+      "delete": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Delete Event",
+        "operationId": "delete_event_api_v1_calendars_events__event_id__delete_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/events/{event_id}/rsvp": {
+      "post": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Rsvp Event",
+        "description": "Update own RSVP status for an event.",
+        "operationId": "rsvp_event_api_v1_calendars_events__event_id__rsvp_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RSVPForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Rsvp Event Api V1 Calendars Events  Event Id  Rsvp Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/{calendar_id}": {
+      "get": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Get Calendar By Id",
+        "operationId": "get_calendar_by_id_api_v1_calendars__calendar_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "calendar_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Calendar Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/{calendar_id}/update": {
+      "post": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Update Calendar",
+        "operationId": "update_calendar_api_v1_calendars__calendar_id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "calendar_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Calendar Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CalendarUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalendarModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/{calendar_id}/delete": {
+      "delete": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Delete Calendar",
+        "operationId": "delete_calendar_api_v1_calendars__calendar_id__delete_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "calendar_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Calendar Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/calendars/{calendar_id}/default": {
+      "post": {
+        "tags": [
+          "calendars"
+        ],
+        "summary": "Set Default Calendar",
+        "operationId": "set_default_calendar_api_v1_calendars__calendar_id__default_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "calendar_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Calendar Id"
             }
           }
         ],
@@ -21010,6 +22534,7 @@
     "/api/chat/completed": {
       "post": {
         "summary": "Chat Completed",
+        "description": "Deprecated: outlet filters now run inline during chat completion.\nKept for backward compatibility with external integrations.",
         "operationId": "chat_completed_api_chat_completed_post",
         "requestBody": {
           "content": {
@@ -21171,6 +22696,48 @@
       "get": {
         "summary": "List Tasks By Chat Id Endpoint",
         "operationId": "list_tasks_by_chat_id_endpoint_api_tasks_chat__chat_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "chat_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Chat Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tasks/chat/{chat_id}/stop": {
+      "post": {
+        "summary": "Stop Tasks By Chat Id Endpoint",
+        "operationId": "stop_tasks_by_chat_id_endpoint_api_tasks_chat__chat_id__stop_post",
         "security": [
           {
             "HTTPBearer": []
@@ -21555,6 +23122,22 @@
         }
       }
     },
+    "/oauth/backchannel-logout": {
+      "post": {
+        "summary": "Oauth Backchannel Logout",
+        "operationId": "oauth_backchannel_logout_oauth_backchannel_logout_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/manifest.json": {
       "get": {
         "summary": "Get Manifest Json",
@@ -21904,9 +23487,45 @@
             ],
             "title": "Folder Max File Count"
           },
+          "AUTOMATION_MAX_COUNT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Automation Max Count"
+          },
+          "AUTOMATION_MIN_INTERVAL": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Automation Min Interval"
+          },
+          "ENABLE_AUTOMATIONS": {
+            "type": "boolean",
+            "title": "Enable Automations"
+          },
           "ENABLE_CHANNELS": {
             "type": "boolean",
             "title": "Enable Channels"
+          },
+          "ENABLE_CALENDAR": {
+            "type": "boolean",
+            "title": "Enable Calendar"
           },
           "ENABLE_MEMORIES": {
             "type": "boolean",
@@ -21972,7 +23591,9 @@
           "ENABLE_COMMUNITY_SHARING",
           "ENABLE_MESSAGE_RATING",
           "ENABLE_FOLDERS",
+          "ENABLE_AUTOMATIONS",
           "ENABLE_CHANNELS",
+          "ENABLE_CALENDAR",
           "ENABLE_MEMORIES",
           "ENABLE_NOTES",
           "ENABLE_USER_WEBHOOKS",
@@ -22071,6 +23692,256 @@
           "stt"
         ],
         "title": "AudioConfigUpdateForm"
+      },
+      "AutomationData": {
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "rrule": {
+            "type": "string",
+            "title": "Rrule"
+          },
+          "terminal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AutomationTerminalConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "prompt",
+          "model_id",
+          "rrule"
+        ],
+        "title": "AutomationData"
+      },
+      "AutomationForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AutomationData"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "data"
+        ],
+        "title": "AutomationForm"
+      },
+      "AutomationResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "last_run_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Run At"
+          },
+          "next_run_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Run At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "last_run": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AutomationRunModel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_runs": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Runs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "data",
+          "is_active",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "AutomationResponse"
+      },
+      "AutomationRunModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "automation_id": {
+            "type": "string",
+            "title": "Automation Id"
+          },
+          "chat_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chat Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "automation_id",
+          "status",
+          "created_at"
+        ],
+        "title": "AutomationRunModel"
+      },
+      "AutomationTerminalConfig": {
+        "properties": {
+          "server_id": {
+            "type": "string",
+            "title": "Server Id"
+          },
+          "cwd": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cwd"
+          }
+        },
+        "type": "object",
+        "required": [
+          "server_id"
+        ],
+        "title": "AutomationTerminalConfig"
       },
       "AzureOpenAIConfigForm": {
         "properties": {
@@ -22337,6 +24208,859 @@
           "file"
         ],
         "title": "Body_upload_pipeline_api_v1_pipelines_upload_post"
+      },
+      "CalendarEventAttendeeModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "event_id": {
+            "type": "string",
+            "title": "Event Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "pending"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "event_id",
+          "user_id",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "CalendarEventAttendeeModel"
+      },
+      "CalendarEventForm": {
+        "properties": {
+          "calendar_id": {
+            "type": "string",
+            "title": "Calendar Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "start_at": {
+            "type": "integer",
+            "title": "Start At"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At"
+          },
+          "all_day": {
+            "type": "boolean",
+            "title": "All Day",
+            "default": false
+          },
+          "rrule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rrule"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "attendees": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attendees"
+          }
+        },
+        "type": "object",
+        "required": [
+          "calendar_id",
+          "title",
+          "start_at"
+        ],
+        "title": "CalendarEventForm"
+      },
+      "CalendarEventListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CalendarEventUserResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "CalendarEventListResponse"
+      },
+      "CalendarEventModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "calendar_id": {
+            "type": "string",
+            "title": "Calendar Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "start_at": {
+            "type": "integer",
+            "title": "Start At"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At"
+          },
+          "all_day": {
+            "type": "boolean",
+            "title": "All Day",
+            "default": false
+          },
+          "rrule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rrule"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "is_cancelled": {
+            "type": "boolean",
+            "title": "Is Cancelled",
+            "default": false
+          },
+          "attendees": {
+            "items": {
+              "$ref": "#/components/schemas/CalendarEventAttendeeModel"
+            },
+            "type": "array",
+            "title": "Attendees"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "calendar_id",
+          "user_id",
+          "title",
+          "start_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "CalendarEventModel"
+      },
+      "CalendarEventUpdateForm": {
+        "properties": {
+          "calendar_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calendar Id"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "start_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Start At"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At"
+          },
+          "all_day": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "All Day"
+          },
+          "rrule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rrule"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "is_cancelled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Cancelled"
+          },
+          "attendees": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attendees"
+          }
+        },
+        "type": "object",
+        "title": "CalendarEventUpdateForm"
+      },
+      "CalendarEventUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "calendar_id": {
+            "type": "string",
+            "title": "Calendar Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "start_at": {
+            "type": "integer",
+            "title": "Start At"
+          },
+          "end_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End At"
+          },
+          "all_day": {
+            "type": "boolean",
+            "title": "All Day",
+            "default": false
+          },
+          "rrule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rrule"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "is_cancelled": {
+            "type": "boolean",
+            "title": "Is Cancelled",
+            "default": false
+          },
+          "attendees": {
+            "items": {
+              "$ref": "#/components/schemas/CalendarEventAttendeeModel"
+            },
+            "type": "array",
+            "title": "Attendees"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "user": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/open_webui__models__users__UserResponse"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "calendar_id",
+          "user_id",
+          "title",
+          "start_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "CalendarEventUserResponse"
+      },
+      "CalendarForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_grants": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Grants"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "CalendarForm"
+      },
+      "CalendarModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "is_default": {
+            "type": "boolean",
+            "title": "Is Default",
+            "default": false
+          },
+          "is_system": {
+            "type": "boolean",
+            "title": "Is System",
+            "default": false
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_grants": {
+            "items": {
+              "$ref": "#/components/schemas/AccessGrantModel"
+            },
+            "type": "array",
+            "title": "Access Grants"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "CalendarModel"
+      },
+      "CalendarUpdateForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "color": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Color"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_grants": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Grants"
+          }
+        },
+        "type": "object",
+        "title": "CalendarUpdateForm"
       },
       "ChannelForm": {
         "properties": {
@@ -23092,6 +25816,23 @@
         ],
         "title": "ChannelWebhookModel"
       },
+      "ChatAccessGrantsForm": {
+        "properties": {
+          "access_grants": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Access Grants"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_grants"
+        ],
+        "title": "ChatAccessGrantsForm"
+      },
       "ChatBody": {
         "properties": {
           "history": {
@@ -23582,6 +26323,29 @@
               }
             ],
             "title": "Folder Id"
+          },
+          "tasks": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tasks"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
           }
         },
         "type": "object",
@@ -23688,6 +26452,17 @@
           "created_at": {
             "type": "integer",
             "title": "Created At"
+          },
+          "last_read_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Read At"
           }
         },
         "type": "object",
@@ -24488,6 +27263,17 @@
             ],
             "title": "Rag Reranking Engine"
           },
+          "RAG_RERANKING_BATCH_SIZE": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Batch Size"
+          },
           "RAG_EXTERNAL_RERANKER_URL": {
             "anyOf": [
               {
@@ -25249,6 +28035,11 @@
             "type": "boolean",
             "title": "Memories",
             "default": true
+          },
+          "automations": {
+            "type": "boolean",
+            "title": "Automations",
+            "default": false
           }
         },
         "type": "object",
@@ -25955,7 +28746,7 @@
             "title": "Parent Id"
           }
         },
-        "additionalProperties": true,
+        "additionalProperties": false,
         "type": "object",
         "required": [
           "name"
@@ -26186,7 +28977,7 @@
             "title": "Meta"
           }
         },
-        "additionalProperties": true,
+        "additionalProperties": false,
         "type": "object",
         "title": "FolderUpdateForm"
       },
@@ -29491,6 +32282,18 @@
             ],
             "title": "Data"
           },
+          "is_pinned": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Pinned",
+            "default": false
+          },
           "updated_at": {
             "type": "integer",
             "title": "Updated At"
@@ -29579,6 +32382,18 @@
             ],
             "title": "Meta"
           },
+          "is_pinned": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Pinned",
+            "default": false
+          },
           "access_grants": {
             "items": {
               "$ref": "#/components/schemas/AccessGrantModel"
@@ -29642,6 +32457,18 @@
               }
             ],
             "title": "Meta"
+          },
+          "is_pinned": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Pinned",
+            "default": false
           },
           "access_grants": {
             "items": {
@@ -29711,6 +32538,18 @@
               }
             ],
             "title": "Meta"
+          },
+          "is_pinned": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Pinned",
+            "default": false
           },
           "access_grants": {
             "items": {
@@ -30715,6 +33554,19 @@
         ],
         "title": "QueryMemoryForm"
       },
+      "RSVPForm": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "RSVPForm"
+      },
       "RatingData": {
         "properties": {
           "rating": {
@@ -30836,186 +33688,6 @@
         },
         "type": "object",
         "title": "RemoveMembersForm"
-      },
-      "ResponsesForm": {
-        "properties": {
-          "model": {
-            "type": "string",
-            "title": "Model"
-          },
-          "input": {
-            "anyOf": [
-              {
-                "items": {},
-                "type": "array"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Input"
-          },
-          "instructions": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Instructions"
-          },
-          "stream": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Stream"
-          },
-          "temperature": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Temperature"
-          },
-          "max_output_tokens": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Max Output Tokens"
-          },
-          "top_p": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Top P"
-          },
-          "tools": {
-            "anyOf": [
-              {
-                "items": {},
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tools"
-          },
-          "tool_choice": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tool Choice"
-          },
-          "text": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Text"
-          },
-          "truncation": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Truncation"
-          },
-          "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
-          },
-          "store": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Store"
-          },
-          "reasoning": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reasoning"
-          },
-          "previous_response_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Previous Response Id"
-          }
-        },
-        "additionalProperties": true,
-        "type": "object",
-        "required": [
-          "model"
-        ],
-        "title": "ResponsesForm"
       },
       "STTConfigForm": {
         "properties": {
@@ -31367,6 +34039,10 @@
             "type": "string",
             "title": "Id"
           },
+          "chat_id": {
+            "type": "string",
+            "title": "Chat Id"
+          },
           "title": {
             "type": "string",
             "title": "Title"
@@ -31394,6 +34070,7 @@
         "type": "object",
         "required": [
           "id",
+          "chat_id",
           "title",
           "updated_at",
           "created_at"
@@ -32086,6 +34763,14 @@
           "AZURE_SPEECH_OUTPUT_FORMAT": {
             "type": "string",
             "title": "Azure Speech Output Format"
+          },
+          "MISTRAL_API_KEY": {
+            "type": "string",
+            "title": "Mistral Api Key"
+          },
+          "MISTRAL_API_BASE_URL": {
+            "type": "string",
+            "title": "Mistral Api Base Url"
           }
         },
         "type": "object",
@@ -32099,7 +34784,9 @@
           "SPLIT_ON",
           "AZURE_SPEECH_REGION",
           "AZURE_SPEECH_BASE_URL",
-          "AZURE_SPEECH_OUTPUT_FORMAT"
+          "AZURE_SPEECH_OUTPUT_FORMAT",
+          "MISTRAL_API_KEY",
+          "MISTRAL_API_BASE_URL"
         ],
         "title": "TTSConfigForm"
       },
@@ -34337,19 +37024,47 @@
       "UserUpdateForm": {
         "properties": {
           "role": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Role"
           },
           "name": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Name"
           },
           "email": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Email"
           },
           "profile_image_url": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Profile Image Url"
           },
           "password": {
@@ -34365,12 +37080,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "role",
-          "name",
-          "email",
-          "profile_image_url"
-        ],
         "title": "UserUpdateForm"
       },
       "ValidationError": {
@@ -34470,6 +37179,21 @@
             ],
             "title": "Web Search Concurrent Requests"
           },
+          "WEB_SEARCH_DOMAIN_FILTER_LIST": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Domain Filter List",
+            "default": []
+          },
           "WEB_FETCH_MAX_CONTENT_LENGTH": {
             "anyOf": [
               {
@@ -34491,21 +37215,6 @@
               }
             ],
             "title": "Web Loader Concurrent Requests"
-          },
-          "WEB_SEARCH_DOMAIN_FILTER_LIST": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Web Search Domain Filter List",
-            "default": []
           },
           "BYPASS_WEB_SEARCH_EMBEDDING_AND_RETRIEVAL": {
             "anyOf": [
@@ -35404,6 +38113,20 @@
         ],
         "title": "OllamaConfigForm"
       },
+      "open_webui__routers__ollama__ResponsesForm": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "title": "Model"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "title": "ResponsesForm"
+      },
       "open_webui__routers__openai__ConnectionVerificationForm": {
         "properties": {
           "url": {
@@ -35474,6 +38197,186 @@
           "OPENAI_API_CONFIGS"
         ],
         "title": "OpenAIConfigForm"
+      },
+      "open_webui__routers__openai__ResponsesForm": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "input": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Input"
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          },
+          "stream": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stream"
+          },
+          "temperature": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temperature"
+          },
+          "max_output_tokens": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Output Tokens"
+          },
+          "top_p": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top P"
+          },
+          "tools": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tools"
+          },
+          "tool_choice": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tool Choice"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "truncation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Truncation"
+          },
+          "metadata": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Metadata"
+          },
+          "store": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Store"
+          },
+          "reasoning": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reasoning"
+          },
+          "previous_response_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Response Id"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "title": "ResponsesForm"
       },
       "open_webui__routers__retrieval__OllamaConfigForm": {
         "properties": {
