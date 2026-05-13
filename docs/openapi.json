@@ -2786,13 +2786,13 @@
       }
     },
     "/openai/{path}": {
-      "put": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2830,13 +2830,13 @@
           }
         }
       },
-      "delete": {
+      "put": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2880,7 +2880,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2918,13 +2918,13 @@
           }
         }
       },
-      "post": {
+      "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__put",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -4235,25 +4235,6 @@
             "HTTPBearer": []
           }
         ]
-      }
-    },
-    "/api/v1/retrieval/": {
-      "get": {
-        "tags": [
-          "retrieval"
-        ],
-        "summary": "Get Status",
-        "operationId": "get_status_api_v1_retrieval__get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        }
       }
     },
     "/api/v1/retrieval/embedding": {
@@ -20718,172 +20699,13 @@
       }
     },
     "/api/v1/terminals/{server_id}/{path}": {
-      "post": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "head": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "options": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
         "security": [
           {
             "HTTPBearer": []
@@ -20936,7 +20758,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
         "security": [
           {
             "HTTPBearer": []
@@ -20983,13 +20805,13 @@
           }
         }
       },
-      "patch": {
+      "post": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
         "security": [
           {
             "HTTPBearer": []
@@ -21042,7 +20864,166 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__post",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
         "security": [
           {
             "HTTPBearer": []
@@ -28147,6 +28128,11 @@
             "type": "boolean",
             "title": "Automations",
             "default": false
+          },
+          "calendar": {
+            "type": "boolean",
+            "title": "Calendar",
+            "default": true
           }
         },
         "type": "object",
@@ -28191,7 +28177,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "type": "object",
         "required": [
           "type"
@@ -34281,6 +34266,11 @@
           "public_chats": {
             "type": "boolean",
             "title": "Public Chats",
+            "default": false
+          },
+          "public_calendars": {
+            "type": "boolean",
+            "title": "Public Calendars",
             "default": false
           }
         },
