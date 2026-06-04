@@ -11,13 +11,18 @@
           "ollama"
         ],
         "summary": "Get Status",
+        "description": "Health-check endpoint.",
         "operationId": "get_status_ollama__get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Get Status Ollama  Get"
+                }
               }
             }
           }
@@ -28,13 +33,18 @@
           "ollama"
         ],
         "summary": "Get Status",
+        "description": "Health-check endpoint.",
         "operationId": "get_status_ollama__head",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Get Status Ollama  Head"
+                }
               }
             }
           }
@@ -47,6 +57,7 @@
           "ollama"
         ],
         "summary": "Verify Connection",
+        "description": "Verify that an Ollama backend at *form_data.url* is reachable.",
         "operationId": "verify_connection_ollama_verify_post",
         "requestBody": {
           "content": {
@@ -91,13 +102,18 @@
           "ollama"
         ],
         "summary": "Get Config",
+        "description": "Return the current Ollama connection configuration.",
         "operationId": "get_config_ollama_config_get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Get Config Ollama Config Get"
+                }
               }
             }
           }
@@ -115,6 +131,7 @@
           "ollama"
         ],
         "summary": "Update Config",
+        "description": "Persist updated Ollama connection settings.",
         "operationId": "update_config_ollama_config_update_post",
         "requestBody": {
           "content": {
@@ -131,7 +148,11 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Update Config Ollama Config Update Post"
+                }
               }
             }
           },
@@ -159,6 +180,7 @@
           "ollama"
         ],
         "summary": "Get Ollama Tags",
+        "description": "List Ollama model tags, optionally from a specific backend.",
         "operationId": "get_ollama_tags_ollama_api_tags__url_idx__get",
         "security": [
           {
@@ -211,6 +233,7 @@
           "ollama"
         ],
         "summary": "Get Ollama Tags",
+        "description": "List Ollama model tags, optionally from a specific backend.",
         "operationId": "get_ollama_tags_ollama_api_tags_get",
         "security": [
           {
@@ -263,14 +286,18 @@
           "ollama"
         ],
         "summary": "Get Ollama Loaded Models",
-        "description": "List models that are currently loaded into Ollama memory, and which node they are loaded on.",
+        "description": "List models currently loaded in Ollama memory across all backends.",
         "operationId": "get_ollama_loaded_models_ollama_api_ps_get",
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Get Ollama Loaded Models Ollama Api Ps Get"
+                }
               }
             }
           }
@@ -288,6 +315,7 @@
           "ollama"
         ],
         "summary": "Get Ollama Versions",
+        "description": "Return the lowest Ollama version across all configured backends.",
         "operationId": "get_ollama_versions_ollama_api_version__url_idx__get",
         "parameters": [
           {
@@ -335,6 +363,7 @@
           "ollama"
         ],
         "summary": "Get Ollama Versions",
+        "description": "Return the lowest Ollama version across all configured backends.",
         "operationId": "get_ollama_versions_ollama_api_version_get",
         "parameters": [
           {
@@ -537,6 +566,7 @@
           "ollama"
         ],
         "summary": "Push Model",
+        "description": "Push a local model to a remote registry.",
         "operationId": "push_model_ollama_api_push__url_idx__delete",
         "security": [
           {
@@ -599,6 +629,7 @@
           "ollama"
         ],
         "summary": "Push Model",
+        "description": "Push a local model to a remote registry.",
         "operationId": "push_model_ollama_api_push_delete",
         "security": [
           {
@@ -772,6 +803,7 @@
           "ollama"
         ],
         "summary": "Copy Model",
+        "description": "Duplicate an existing model under a new name.",
         "operationId": "copy_model_ollama_api_copy__url_idx__post",
         "security": [
           {
@@ -834,6 +866,7 @@
           "ollama"
         ],
         "summary": "Copy Model",
+        "description": "Duplicate an existing model under a new name.",
         "operationId": "copy_model_ollama_api_copy_post",
         "security": [
           {
@@ -896,6 +929,7 @@
           "ollama"
         ],
         "summary": "Delete Model",
+        "description": "Remove a model from an Ollama backend.",
         "operationId": "delete_model_ollama_api_delete__url_idx__delete",
         "security": [
           {
@@ -958,6 +992,7 @@
           "ollama"
         ],
         "summary": "Delete Model",
+        "description": "Remove a model from an Ollama backend.",
         "operationId": "delete_model_ollama_api_delete_delete",
         "security": [
           {
@@ -1020,6 +1055,7 @@
           "ollama"
         ],
         "summary": "Show Model Info",
+        "description": "Retrieve model metadata from the Ollama backend.",
         "operationId": "show_model_info_ollama_api_show_post",
         "requestBody": {
           "content": {
@@ -1064,6 +1100,7 @@
           "ollama"
         ],
         "summary": "Embed",
+        "description": "Generate embeddings via the Ollama /api/embed endpoint.",
         "operationId": "embed_ollama_api_embed__url_idx__post",
         "security": [
           {
@@ -1126,6 +1163,7 @@
           "ollama"
         ],
         "summary": "Embed",
+        "description": "Generate embeddings via the Ollama /api/embed endpoint.",
         "operationId": "embed_ollama_api_embed_post",
         "security": [
           {
@@ -1188,6 +1226,7 @@
           "ollama"
         ],
         "summary": "Embeddings",
+        "description": "Generate embeddings via the legacy Ollama /api/embeddings endpoint.",
         "operationId": "embeddings_ollama_api_embeddings__url_idx__post",
         "security": [
           {
@@ -1250,6 +1289,7 @@
           "ollama"
         ],
         "summary": "Embeddings",
+        "description": "Generate embeddings via the legacy Ollama /api/embeddings endpoint.",
         "operationId": "embeddings_ollama_api_embeddings_post",
         "security": [
           {
@@ -1312,6 +1352,7 @@
           "ollama"
         ],
         "summary": "Generate Completion",
+        "description": "Run text completion via Ollama /api/generate.",
         "operationId": "generate_completion_ollama_api_generate__url_idx__post",
         "security": [
           {
@@ -1374,6 +1415,7 @@
           "ollama"
         ],
         "summary": "Generate Completion",
+        "description": "Run text completion via Ollama /api/generate.",
         "operationId": "generate_completion_ollama_api_generate_post",
         "security": [
           {
@@ -1436,6 +1478,7 @@
           "ollama"
         ],
         "summary": "Generate Chat Completion",
+        "description": "Forward a chat completion request to an Ollama backend.",
         "operationId": "generate_chat_completion_ollama_api_chat__url_idx__post",
         "security": [
           {
@@ -1457,16 +1500,6 @@
                 }
               ],
               "title": "Url Idx"
-            }
-          },
-          {
-            "name": "bypass_system_prompt",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Bypass System Prompt"
             }
           }
         ],
@@ -1510,6 +1543,7 @@
           "ollama"
         ],
         "summary": "Generate Chat Completion",
+        "description": "Forward a chat completion request to an Ollama backend.",
         "operationId": "generate_chat_completion_ollama_api_chat_post",
         "security": [
           {
@@ -1531,16 +1565,6 @@
                 }
               ],
               "title": "Url Idx"
-            }
-          },
-          {
-            "name": "bypass_system_prompt",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Bypass System Prompt"
             }
           }
         ],
@@ -1584,6 +1608,7 @@
           "ollama"
         ],
         "summary": "Generate Openai Completion",
+        "description": "Forward a text completion request via the OpenAI-compatible proxy.",
         "operationId": "generate_openai_completion_ollama_v1_completions__url_idx__post",
         "security": [
           {
@@ -1648,6 +1673,7 @@
           "ollama"
         ],
         "summary": "Generate Openai Completion",
+        "description": "Forward a text completion request via the OpenAI-compatible proxy.",
         "operationId": "generate_openai_completion_ollama_v1_completions_post",
         "security": [
           {
@@ -1712,6 +1738,7 @@
           "ollama"
         ],
         "summary": "Generate Openai Chat Completion",
+        "description": "Forward a chat completion request via the OpenAI-compatible proxy.",
         "operationId": "generate_openai_chat_completion_ollama_v1_chat_completions__url_idx__post",
         "security": [
           {
@@ -1776,6 +1803,7 @@
           "ollama"
         ],
         "summary": "Generate Openai Chat Completion",
+        "description": "Forward a chat completion request via the OpenAI-compatible proxy.",
         "operationId": "generate_openai_chat_completion_ollama_v1_chat_completions_post",
         "security": [
           {
@@ -2096,6 +2124,7 @@
           "ollama"
         ],
         "summary": "Get Openai Models",
+        "description": "List models in the OpenAI-compatible format.",
         "operationId": "get_openai_models_ollama_v1_models__url_idx__get",
         "security": [
           {
@@ -2125,7 +2154,11 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Openai Models Ollama V1 Models  Url Idx  Get"
+                }
               }
             }
           },
@@ -2148,6 +2181,7 @@
           "ollama"
         ],
         "summary": "Get Openai Models",
+        "description": "List models in the OpenAI-compatible format.",
         "operationId": "get_openai_models_ollama_v1_models_get",
         "security": [
           {
@@ -2177,7 +2211,11 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Openai Models Ollama V1 Models Get"
+                }
               }
             }
           },
@@ -2200,6 +2238,7 @@
           "ollama"
         ],
         "summary": "Download Model",
+        "description": "Download a GGUF model from HuggingFace or GitHub and register it with Ollama.",
         "operationId": "download_model_ollama_models_download__url_idx__post",
         "security": [
           {
@@ -2229,7 +2268,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UrlForm"
+                "$ref": "#/components/schemas/open_webui__routers__ollama__UrlForm"
               }
             }
           }
@@ -2262,6 +2301,7 @@
           "ollama"
         ],
         "summary": "Download Model",
+        "description": "Download a GGUF model from HuggingFace or GitHub and register it with Ollama.",
         "operationId": "download_model_ollama_models_download_post",
         "security": [
           {
@@ -2291,7 +2331,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UrlForm"
+                "$ref": "#/components/schemas/open_webui__routers__ollama__UrlForm"
               }
             }
           }
@@ -2324,6 +2364,7 @@
           "ollama"
         ],
         "summary": "Upload Model",
+        "description": "Upload a local model file, push it as a blob, and create the model in Ollama.",
         "operationId": "upload_model_ollama_models_upload__url_idx__post",
         "security": [
           {
@@ -2386,6 +2427,7 @@
           "ollama"
         ],
         "summary": "Upload Model",
+        "description": "Upload a local model file, push it as a blob, and create the model in Ollama.",
         "operationId": "upload_model_ollama_models_upload_post",
         "security": [
           {
@@ -2689,34 +2731,17 @@
         ],
         "summary": "Generate Chat Completion",
         "operationId": "generate_chat_completion_openai_chat_completions_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "bypass_system_prompt",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Bypass System Prompt"
-            }
-          }
-        ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
                 "additionalProperties": true,
+                "type": "object",
                 "title": "Form Data"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -2737,7 +2762,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/openai/responses": {
@@ -2786,57 +2816,13 @@
       }
     },
     "/openai/{path}": {
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2880,7 +2866,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -2918,13 +2904,57 @@
           }
         }
       },
-      "post": {
+      "delete": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__get",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -6993,6 +7023,7 @@
           "users"
         ],
         "summary": "Update User Info By Session User",
+        "description": "Merge caller-supplied fields into the current user's info dict.\n\nUses the auth-time snapshot of ``user.info`` as the merge base.  This does\nNOT eliminate lost-update races on concurrent same-user writes; real safety\nwould need row locking or an optimistic-concurrency version column.",
         "operationId": "update_user_info_by_session_user_api_v1_users_user_info_update_post",
         "requestBody": {
           "content": {
@@ -7395,6 +7426,52 @@
         ],
         "summary": "Get User Groups By Id",
         "operationId": "get_user_groups_by_id_api_v1_users__user_id__groups_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/preview": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Preview",
+        "description": "Show what resources a specific user can access across all their groups.",
+        "operationId": "get_user_preview_api_v1_users__user_id__preview_get",
         "security": [
           {
             "HTTPBearer": []
@@ -9556,6 +9633,7 @@
           "chats"
         ],
         "summary": "Get User Chat List By User Id",
+        "description": "List chat summaries for a given user (admin-only endpoint).",
         "operationId": "get_user_chat_list_by_user_id_api_v1_chats_list_user__user_id__get",
         "security": [
           {
@@ -11517,61 +11595,6 @@
         }
       }
     },
-    "/api/v1/chats/{id}/tags/all": {
-      "delete": {
-        "tags": [
-          "chats"
-        ],
-        "summary": "Delete All Tags By Id",
-        "operationId": "delete_all_tags_by_id_api_v1_chats__id__tags_all_delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Id"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "type": "boolean"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "title": "Response Delete All Tags By Id Api V1 Chats  Id  Tags All Delete"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/notes/": {
       "get": {
         "tags": [
@@ -12338,6 +12361,7 @@
           "models"
         ],
         "summary": "Create New Model",
+        "description": "Create a new workspace model entry.",
         "operationId": "create_new_model_api_v1_models_create_post",
         "requestBody": {
           "content": {
@@ -12674,6 +12698,7 @@
           "models"
         ],
         "summary": "Update Model By Id",
+        "description": "Update a workspace model's configuration.",
         "operationId": "update_model_by_id_api_v1_models_model_update_post",
         "requestBody": {
           "content": {
@@ -13022,6 +13047,18 @@
             }
           },
           {
+            "name": "include_content",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include file content in search (expensive).",
+              "default": false,
+              "title": "Include Content"
+            },
+            "description": "Include file content in search (expensive)."
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -13358,6 +13395,62 @@
         }
       }
     },
+    "/api/v1/knowledge/{id}/files/pending": {
+      "get": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Get Pending Knowledge Files",
+        "description": "Return files that are being processed for this knowledge base but not yet linked.\n\nAfter a file is uploaded with ``knowledge_id`` in its metadata, the backend\nprocesses it in a background task before linking it to the ``knowledge_file``\njoin table.  During this window the file is invisible to the normal file\nlist endpoint.  This endpoint exposes those in-flight files so the frontend\ncan show them with a processing indicator even after a page reload.\n\nWhen ``stream=true``, returns an SSE stream that polls every 3 seconds\nand emits the current pending file list.  Closes when no files remain.",
+        "operationId": "get_pending_knowledge_files_api_v1_knowledge__id__files_pending_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "stream",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Stream"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/knowledge/{id}/files": {
       "get": {
         "tags": [
@@ -13395,6 +13488,18 @@
               ],
               "title": "Query"
             }
+          },
+          {
+            "name": "include_content",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include file content in search (expensive).",
+              "default": false,
+              "title": "Include Content"
+            },
+            "description": "Include file content in search (expensive)."
           },
           {
             "name": "view_option",
@@ -13445,6 +13550,24 @@
             }
           },
           {
+            "name": "directory_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by directory ID. Pass empty string for root.",
+              "title": "Directory Id"
+            },
+            "description": "Filter by directory ID. Pass empty string for root."
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -13460,6 +13583,24 @@
               "default": 1,
               "title": "Page"
             }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Page size (admin only). Defaults to 30.",
+              "title": "Limit"
+            },
+            "description": "Page size (admin only). Defaults to 30."
           }
         ],
         "responses": {
@@ -13760,6 +13901,16 @@
               "type": "string",
               "title": "Id"
             }
+          },
+          {
+            "name": "include_directories",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Include Directories"
+            }
           }
         ],
         "responses": {
@@ -13778,6 +13929,120 @@
                   ],
                   "title": "Response Reset Knowledge By Id Api V1 Knowledge  Id  Reset Post"
                 }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/sync/diff": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Sync Knowledge Diff",
+        "description": "Compare a local file manifest against the knowledge base to determine\nwhich files need uploading, removing, and which directories to create/remove.",
+        "operationId": "sync_knowledge_diff_api_v1_knowledge__id__sync_diff_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncDiffForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncDiffResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/sync/cleanup": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Sync Knowledge Cleanup",
+        "description": "Remove stale files and orphaned directories from a knowledge base\nafter an incremental sync.",
+        "operationId": "sync_knowledge_cleanup_api_v1_knowledge__id__sync_cleanup_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncCleanupForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           },
@@ -13888,6 +14153,250 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/dirs/create": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Create Knowledge Directory",
+        "operationId": "create_knowledge_directory_api_v1_knowledge__id__dirs_create_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeDirectoryCreateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeDirectoryModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/dirs/{dir_id}/update": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Update Knowledge Directory",
+        "operationId": "update_knowledge_directory_api_v1_knowledge__id__dirs__dir_id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "dir_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dir Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeDirectoryUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeDirectoryModel"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/dirs/{dir_id}/delete": {
+      "delete": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Delete Knowledge Directory",
+        "operationId": "delete_knowledge_directory_api_v1_knowledge__id__dirs__dir_id__delete_delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "dir_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Dir Id"
+            }
+          },
+          {
+            "name": "move_files",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "If true, move contained files to parent. If false, delete them.",
+              "default": true,
+              "title": "Move Files"
+            },
+            "description": "If true, move contained files to parent. If false, delete them."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/{id}/file/move": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Move File In Knowledge",
+        "operationId": "move_file_in_knowledge_api_v1_knowledge__id__file_move_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeFileMoveForm"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -14159,61 +14668,6 @@
         ]
       }
     },
-    "/api/v1/prompts/command/{command}": {
-      "get": {
-        "tags": [
-          "prompts"
-        ],
-        "summary": "Get Prompt By Command",
-        "operationId": "get_prompt_by_command_api_v1_prompts_command__command__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "command",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Command"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/PromptAccessResponse"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "title": "Response Get Prompt By Command Api V1 Prompts Command  Command  Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/prompts/id/{prompt_id}": {
       "get": {
         "tags": [
@@ -14275,6 +14729,7 @@
           "prompts"
         ],
         "summary": "Update Prompt By Id",
+        "description": "Update a prompt's content, creating a new history entry if changed.",
         "operationId": "update_prompt_by_id_api_v1_prompts_id__prompt_id__update_post",
         "security": [
           {
@@ -15023,6 +15478,7 @@
           "tools"
         ],
         "summary": "Create New Tools",
+        "description": "Create a new tool from user-supplied Python source code.",
         "operationId": "create_new_tools_api_v1_tools_create_post",
         "requestBody": {
           "content": {
@@ -15132,6 +15588,7 @@
           "tools"
         ],
         "summary": "Update Tools By Id",
+        "description": "Update an existing tool's source code and metadata.",
         "operationId": "update_tools_by_id_api_v1_tools_id__id__update_post",
         "security": [
           {
@@ -16189,6 +16646,7 @@
           "memories"
         ],
         "summary": "Add Memory",
+        "description": "Persist a new memory and embed it into the user's vector collection.\n\nDoes NOT use ``Depends(get_async_session)`` — database operations manage their\nown short-lived sessions so a connection is not held during the external\nembedding API call (``EMBEDDING_FUNCTION``), which can take 1-5+ seconds.",
         "operationId": "add_memory_api_v1_memories_add_post",
         "requestBody": {
           "content": {
@@ -17372,6 +17830,52 @@
         }
       }
     },
+    "/api/v1/groups/id/{id}/preview": {
+      "get": {
+        "tags": [
+          "groups"
+        ],
+        "summary": "Preview Group Access",
+        "description": "Show what resources a group can access (preview audit).",
+        "operationId": "preview_group_access_api_v1_groups_id__id__preview_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/files/": {
       "post": {
         "tags": [
@@ -17990,6 +18494,61 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/files/{id}/rename": {
+      "post": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Rename File By Id",
+        "operationId": "rename_file_by_id_api_v1_files__id__rename_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileRenameForm"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -19137,58 +19696,6 @@
         ]
       }
     },
-    "/api/v1/evaluations/feedbacks/all": {
-      "get": {
-        "tags": [
-          "evaluations"
-        ],
-        "summary": "Get All Feedbacks",
-        "operationId": "get_all_feedbacks_api_v1_evaluations_feedbacks_all_get",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/FeedbackResponse"
-                  },
-                  "type": "array",
-                  "title": "Response Get All Feedbacks Api V1 Evaluations Feedbacks All Get"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      },
-      "delete": {
-        "tags": [
-          "evaluations"
-        ],
-        "summary": "Delete All Feedbacks",
-        "operationId": "delete_all_feedbacks_api_v1_evaluations_feedbacks_all_delete",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/v1/evaluations/feedbacks/all/ids": {
       "get": {
         "tags": [
@@ -19208,6 +19715,30 @@
                   "type": "array",
                   "title": "Response Get All Feedback Ids Api V1 Evaluations Feedbacks All Ids Get"
                 }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/evaluations/feedbacks/all": {
+      "delete": {
+        "tags": [
+          "evaluations"
+        ],
+        "summary": "Delete All Feedbacks",
+        "operationId": "delete_all_feedbacks_api_v1_evaluations_feedbacks_all_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }
@@ -19282,29 +19813,54 @@
         "tags": [
           "evaluations"
         ],
-        "summary": "Get Feedbacks",
-        "operationId": "get_feedbacks_api_v1_evaluations_feedbacks_user_get",
+        "summary": "Get User Feedbacks",
+        "operationId": "get_user_feedbacks_api_v1_evaluations_feedbacks_user_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/FeedbackUserResponse"
-                  },
-                  "type": "array",
-                  "title": "Response Get Feedbacks Api V1 Evaluations Feedbacks User Get"
+                  "$ref": "#/components/schemas/FeedbackListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/evaluations/feedbacks": {
@@ -20561,50 +21117,6 @@
         ]
       }
     },
-    "/api/v1/utils/markdown": {
-      "post": {
-        "tags": [
-          "utils"
-        ],
-        "summary": "Get Html From Markdown",
-        "operationId": "get_html_from_markdown_api_v1_utils_markdown_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MarkdownForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/v1/utils/pdf": {
       "post": {
         "tags": [
@@ -20655,6 +21167,7 @@
           "utils"
         ],
         "summary": "Download Db",
+        "description": "Download the raw SQLite database file (admin-only, SQLite deployments only).",
         "operationId": "download_db_api_v1_utils_db_download_get",
         "responses": {
           "200": {
@@ -20699,278 +21212,13 @@
       }
     },
     "/api/v1/terminals/{server_id}/{path}": {
-      "get": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "options": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -21023,7 +21271,272 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -22885,7 +23398,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UrlForm"
+                "$ref": "#/components/schemas/open_webui__main__UrlForm"
               }
             }
           },
@@ -23117,6 +23630,7 @@
     "/oauth/{provider}/callback": {
       "get": {
         "summary": "Oauth Login Callback",
+        "description": "Handle the OAuth provider callback.\n\nResolution order:\n1. Match by subject ID bound to the provider.\n2. If ``OAUTH_MERGE_ACCOUNTS_BY_EMAIL`` is enabled, match by email\n   (note: some providers do not verify email addresses).\n3. If no match and ``ENABLE_OAUTH_SIGNUP`` is enabled, create a new user\n   (fails if the email is already registered).",
         "operationId": "oauth_login_callback_oauth__provider__callback_get",
         "parameters": [
           {
@@ -23154,6 +23668,7 @@
     "/oauth/{provider}/login/callback": {
       "get": {
         "summary": "Oauth Login Callback",
+        "description": "Handle the OAuth provider callback.\n\nResolution order:\n1. Match by subject ID bound to the provider.\n2. If ``OAUTH_MERGE_ACCOUNTS_BY_EMAIL`` is enabled, match by email\n   (note: some providers do not verify email addresses).\n3. If no match and ``ENABLE_OAUTH_SIGNUP`` is enabled, create a new user\n   (fails if the email is already registered).",
         "operationId": "oauth_login_callback_oauth__provider__login_callback_get",
         "parameters": [
           {
@@ -23271,8 +23786,9 @@
     },
     "/health/db": {
       "get": {
-        "summary": "Healthcheck With Db",
-        "operationId": "healthcheck_with_db_health_db_get",
+        "summary": "Check Db Health",
+        "description": "Verify database connectivity by issuing a lightweight ping.",
+        "operationId": "check_db_health_health_db_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -23288,6 +23804,7 @@
     "/cache/{path}": {
       "get": {
         "summary": "Serve Cache File",
+        "description": "Serve cached files (e.g. tool outputs) with path-traversal protection.\n\nOnly ``image/*``, ``audio/*``, and ``video/*`` MIME types are served inline;\neverything else gets a ``Content-Disposition: attachment`` header to prevent\nXSS from user-generated HTML stored in the cache directory.",
         "operationId": "serve_cache_file_cache__path__get",
         "security": [
           {
@@ -27329,6 +27846,20 @@
             ],
             "title": "Mineru Params"
           },
+          "MINERU_FILE_EXTENSIONS": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru File Extensions"
+          },
           "RAG_RERANKING_MODEL": {
             "anyOf": [
               {
@@ -27507,17 +28038,17 @@
             "title": "File Image Compression Height"
           },
           "ALLOWED_FILE_EXTENSIONS": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Allowed File Extensions"
           },
           "ENABLE_GOOGLE_DRIVE_INTEGRATION": {
@@ -27603,7 +28134,8 @@
           "source",
           "destination"
         ],
-        "title": "CopyModelForm"
+        "title": "CopyModelForm",
+        "description": "Payload for duplicating an existing model under a new name."
       },
       "CreateChannelForm": {
         "properties": {
@@ -27816,7 +28348,8 @@
         },
         "additionalProperties": true,
         "type": "object",
-        "title": "CreateModelForm"
+        "title": "CreateModelForm",
+        "description": "Payload for creating a new model via Modelfile."
       },
       "DailyStatsEntry": {
         "properties": {
@@ -28306,68 +28839,6 @@
         ],
         "title": "FeedbackModel"
       },
-      "FeedbackResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "version": {
-            "type": "integer",
-            "title": "Version"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "version",
-          "type",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "FeedbackResponse"
-      },
       "FeedbackUserResponse": {
         "properties": {
           "id": {
@@ -28460,6 +28931,34 @@
           "total"
         ],
         "title": "FileListResponse"
+      },
+      "FileManifestEntry": {
+        "properties": {
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "checksum": {
+            "type": "string",
+            "title": "Checksum"
+          },
+          "size": {
+            "type": "integer",
+            "title": "Size"
+          }
+        },
+        "type": "object",
+        "required": [
+          "filename",
+          "path",
+          "checksum",
+          "size"
+        ],
+        "title": "FileManifestEntry"
       },
       "FileMeta": {
         "properties": {
@@ -28712,6 +29211,19 @@
           "created_at"
         ],
         "title": "FileModelResponse"
+      },
+      "FileRenameForm": {
+        "properties": {
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          }
+        },
+        "type": "object",
+        "required": [
+          "filename"
+        ],
+        "title": "FileRenameForm"
       },
       "FileUserResponse": {
         "properties": {
@@ -29400,17 +29912,17 @@
             "title": "Suffix"
           },
           "images": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Images"
           },
           "format": {
@@ -29463,17 +29975,17 @@
             "title": "Template"
           },
           "context": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "integer"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Context"
           },
           "stream": {
@@ -29518,7 +30030,8 @@
         "required": [
           "model"
         ],
-        "title": "GenerateCompletionForm"
+        "title": "GenerateCompletionForm",
+        "description": "Payload for the Ollama /api/generate endpoint."
       },
       "GenerateEmbedForm": {
         "properties": {
@@ -29584,7 +30097,8 @@
           "model",
           "input"
         ],
-        "title": "GenerateEmbedForm"
+        "title": "GenerateEmbedForm",
+        "description": "Payload for the newer /api/embed endpoint (batch-capable)."
       },
       "GenerateEmbeddingsForm": {
         "properties": {
@@ -29628,7 +30142,8 @@
           "model",
           "prompt"
         ],
-        "title": "GenerateEmbeddingsForm"
+        "title": "GenerateEmbeddingsForm",
+        "description": "Payload for the legacy /api/embeddings endpoint (single-prompt)."
       },
       "GroupExportResponse": {
         "properties": {
@@ -30343,11 +30858,124 @@
         ],
         "title": "KnowledgeAccessResponse"
       },
+      "KnowledgeDirectoryCreateForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "KnowledgeDirectoryCreateForm"
+      },
+      "KnowledgeDirectoryModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "knowledge_id": {
+            "type": "string",
+            "title": "Knowledge Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "knowledge_id",
+          "name",
+          "user_id",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "KnowledgeDirectoryModel"
+      },
+      "KnowledgeDirectoryUpdateForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id",
+            "default": "__unset__"
+          }
+        },
+        "type": "object",
+        "title": "KnowledgeDirectoryUpdateForm"
+      },
       "KnowledgeFileIdForm": {
         "properties": {
           "file_id": {
             "type": "string",
             "title": "File Id"
+          },
+          "directory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Directory Id"
           }
         },
         "type": "object",
@@ -30365,6 +30993,20 @@
             "type": "array",
             "title": "Items"
           },
+          "directories": {
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeDirectoryModel"
+            },
+            "type": "array",
+            "title": "Directories"
+          },
+          "breadcrumbs": {
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeDirectoryModel"
+            },
+            "type": "array",
+            "title": "Breadcrumbs"
+          },
           "total": {
             "type": "integer",
             "title": "Total"
@@ -30376,6 +31018,30 @@
           "total"
         ],
         "title": "KnowledgeFileListResponse"
+      },
+      "KnowledgeFileMoveForm": {
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "title": "File Id"
+          },
+          "directory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Directory Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_id"
+        ],
+        "title": "KnowledgeFileMoveForm"
       },
       "KnowledgeFilesResponse": {
         "properties": {
@@ -30423,17 +31089,17 @@
             "title": "Updated At"
           },
           "files": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "$ref": "#/components/schemas/FileMetadataResponse"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Files"
           },
           "write_access": {
@@ -30773,19 +31439,6 @@
         ],
         "title": "LoadUrlForm"
       },
-      "MarkdownForm": {
-        "properties": {
-          "md": {
-            "type": "string",
-            "title": "Md"
-          }
-        },
-        "type": "object",
-        "required": [
-          "md"
-        ],
-        "title": "MarkdownForm"
-      },
       "MemoryModel": {
         "properties": {
           "id": {
@@ -30817,7 +31470,8 @@
           "updated_at",
           "created_at"
         ],
-        "title": "MemoryModel"
+        "title": "MemoryModel",
+        "description": "Pydantic mirror of the Memory table row."
       },
       "MemoryUpdateModel": {
         "properties": {
@@ -31174,17 +31828,17 @@
             "title": "Rating"
           },
           "tags": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Tags"
           }
         },
@@ -31891,18 +32545,18 @@
             "$ref": "#/components/schemas/ModelParams"
           },
           "access_grants": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "additionalProperties": true,
                   "type": "object"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Access Grants"
           },
           "is_active": {
@@ -31988,8 +32642,7 @@
                 "type": "null"
               }
             ],
-            "title": "Profile Image Url",
-            "default": "/static/favicon.png"
+            "title": "Profile Image Url"
           },
           "description": {
             "anyOf": [
@@ -32000,7 +32653,8 @@
                 "type": "null"
               }
             ],
-            "title": "Description"
+            "title": "Description",
+            "description": "User-facing description of the model."
           },
           "capabilities": {
             "anyOf": [
@@ -32017,7 +32671,8 @@
         },
         "additionalProperties": true,
         "type": "object",
-        "title": "ModelMeta"
+        "title": "ModelMeta",
+        "description": "Metadata for a workspace model entry (profile, description, tags, capabilities)."
       },
       "ModelModel": {
         "properties": {
@@ -32099,7 +32754,8 @@
         },
         "additionalProperties": true,
         "type": "object",
-        "title": "ModelNameForm"
+        "title": "ModelNameForm",
+        "description": "Generic form carrying an optional model identifier."
       },
       "ModelOverviewResponse": {
         "properties": {
@@ -32129,7 +32785,8 @@
         "properties": {},
         "additionalProperties": true,
         "type": "object",
-        "title": "ModelParams"
+        "title": "ModelParams",
+        "description": "Parameters for model inference (temperature, top_p, etc.)."
       },
       "ModelResponse": {
         "properties": {
@@ -32233,17 +32890,17 @@
             "title": "Default Pinned Models"
           },
           "MODEL_ORDER_LIST": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Model Order List"
           },
           "DEFAULT_MODEL_METADATA": {
@@ -32936,17 +33593,17 @@
             "title": "Meta"
           },
           "tags": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Tags"
           },
           "is_active": {
@@ -33072,32 +33729,32 @@
             "title": "Meta"
           },
           "tags": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Tags"
           },
           "access_grants": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "additionalProperties": true,
                   "type": "object"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Access Grants"
           },
           "version_id": {
@@ -33277,17 +33934,17 @@
             "title": "Command"
           },
           "tags": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Tags"
           }
         },
@@ -33352,17 +34009,17 @@
             "title": "Meta"
           },
           "tags": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Tags"
           },
           "is_active": {
@@ -33494,7 +34151,8 @@
         "required": [
           "model"
         ],
-        "title": "PushModelForm"
+        "title": "PushModelForm",
+        "description": "Payload for pushing a model to a registry."
       },
       "QueryCollectionsForm": {
         "properties": {
@@ -34816,6 +35474,110 @@
         ],
         "title": "SummaryResponse"
       },
+      "SyncCleanupForm": {
+        "properties": {
+          "file_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "File Ids"
+          },
+          "dir_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Dir Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_ids"
+        ],
+        "title": "SyncCleanupForm"
+      },
+      "SyncDiffForm": {
+        "properties": {
+          "manifest": {
+            "items": {
+              "$ref": "#/components/schemas/FileManifestEntry"
+            },
+            "type": "array",
+            "title": "Manifest"
+          }
+        },
+        "type": "object",
+        "required": [
+          "manifest"
+        ],
+        "title": "SyncDiffForm"
+      },
+      "SyncDiffResponse": {
+        "properties": {
+          "added": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Added"
+          },
+          "modified": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Modified"
+          },
+          "deleted": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Deleted"
+          },
+          "mkdir": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Mkdir"
+          },
+          "rmdir": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rmdir"
+          },
+          "unmodified_count": {
+            "type": "integer",
+            "title": "Unmodified Count"
+          },
+          "directory_map": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Directory Map"
+          }
+        },
+        "type": "object",
+        "required": [
+          "added",
+          "modified",
+          "deleted",
+          "mkdir",
+          "rmdir",
+          "unmodified_count",
+          "directory_map"
+        ],
+        "title": "SyncDiffResponse"
+      },
       "SyncFunctionsForm": {
         "properties": {
           "functions": {
@@ -35516,18 +36278,18 @@
             "$ref": "#/components/schemas/ToolMeta"
           },
           "access_grants": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "additionalProperties": true,
                   "type": "object"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Access Grants"
           }
         },
@@ -35987,19 +36749,6 @@
           "timezone"
         ],
         "title": "UpdateTimezoneForm"
-      },
-      "UrlForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "title": "UrlForm"
       },
       "UserActiveResponse": {
         "properties": {
@@ -37331,17 +38080,17 @@
             "title": "Web Search Concurrent Requests"
           },
           "WEB_SEARCH_DOMAIN_FILTER_LIST": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Web Search Domain Filter List",
             "default": []
           },
@@ -37907,17 +38656,17 @@
             "title": "External Web Loader Api Key"
           },
           "YOUTUBE_LOADER_LANGUAGE": {
-            "anyOf": [
-              {
-                "items": {
+            "items": {
+              "anyOf": [
+                {
                   "type": "string"
                 },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
             "title": "Youtube Loader Language"
           },
           "YOUTUBE_LOADER_PROXY_URL": {
@@ -37985,6 +38734,29 @@
               }
             ],
             "title": "Youcom Api Key"
+          },
+          "LINKUP_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Linkup Api Key"
+          },
+          "LINKUP_SEARCH_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Linkup Search Params"
           }
         },
         "type": "object",
@@ -38063,6 +38835,19 @@
         },
         "type": "object",
         "title": "WorkspacePermissions"
+      },
+      "open_webui__main__UrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "UrlForm"
       },
       "open_webui__models__feedbacks__UserResponse": {
         "properties": {
@@ -38273,7 +39058,8 @@
           "OLLAMA_BASE_URLS",
           "OLLAMA_API_CONFIGS"
         ],
-        "title": "OllamaConfigForm"
+        "title": "OllamaConfigForm",
+        "description": "Payload for updating the Ollama connection configuration."
       },
       "open_webui__routers__ollama__ResponsesForm": {
         "properties": {
@@ -38288,6 +39074,20 @@
           "model"
         ],
         "title": "ResponsesForm"
+      },
+      "open_webui__routers__ollama__UrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "UrlForm",
+        "description": "Form carrying a single URL string."
       },
       "open_webui__routers__openai__ConnectionVerificationForm": {
         "properties": {
@@ -38451,11 +39251,11 @@
           "tool_choice": {
             "anyOf": [
               {
-                "additionalProperties": true,
-                "type": "object"
+                "type": "string"
               },
               {
-                "type": "string"
+                "additionalProperties": true,
+                "type": "object"
               },
               {
                 "type": "null"
