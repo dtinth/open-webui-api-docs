@@ -288,6 +288,27 @@
         "summary": "Get Ollama Loaded Models",
         "description": "List models currently loaded in Ollama memory across all backends.",
         "operationId": "get_ollama_loaded_models_ollama_api_ps_get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "items": {
+                      "type": "integer"
+                    },
+                    "type": "array",
+                    "uniqueItems": true
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Skip Idxs"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -297,6 +318,16 @@
                   "additionalProperties": true,
                   "type": "object",
                   "title": "Response Get Ollama Loaded Models Ollama Api Ps Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -2268,7 +2299,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__ollama__UrlForm"
+                "$ref": "#/components/schemas/UrlForm"
               }
             }
           }
@@ -2331,7 +2362,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__routers__ollama__UrlForm"
+                "$ref": "#/components/schemas/UrlForm"
               }
             }
           }
@@ -2904,7 +2935,7 @@
           }
         }
       },
-      "get": {
+      "delete": {
         "tags": [
           "openai"
         ],
@@ -2948,7 +2979,7 @@
           }
         }
       },
-      "delete": {
+      "get": {
         "tags": [
           "openai"
         ],
@@ -4044,13 +4075,13 @@
         "tags": [
           "images"
         ],
-        "summary": "Image Edits",
-        "operationId": "image_edits_api_v1_images_edit_post",
+        "summary": "Edit Images",
+        "operationId": "edit_images_api_v1_images_edit_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Body_image_edits_api_v1_images_edit_post"
+                "$ref": "#/components/schemas/EditImageForm"
               }
             }
           },
@@ -5039,6 +5070,55 @@
         ]
       }
     },
+    "/api/v1/configs/namespace/{namespace}": {
+      "get": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Get Config Namespace",
+        "operationId": "get_config_namespace_api_v1_configs_namespace__namespace__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Config Namespace Api V1 Configs Namespace  Namespace  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/configs/connections": {
       "get": {
         "tags": [
@@ -5365,6 +5445,96 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/TerminalServerPolicyForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/configs/terminal_servers/lifecycle": {
+      "post": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Put Terminal Server Lifecycle",
+        "description": "Proxy a policy lifecycle PUT to an orchestrator terminal server.",
+        "operationId": "put_terminal_server_lifecycle_api_v1_configs_terminal_servers_lifecycle_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminalServerLifecycleForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/configs/terminal_servers/refresh": {
+      "post": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Refresh Terminal Server Terminals",
+        "description": "Proxy a terminal refresh request to an orchestrator terminal server.",
+        "operationId": "refresh_terminal_server_terminals_api_v1_configs_terminal_servers_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminalServerRefreshForm"
               }
             }
           },
@@ -6358,6 +6528,76 @@
         ]
       }
     },
+    "/api/v1/auths/admin/config/oauth": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Oauth Config",
+        "operationId": "get_oauth_config_api_v1_auths_admin_config_oauth_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OAuthConfigForm"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Oauth Config",
+        "operationId": "update_oauth_config_api_v1_auths_admin_config_oauth_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OAuthConfigForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OAuthConfigForm"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/auths/api_key": {
       "get": {
         "tags": [
@@ -6822,6 +7062,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/default/permissions/defaults": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Default User Permissions Defaults",
+        "operationId": "get_default_user_permissions_defaults_api_v1_users_default_permissions_defaults_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPermissions"
                 }
               }
             }
@@ -7828,7 +8094,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserListResponse"
+                  "$ref": "#/components/schemas/ChannelMemberListResponse"
                 }
               }
             }
@@ -9847,6 +10113,76 @@
         ]
       }
     },
+    "/api/v1/chats/config": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Get Chat Config",
+        "operationId": "get_chat_config_api_v1_chats_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatConfigForm"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Set Chat Config",
+        "operationId": "set_chat_config_api_v1_chats_config_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatConfigForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatConfigForm"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/chats/search": {
       "get": {
         "tags": [
@@ -10277,6 +10613,33 @@
         }
       }
     },
+    "/api/v1/chats/archived/count": {
+      "get": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Get Archived Session User Chat Count",
+        "operationId": "get_archived_session_user_chat_count_api_v1_chats_archived_count_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "title": "Response Get Archived Session User Chat Count Api V1 Chats Archived Count Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/chats/archive/all": {
       "post": {
         "tags": [
@@ -10319,6 +10682,33 @@
                 "schema": {
                   "type": "boolean",
                   "title": "Response Unarchive All Chats Api V1 Chats Unarchive All Post"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/chats/share/all": {
+      "delete": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Unshare All Chats",
+        "operationId": "unshare_all_chats_api_v1_chats_share_all_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Unshare All Chats Api V1 Chats Share All Delete"
                 }
               }
             }
@@ -10542,6 +10932,68 @@
         ]
       }
     },
+    "/api/v1/chats/{id}/compact": {
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Compact Chat By Id",
+        "operationId": "compact_chat_by_id_api_v1_chats__id__compact_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CompactChatForm"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Form Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/chats/{id}": {
       "get": {
         "tags": [
@@ -10763,6 +11215,68 @@
                     }
                   ],
                   "title": "Response Update Chat Message By Id Api V1 Chats  Id  Messages  Message Id  Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Delete Chat Message By Id",
+        "operationId": "delete_chat_message_by_id_api_v1_chats__id__messages__message_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "message_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Message Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ChatResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Delete Chat Message By Id Api V1 Chats  Id  Messages  Message Id  Delete"
                 }
               }
             }
@@ -12295,13 +12809,13 @@
         }
       }
     },
-    "/api/v1/models/base": {
+    "/api/v1/models/base/tags": {
       "get": {
         "tags": [
           "models"
         ],
-        "summary": "Get Base Models",
-        "operationId": "get_base_models_api_v1_models_base_get",
+        "summary": "Get Base Model Tags",
+        "operationId": "get_base_model_tags_api_v1_models_base_tags_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -12309,10 +12823,10 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ModelResponse"
+                    "type": "string"
                   },
                   "type": "array",
-                  "title": "Response Get Base Models Api V1 Models Base Get"
+                  "title": "Response Get Base Model Tags Api V1 Models Base Tags Get"
                 }
               }
             }
@@ -12323,6 +12837,64 @@
             "HTTPBearer": []
           }
         ]
+      }
+    },
+    "/api/v1/models/base": {
+      "get": {
+        "tags": [
+          "models"
+        ],
+        "summary": "Get Base Models",
+        "operationId": "get_base_models_api_v1_models_base_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Tag"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelResponse"
+                  },
+                  "title": "Response Get Base Models Api V1 Models Base Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/models/tags": {
@@ -12976,6 +13548,22 @@
             }
           },
           {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -13208,6 +13796,559 @@
             "HTTPBearer": []
           }
         ]
+      }
+    },
+    "/api/v1/knowledge/external/connections": {
+      "get": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Get External Knowledge Connections",
+        "operationId": "get_external_knowledge_connections_api_v1_knowledge_external_connections_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalKnowledgeConnectionListResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Create External Knowledge Connection",
+        "operationId": "create_external_knowledge_connection_api_v1_knowledge_external_connections_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeConnectionForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Create External Knowledge Connection Api V1 Knowledge External Connections Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/knowledge/external/connections/{id}": {
+      "get": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Get External Knowledge Connection",
+        "operationId": "get_external_knowledge_connection_api_v1_knowledge_external_connections__id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get External Knowledge Connection Api V1 Knowledge External Connections  Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Update External Knowledge Connection",
+        "operationId": "update_external_knowledge_connection_api_v1_knowledge_external_connections__id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeConnectionForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Update External Knowledge Connection Api V1 Knowledge External Connections  Id  Patch"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Delete External Knowledge Connection",
+        "operationId": "delete_external_knowledge_connection_api_v1_knowledge_external_connections__id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Delete External Knowledge Connection Api V1 Knowledge External Connections  Id  Delete"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/external/connections/{id}/test": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Test External Knowledge Connection",
+        "operationId": "test_external_knowledge_connection_api_v1_knowledge_external_connections__id__test_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Test External Knowledge Connection Api V1 Knowledge External Connections  Id  Test Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/external/source/test": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Test External Knowledge Source",
+        "operationId": "test_external_knowledge_source_api_v1_knowledge_external_source_test_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeSourceTestForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Test External Knowledge Source Api V1 Knowledge External Source Test Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/knowledge/external/connections/{id}/retrieve-test": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Test External Knowledge Retrieval",
+        "operationId": "test_external_knowledge_retrieval_api_v1_knowledge_external_connections__id__retrieve_test_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeRetrieveTestForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Test External Knowledge Retrieval Api V1 Knowledge External Connections  Id  Retrieve Test Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/knowledge/external/knowledge/create": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Create External Knowledge",
+        "operationId": "create_external_knowledge_api_v1_knowledge_external_knowledge_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeCreateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/KnowledgeResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Create External Knowledge Api V1 Knowledge External Knowledge Create Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/knowledge/external/source/create": {
+      "post": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Create External Knowledge Source",
+        "operationId": "create_external_knowledge_source_api_v1_knowledge_external_source_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeSourceCreateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/KnowledgeResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Create External Knowledge Source Api V1 Knowledge External Source Create Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/knowledge/external/source/{id}": {
+      "patch": {
+        "tags": [
+          "knowledge"
+        ],
+        "summary": "Update External Knowledge Source",
+        "operationId": "update_external_knowledge_source_api_v1_knowledge_external_source__id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExternalKnowledgeSourceUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/KnowledgeResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Update External Knowledge Source Api V1 Knowledge External Source  Id  Patch"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/knowledge/{id}": {
@@ -16695,6 +17836,57 @@
         ]
       }
     },
+    "/api/v1/memories/update": {
+      "post": {
+        "tags": [
+          "memories"
+        ],
+        "summary": "Update Memories",
+        "operationId": "update_memories_api_v1_memories_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMemoriesForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Response Update Memories Api V1 Memories Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/memories/query": {
       "post": {
         "tags": [
@@ -16707,6 +17899,144 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/QueryMemoryForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/memories/search": {
+      "post": {
+        "tags": [
+          "memories"
+        ],
+        "summary": "Search Memories",
+        "operationId": "search_memories_api_v1_memories_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchMemoriesForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MemoryModel"
+                  },
+                  "type": "array",
+                  "title": "Response Search Memories Api V1 Memories Search Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/memories/paths": {
+      "post": {
+        "tags": [
+          "memories"
+        ],
+        "summary": "List Memory Paths",
+        "operationId": "list_memory_paths_api_v1_memories_paths_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListMemoryPathsForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/memories/path": {
+      "post": {
+        "tags": [
+          "memories"
+        ],
+        "summary": "Read Memory Path",
+        "operationId": "read_memory_path_api_v1_memories_path_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadMemoryPathForm"
               }
             }
           },
@@ -16979,6 +18309,31 @@
         ]
       }
     },
+    "/api/v1/folders/shared": {
+      "get": {
+        "tags": [
+          "folders"
+        ],
+        "summary": "Get Shared Folders",
+        "description": "Get all folders shared with the current user (not owned by them).",
+        "operationId": "get_shared_folders_api_v1_folders_shared_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/folders/{id}": {
       "get": {
         "tags": [
@@ -17007,17 +18362,7 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/FolderModel"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "title": "Response Get Folder By Id Api V1 Folders  Id  Get"
-                }
+                "schema": {}
               }
             }
           },
@@ -17237,6 +18582,107 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/folders/{id}/access/update": {
+      "post": {
+        "tags": [
+          "folders"
+        ],
+        "summary": "Update Folder Access By Id",
+        "operationId": "update_folder_access_by_id_api_v1_folders__id__access_update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderAccessGrantsForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/folders/{id}/shared/chats": {
+      "get": {
+        "tags": [
+          "folders"
+        ],
+        "summary": "Get Shared Folder Chats",
+        "description": "Get chats within a shared folder. Returns readonly flag based on permission.",
+        "operationId": "get_shared_folder_chats_api_v1_folders__id__shared_chats_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -18092,6 +19538,33 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/files/count": {
+      "get": {
+        "tags": [
+          "files"
+        ],
+        "summary": "Count Files",
+        "operationId": "count_files_api_v1_files_count_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "title": "Response Count Files Api V1 Files Count Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/files/all": {
@@ -20898,6 +22371,26 @@
               "default": 50,
               "title": "Limit"
             }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "updated_at",
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Direction"
+            }
           }
         ],
         "responses": {
@@ -21212,119 +22705,13 @@
       }
     },
     "/api/v1/terminals/{server_id}/{path}": {
-      "options": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -21377,60 +22764,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -21483,7 +22817,166 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -21536,7 +23029,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__options",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__delete",
         "security": [
           {
             "HTTPBearer": []
@@ -23371,10 +24864,31 @@
         }
       }
     },
-    "/api/webhook": {
+    "/api/events": {
       "get": {
-        "summary": "Get Webhook Url",
-        "operationId": "get_webhook_url_api_webhook_get",
+        "summary": "Get Event Catalog",
+        "operationId": "get_event_catalog_api_events_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/events/webhooks": {
+      "get": {
+        "summary": "Get Event Webhooks Api",
+        "operationId": "get_event_webhooks_api_api_events_webhooks_get",
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -23392,13 +24906,13 @@
         ]
       },
       "post": {
-        "summary": "Update Webhook Url",
-        "operationId": "update_webhook_url_api_webhook_post",
+        "summary": "Create Event Webhook",
+        "operationId": "create_event_webhook_api_events_webhooks_post",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/open_webui__main__UrlForm"
+                "$ref": "#/components/schemas/EventWebhookForm"
               }
             }
           },
@@ -23429,6 +24943,98 @@
             "HTTPBearer": []
           }
         ]
+      }
+    },
+    "/api/events/webhooks/{webhook_id}": {
+      "put": {
+        "summary": "Update Event Webhook",
+        "operationId": "update_event_webhook_api_events_webhooks__webhook_id__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Webhook Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventWebhookUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Event Webhook Api",
+        "operationId": "delete_event_webhook_api_api_events_webhooks__webhook_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Webhook Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/version": {
@@ -23922,6 +25528,26 @@
           "content": {
             "type": "string",
             "title": "Content"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "context"
+            ],
+            "title": "Type",
+            "default": "context"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
           }
         },
         "type": "object",
@@ -24666,30 +26292,6 @@
           "status"
         ],
         "title": "BatchProcessFilesResult"
-      },
-      "Body_image_edits_api_v1_images_edit_post": {
-        "properties": {
-          "form_data": {
-            "$ref": "#/components/schemas/EditImageForm"
-          },
-          "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata"
-          }
-        },
-        "type": "object",
-        "required": [
-          "form_data"
-        ],
-        "title": "Body_image_edits_api_v1_images_edit_post"
       },
       "Body_transcription_api_v1_audio_transcriptions_post": {
         "properties": {
@@ -26158,6 +27760,115 @@
         ],
         "title": "ChannelListItemResponse"
       },
+      "ChannelMemberListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/ChannelMemberResponse"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "ChannelMemberListResponse"
+      },
+      "ChannelMemberResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "profile_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Image Url"
+          },
+          "presence_state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Presence State"
+          },
+          "status_emoji": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Emoji"
+          },
+          "status_message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Message"
+          },
+          "status_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Expires At"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role"
+        ],
+        "title": "ChannelMemberResponse"
+      },
       "ChannelModel": {
         "properties": {
           "id": {
@@ -26427,6 +28138,29 @@
           "history"
         ],
         "title": "ChatBody"
+      },
+      "ChatConfigForm": {
+        "properties": {
+          "ENABLE_CONTEXT_COMPACTION": {
+            "type": "boolean",
+            "title": "Enable Context Compaction"
+          },
+          "CONTEXT_COMPACTION_TOKEN_THRESHOLD": {
+            "type": "integer",
+            "title": "Context Compaction Token Threshold"
+          },
+          "CONTEXT_COMPACTION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Context Compaction Prompt Template"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ENABLE_CONTEXT_COMPACTION",
+          "CONTEXT_COMPACTION_TOKEN_THRESHOLD",
+          "CONTEXT_COMPACTION_PROMPT_TEMPLATE"
+        ],
+        "title": "ChatConfigForm"
       },
       "ChatFolderIdForm": {
         "properties": {
@@ -26710,6 +28444,17 @@
             ],
             "title": "Usage"
           },
+          "context_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Summary"
+          },
           "created_at": {
             "type": "integer",
             "title": "Created At"
@@ -26800,6 +28545,11 @@
           "export": {
             "type": "boolean",
             "title": "Export",
+            "default": true
+          },
+          "import": {
+            "type": "boolean",
+            "title": "Import",
             "default": true
           },
           "stt": {
@@ -27046,6 +28796,17 @@
               }
             ],
             "title": "Last Read At"
+          },
+          "snippet": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Snippet"
           }
         },
         "type": "object",
@@ -27391,6 +29152,23 @@
         ],
         "title": "CodeInterpreterConfigForm"
       },
+      "CompactChatForm": {
+        "properties": {
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          }
+        },
+        "type": "object",
+        "title": "CompactChatForm"
+      },
       "ConfigForm": {
         "properties": {
           "RAG_TEMPLATE": {
@@ -27668,6 +29446,18 @@
             ],
             "title": "External Document Loader Api Key"
           },
+          "EXTERNAL_DOCUMENT_LOADER_HEADERS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Headers"
+          },
           "TIKA_SERVER_URL": {
             "anyOf": [
               {
@@ -27768,6 +29558,17 @@
             ],
             "title": "Mistral Ocr Api Key"
           },
+          "MISTRAL_OCR_USE_BASE64": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mistral Ocr Use Base64"
+          },
           "PADDLEOCR_VL_BASE_URL": {
             "anyOf": [
               {
@@ -27826,7 +29627,7 @@
           "MINERU_API_TIMEOUT": {
             "anyOf": [
               {
-                "type": "string"
+                "type": "integer"
               },
               {
                 "type": "null"
@@ -27936,6 +29737,17 @@
               }
             ],
             "title": "Text Splitter"
+          },
+          "RAG_TOKENIZER_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Tokenizer Model"
           },
           "ENABLE_MARKDOWN_HEADER_TEXT_SPLITTER": {
             "anyOf": [
@@ -28610,6 +30422,461 @@
         ],
         "title": "EventForm"
       },
+      "EventWebhookForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "default": true
+          },
+          "events": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Events"
+          },
+          "targets": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targets"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "EventWebhookForm"
+      },
+      "EventWebhookUpdateForm": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enabled"
+          },
+          "events": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Events"
+          },
+          "targets": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Targets"
+          }
+        },
+        "type": "object",
+        "title": "EventWebhookUpdateForm"
+      },
+      "ExternalKnowledgeConnectionForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "endpoint": {
+            "type": "string",
+            "title": "Endpoint"
+          },
+          "auth_config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auth Config"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
+          },
+          "capabilities": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capabilities"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "provider",
+          "endpoint"
+        ],
+        "title": "ExternalKnowledgeConnectionForm"
+      },
+      "ExternalKnowledgeConnectionListResponse": {
+        "properties": {
+          "items": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total"
+        ],
+        "title": "ExternalKnowledgeConnectionListResponse"
+      },
+      "ExternalKnowledgeCreateForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "connection_id": {
+            "type": "string",
+            "title": "Connection Id"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ExternalKnowledgeSourceForm"
+          },
+          "access_grants": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Grants"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "connection_id",
+          "source"
+        ],
+        "title": "ExternalKnowledgeCreateForm"
+      },
+      "ExternalKnowledgeRetrieveTestForm": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExternalKnowledgeSourceForm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "ExternalKnowledgeRetrieveTestForm"
+      },
+      "ExternalKnowledgeSourceCreateForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "connection": {
+            "$ref": "#/components/schemas/ExternalKnowledgeConnectionForm"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ExternalKnowledgeSourceForm"
+          },
+          "access_grants": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Grants"
+          },
+          "test_query": {
+            "type": "string",
+            "title": "Test Query"
+          },
+          "test_count": {
+            "type": "integer",
+            "title": "Test Count",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "connection",
+          "source",
+          "test_query"
+        ],
+        "title": "ExternalKnowledgeSourceCreateForm"
+      },
+      "ExternalKnowledgeSourceForm": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "collection"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "ExternalKnowledgeSourceForm"
+      },
+      "ExternalKnowledgeSourceTestForm": {
+        "properties": {
+          "connection_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connection Id"
+          },
+          "connection": {
+            "$ref": "#/components/schemas/ExternalKnowledgeConnectionForm"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ExternalKnowledgeSourceForm"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "connection",
+          "source",
+          "query"
+        ],
+        "title": "ExternalKnowledgeSourceTestForm"
+      },
+      "ExternalKnowledgeSourceUpdateForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "connection": {
+            "$ref": "#/components/schemas/ExternalKnowledgeConnectionForm"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ExternalKnowledgeSourceForm"
+          },
+          "access_grants": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Grants"
+          },
+          "test_query": {
+            "type": "string",
+            "title": "Test Query"
+          },
+          "test_count": {
+            "type": "integer",
+            "title": "Test Count",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "connection",
+          "source",
+          "test_query"
+        ],
+        "title": "ExternalKnowledgeSourceUpdateForm"
+      },
       "FeaturesPermissions": {
         "properties": {
           "api_keys": {
@@ -28666,6 +30933,11 @@
             "type": "boolean",
             "title": "Calendar",
             "default": true
+          },
+          "webhooks": {
+            "type": "boolean",
+            "title": "Webhooks",
+            "default": false
           }
         },
         "type": "object",
@@ -29308,6 +31580,23 @@
         ],
         "title": "FileUserResponse"
       },
+      "FolderAccessGrantsForm": {
+        "properties": {
+          "access_grants": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Access Grants"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_grants"
+        ],
+        "title": "FolderAccessGrantsForm"
+      },
       "FolderForm": {
         "properties": {
           "name": {
@@ -29386,91 +31675,6 @@
         },
         "type": "object",
         "title": "FolderMetadataResponse"
-      },
-      "FolderModel": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "parent_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Parent Id"
-          },
-          "user_id": {
-            "type": "string",
-            "title": "User Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "items": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Items"
-          },
-          "meta": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Meta"
-          },
-          "data": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Data"
-          },
-          "is_expanded": {
-            "type": "boolean",
-            "title": "Is Expanded",
-            "default": false
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "user_id",
-          "name",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "FolderModel"
       },
       "FolderNameIdResponse": {
         "properties": {
@@ -31423,6 +33627,38 @@
         ],
         "title": "LeaderboardResponse"
       },
+      "ListMemoryPathsForm": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "context",
+              "all"
+            ],
+            "title": "Type",
+            "default": "all"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 100
+          }
+        },
+        "type": "object",
+        "title": "ListMemoryPathsForm"
+      },
       "LoadUrlForm": {
         "properties": {
           "url": {
@@ -31449,9 +33685,41 @@
             "type": "string",
             "title": "User Id"
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "context"
+            ],
+            "title": "Type",
+            "default": "context"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
           "content": {
             "type": "string",
             "title": "Content"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
           },
           "updated_at": {
             "type": "integer",
@@ -31473,6 +33741,73 @@
         "title": "MemoryModel",
         "description": "Pydantic mirror of the Memory table row."
       },
+      "MemoryOperationModel": {
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "add",
+              "replace",
+              "remove",
+              "move"
+            ],
+            "title": "Action"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "user",
+                  "context"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          }
+        },
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "title": "MemoryOperationModel"
+      },
       "MemoryUpdateModel": {
         "properties": {
           "content": {
@@ -31485,6 +33820,32 @@
               }
             ],
             "title": "Content"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "user",
+                  "context"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
           }
         },
         "type": "object",
@@ -32420,6 +34781,16 @@
           "count": {
             "type": "integer",
             "title": "Count"
+          },
+          "unique_users": {
+            "type": "integer",
+            "title": "Unique Users",
+            "default": 0
+          },
+          "unique_chats": {
+            "type": "integer",
+            "title": "Unique Chats",
+            "default": 0
           }
         },
         "type": "object",
@@ -33391,6 +35762,17 @@
               }
             ],
             "title": "Oauth Server Url"
+          },
+          "oauth_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Scope"
           }
         },
         "type": "object",
@@ -33399,6 +35781,385 @@
           "client_id"
         ],
         "title": "OAuthClientRegistrationForm"
+      },
+      "OAuthConfigForm": {
+        "properties": {
+          "ENABLE_OAUTH_SIGNUP": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Oauth Signup"
+          },
+          "OAUTH_MERGE_ACCOUNTS_BY_EMAIL": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Merge Accounts By Email"
+          },
+          "OAUTH_AUTO_REDIRECT": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Auto Redirect"
+          },
+          "OAUTH_ALLOWED_DOMAINS": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Allowed Domains"
+          },
+          "OAUTH_BLOCKED_GROUPS": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Blocked Groups"
+          },
+          "ENABLE_OAUTH_ROLE_MANAGEMENT": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Oauth Role Management"
+          },
+          "OAUTH_ROLES_CLAIM": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Roles Claim"
+          },
+          "OAUTH_ADMIN_ROLES": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Admin Roles"
+          },
+          "OAUTH_ALLOWED_ROLES": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Allowed Roles"
+          },
+          "ENABLE_OAUTH_GROUP_MANAGEMENT": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Oauth Group Management"
+          },
+          "ENABLE_OAUTH_GROUP_CREATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Oauth Group Creation"
+          },
+          "OAUTH_GROUP_CLAIM": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Group Claim"
+          },
+          "OAUTH_GROUP_DEFAULT_SHARE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Group Default Share"
+          },
+          "OAUTH_PROVIDER_NAME": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Provider Name"
+          },
+          "OPENID_PROVIDER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Openid Provider Url"
+          },
+          "OAUTH_CLIENT_ID": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Client Id"
+          },
+          "OAUTH_CLIENT_SECRET": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Client Secret"
+          },
+          "OPENID_REDIRECT_URI": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Openid Redirect Uri"
+          },
+          "OAUTH_SCOPES": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Scopes"
+          },
+          "OAUTH_CODE_CHALLENGE_METHOD": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Code Challenge Method"
+          },
+          "OAUTH_TOKEN_ENDPOINT_AUTH_METHOD": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Token Endpoint Auth Method"
+          },
+          "OPENID_END_SESSION_ENDPOINT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Openid End Session Endpoint"
+          },
+          "OAUTH_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Timeout"
+          },
+          "OAUTH_CLIENT_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Client Timeout"
+          },
+          "OAUTH_EMAIL_CLAIM": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Email Claim"
+          },
+          "OAUTH_USERNAME_CLAIM": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Username Claim"
+          },
+          "OAUTH_PICTURE_CLAIM": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Picture Claim"
+          },
+          "OAUTH_SUB_CLAIM": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Sub Claim"
+          },
+          "OAUTH_AUDIENCE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Audience"
+          },
+          "OAUTH_UPDATE_EMAIL_ON_LOGIN": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Update Email On Login"
+          },
+          "OAUTH_UPDATE_NAME_ON_LOGIN": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Update Name On Login"
+          },
+          "OAUTH_UPDATE_PICTURE_ON_LOGIN": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Update Picture On Login"
+          },
+          "OAUTH_REFRESH_TOKEN_INCLUDE_SCOPE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Refresh Token Include Scope"
+          }
+        },
+        "type": "object",
+        "title": "OAuthConfigForm",
+        "description": "All OAuth/OIDC settings exposed to the admin panel."
       },
       "PinMessageForm": {
         "properties": {
@@ -34294,6 +37055,17 @@
               }
             ],
             "title": "Hybrid"
+          },
+          "hybrid_bm25_weight": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid Bm25 Weight"
           }
         },
         "type": "object",
@@ -34449,6 +37221,39 @@
         ],
         "title": "Reactions"
       },
+      "ReadMemoryPathForm": {
+        "properties": {
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "context",
+              "all"
+            ],
+            "title": "Type",
+            "default": "all"
+          },
+          "include_children": {
+            "type": "boolean",
+            "title": "Include Children",
+            "default": true
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 50
+          }
+        },
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "title": "ReadMemoryPathForm"
+      },
       "RemoveMembersForm": {
         "properties": {
           "user_ids": {
@@ -34572,6 +37377,60 @@
           "queries"
         ],
         "title": "SearchForm"
+      },
+      "SearchMemoriesForm": {
+        "properties": {
+          "query": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Query"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "user",
+              "context",
+              "all"
+            ],
+            "title": "Type",
+            "default": "all"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
+          "memory_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Memory Id"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit",
+            "default": 20
+          }
+        },
+        "type": "object",
+        "title": "SearchMemoriesForm"
       },
       "SessionUserInfoResponse": {
         "properties": {
@@ -35833,6 +38692,10 @@
             "type": "integer",
             "title": "Autocomplete Generation Input Max Length"
           },
+          "AUTOCOMPLETE_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Autocomplete Generation Prompt Template"
+          },
           "TAGS_GENERATION_PROMPT_TEMPLATE": {
             "type": "string",
             "title": "Tags Generation Prompt Template"
@@ -35890,6 +38753,7 @@
           "IMAGE_PROMPT_GENERATION_PROMPT_TEMPLATE",
           "ENABLE_AUTOCOMPLETE_GENERATION",
           "AUTOCOMPLETE_GENERATION_INPUT_MAX_LENGTH",
+          "AUTOCOMPLETE_GENERATION_PROMPT_TEMPLATE",
           "TAGS_GENERATION_PROMPT_TEMPLATE",
           "FOLLOW_UP_GENERATION_PROMPT_TEMPLATE",
           "ENABLE_FOLLOW_UP_GENERATION",
@@ -36035,6 +38899,54 @@
         ],
         "title": "TerminalServerConnection"
       },
+      "TerminalServerLifecycleForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key",
+            "default": ""
+          },
+          "auth_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auth Type",
+            "default": "bearer"
+          },
+          "policy_id": {
+            "type": "string",
+            "title": "Policy Id"
+          },
+          "lifecycle_data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Lifecycle Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "policy_id",
+          "lifecycle_data"
+        ],
+        "title": "TerminalServerLifecycleForm"
+      },
       "TerminalServerPolicyForm": {
         "properties": {
           "url": {
@@ -36082,6 +38994,75 @@
           "policy_data"
         ],
         "title": "TerminalServerPolicyForm"
+      },
+      "TerminalServerRefreshForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key",
+            "default": ""
+          },
+          "auth_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auth Type",
+            "default": "bearer"
+          },
+          "user_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Id"
+          },
+          "policy_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Policy Id"
+          },
+          "only_idle": {
+            "type": "boolean",
+            "title": "Only Idle",
+            "default": true
+          },
+          "reset": {
+            "type": "boolean",
+            "title": "Reset",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "TerminalServerRefreshForm"
       },
       "TerminalServersConfigForm": {
         "properties": {
@@ -36327,6 +39308,11 @@
             ],
             "title": "Manifest",
             "default": {}
+          },
+          "has_user_valves": {
+            "type": "boolean",
+            "title": "Has User Valves",
+            "default": false
           }
         },
         "type": "object",
@@ -36667,6 +39653,37 @@
         "type": "object",
         "title": "UpdateMembersForm"
       },
+      "UpdateMemoriesForm": {
+        "properties": {
+          "operations": {
+            "items": {
+              "$ref": "#/components/schemas/MemoryOperationModel"
+            },
+            "type": "array",
+            "title": "Operations"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "tool",
+                  "background_review"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "operations"
+        ],
+        "title": "UpdateMemoriesForm"
+      },
       "UpdatePasswordForm": {
         "properties": {
           "password": {
@@ -36749,6 +39766,20 @@
           "timezone"
         ],
         "title": "UpdateTimezoneForm"
+      },
+      "UrlForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "UrlForm",
+        "description": "Form carrying a single URL string."
       },
       "UserActiveResponse": {
         "properties": {
@@ -37330,27 +40361,6 @@
         ],
         "title": "UserInfoResponse"
       },
-      "UserListResponse": {
-        "properties": {
-          "users": {
-            "items": {
-              "$ref": "#/components/schemas/UserModelResponse"
-            },
-            "type": "array",
-            "title": "Users"
-          },
-          "total": {
-            "type": "integer",
-            "title": "Total"
-          }
-        },
-        "type": "object",
-        "required": [
-          "users",
-          "total"
-        ],
-        "title": "UserListResponse"
-      },
       "UserModel": {
         "properties": {
           "id": {
@@ -37561,218 +40571,6 @@
           "created_at"
         ],
         "title": "UserModel"
-      },
-      "UserModelResponse": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id"
-          },
-          "email": {
-            "type": "string",
-            "title": "Email"
-          },
-          "username": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Username"
-          },
-          "role": {
-            "type": "string",
-            "title": "Role",
-            "default": "pending"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "profile_image_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Profile Image Url"
-          },
-          "profile_banner_image_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Profile Banner Image Url"
-          },
-          "bio": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Bio"
-          },
-          "gender": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Gender"
-          },
-          "date_of_birth": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Date Of Birth"
-          },
-          "timezone": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Timezone"
-          },
-          "presence_state": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Presence State"
-          },
-          "status_emoji": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Status Emoji"
-          },
-          "status_message": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Status Message"
-          },
-          "status_expires_at": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Status Expires At"
-          },
-          "info": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Info"
-          },
-          "settings": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/UserSettings"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "oauth": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Oauth"
-          },
-          "scim": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Scim"
-          },
-          "last_active_at": {
-            "type": "integer",
-            "title": "Last Active At"
-          },
-          "updated_at": {
-            "type": "integer",
-            "title": "Updated At"
-          },
-          "created_at": {
-            "type": "integer",
-            "title": "Created At"
-          }
-        },
-        "additionalProperties": true,
-        "type": "object",
-        "required": [
-          "id",
-          "email",
-          "name",
-          "last_active_at",
-          "updated_at",
-          "created_at"
-        ],
-        "title": "UserModelResponse"
       },
       "UserNameResponse": {
         "properties": {
@@ -38034,6 +40832,28 @@
               }
             ],
             "title": "Enable Web Search"
+          },
+          "ENABLE_WEB_SEARCH_CONFIRMATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Web Search Confirmation"
+          },
+          "WEB_SEARCH_CONFIRMATION_CONTENT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Confirmation Content"
           },
           "WEB_SEARCH_ENGINE": {
             "anyOf": [
@@ -38314,6 +41134,28 @@
             ],
             "title": "Serper Api Key"
           },
+          "SERPHOUSE_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serphouse Api Key"
+          },
+          "SERPHOUSE_DOMAIN": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serphouse Domain"
+          },
           "SERPLY_API_KEY": {
             "anyOf": [
               {
@@ -38489,6 +41331,39 @@
               }
             ],
             "title": "Perplexity Search Api Url"
+          },
+          "MICROSOFT_WEB_IQ_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Microsoft Web Iq Api Base Url"
+          },
+          "MICROSOFT_WEB_IQ_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Microsoft Web Iq Api Key"
+          },
+          "MICROSOFT_WEB_IQ_LANGUAGE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Microsoft Web Iq Language"
           },
           "SOUGOU_API_SID": {
             "anyOf": [
@@ -38831,23 +41706,20 @@
             "type": "boolean",
             "title": "Tools Export",
             "default": false
+          },
+          "skills_import": {
+            "type": "boolean",
+            "title": "Skills Import",
+            "default": false
+          },
+          "skills_export": {
+            "type": "boolean",
+            "title": "Skills Export",
+            "default": false
           }
         },
         "type": "object",
         "title": "WorkspacePermissions"
-      },
-      "open_webui__main__UrlForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "title": "UrlForm"
       },
       "open_webui__models__feedbacks__UserResponse": {
         "properties": {
@@ -39074,20 +41946,6 @@
           "model"
         ],
         "title": "ResponsesForm"
-      },
-      "open_webui__routers__ollama__UrlForm": {
-        "properties": {
-          "url": {
-            "type": "string",
-            "title": "Url"
-          }
-        },
-        "type": "object",
-        "required": [
-          "url"
-        ],
-        "title": "UrlForm",
-        "description": "Form carrying a single URL string."
       },
       "open_webui__routers__openai__ConnectionVerificationForm": {
         "properties": {
