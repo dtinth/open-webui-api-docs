@@ -348,6 +348,11 @@
         "summary": "Get Ollama Versions",
         "description": "Return the lowest Ollama version across all configured backends.",
         "operationId": "get_ollama_versions_ollama_api_version__url_idx__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "url_idx",
@@ -396,6 +401,11 @@
         "summary": "Get Ollama Versions",
         "description": "Return the lowest Ollama version across all configured backends.",
         "operationId": "get_ollama_versions_ollama_api_version_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
         "parameters": [
           {
             "name": "url_idx",
@@ -1763,6 +1773,136 @@
         }
       }
     },
+    "/ollama/v1/embeddings/{url_idx}": {
+      "post": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Generate Openai Embeddings",
+        "description": "Forward an embeddings request via the OpenAI-compatible proxy.",
+        "operationId": "generate_openai_embeddings_ollama_v1_embeddings__url_idx__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url_idx",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Url Idx"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Form Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ollama/v1/embeddings": {
+      "post": {
+        "tags": [
+          "ollama"
+        ],
+        "summary": "Generate Openai Embeddings",
+        "description": "Forward an embeddings request via the OpenAI-compatible proxy.",
+        "operationId": "generate_openai_embeddings_ollama_v1_embeddings_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "url_idx",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Url Idx"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "title": "Form Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ollama/v1/chat/completions/{url_idx}": {
       "post": {
         "tags": [
@@ -2847,57 +2987,13 @@
       }
     },
     "/openai/{path}": {
-      "post": {
+      "get": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2941,7 +3037,7 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -2979,13 +3075,57 @@
           }
         }
       },
-      "get": {
+      "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__post",
+        "operationId": "proxy_openai__path__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -3425,51 +3565,6 @@
             }
           }
         }
-      }
-    },
-    "/api/v1/tasks/active/chats": {
-      "post": {
-        "tags": [
-          "tasks"
-        ],
-        "summary": "Check Active Chats",
-        "description": "Check which chat IDs have active tasks.",
-        "operationId": "check_active_chats_api_v1_tasks_active_chats_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ActiveChatsForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
       }
     },
     "/api/v1/tasks/config": {
@@ -5438,7 +5533,7 @@
           "configs"
         ],
         "summary": "Put Terminal Server Policy",
-        "description": "Proxy a policy PUT to an orchestrator terminal server.",
+        "description": "Proxy a policy read or update to an orchestrator terminal server.",
         "operationId": "put_terminal_server_policy_api_v1_configs_terminal_servers_policy_post",
         "requestBody": {
           "content": {
@@ -5483,7 +5578,7 @@
           "configs"
         ],
         "summary": "Put Terminal Server Lifecycle",
-        "description": "Proxy a policy lifecycle PUT to an orchestrator terminal server.",
+        "description": "Proxy a lifecycle read or update to an orchestrator terminal server.",
         "operationId": "put_terminal_server_lifecycle_api_v1_configs_terminal_servers_lifecycle_post",
         "requestBody": {
           "content": {
@@ -5754,6 +5849,76 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ModelsConfigForm"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/configs/subagents": {
+      "get": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Get Subagents Config",
+        "operationId": "get_subagents_config_api_v1_configs_subagents_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubagentsConfigForm"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "configs"
+        ],
+        "summary": "Set Subagents Config",
+        "operationId": "set_subagents_config_api_v1_configs_subagents_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubagentsConfigForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubagentsConfigForm"
                 }
               }
             }
@@ -7283,6 +7448,78 @@
         ]
       }
     },
+    "/api/v1/users/user/variables": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Variables By Session User",
+        "operationId": "get_user_variables_by_session_user_api_v1_users_user_variables_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserVariablesResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/user/variables/update": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update User Variables By Session User",
+        "operationId": "update_user_variables_by_session_user_api_v1_users_user_variables_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserVariablesForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserVariablesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/users/user/info/update": {
       "post": {
         "tags": [
@@ -7339,6 +7576,94 @@
             "HTTPBearer": []
           }
         ]
+      }
+    },
+    "/api/v1/users/usage": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Usage By Session User",
+        "operationId": "get_user_usage_by_session_user_api_v1_users_usage_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 732,
+                  "minimum": 7
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Days"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUsageResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/users/{user_id}": {
@@ -9537,6 +9862,26 @@
               "default": false,
               "title": "Include Folders"
             }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "updated_at",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sort Dir"
+            }
           }
         ],
         "responses": {
@@ -9629,6 +9974,26 @@
               "default": false,
               "title": "Include Folders"
             }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "updated_at",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sort Dir"
+            }
           }
         ],
         "responses": {
@@ -9682,6 +10047,30 @@
             }
           }
         }
+      }
+    },
+    "/api/v1/chats/read": {
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Mark Chats Read By User Id",
+        "operationId": "mark_chats_read_by_user_id_api_v1_chats_read_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
       }
     },
     "/api/v1/chats/stats/usage": {
@@ -10339,6 +10728,26 @@
               "default": 1,
               "title": "Page"
             }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "unread_updated_at",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sort Dir"
+            }
           }
         ],
         "responses": {
@@ -10346,7 +10755,13 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChatTitleIdResponse"
+                  },
+                  "title": "Response Get Chat List By Folder Id Api V1 Chats Folder  Folder Id  List Get"
+                }
               }
             }
           },
@@ -11478,6 +11893,78 @@
         }
       }
     },
+    "/api/v1/chats/{id}/fork": {
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Fork Chat By Id",
+        "operationId": "fork_chat_by_id_api_v1_chats__id__fork_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ForkForm"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Form Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ChatResponse"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Fork Chat By Id Api V1 Chats  Id  Fork Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/chats/{id}/clone": {
       "post": {
         "tags": [
@@ -11859,6 +12346,51 @@
                   "items": {},
                   "title": "Response Get Shared Chat Access By Id Api V1 Chats Shared  Id  Access Get"
                 }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/chats/{id}/unread": {
+      "post": {
+        "tags": [
+          "chats"
+        ],
+        "summary": "Mark Chat Unread By Id",
+        "operationId": "mark_chat_unread_by_id_api_v1_chats__id__unread_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           },
@@ -12424,6 +12956,149 @@
                     }
                   ],
                   "title": "Response Get Note By Id Api V1 Notes  Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/{id}/chat": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Get Note Chat By Id",
+        "operationId": "get_note_chat_by_id_api_v1_notes__id__chat_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Create Note Chat By Id",
+        "operationId": "create_note_chat_by_id_api_v1_notes__id__chat_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notes/{id}/chats": {
+      "get": {
+        "tags": [
+          "notes"
+        ],
+        "summary": "Get Note Chats By Id",
+        "operationId": "get_note_chats_by_id_api_v1_notes__id__chats_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChatResponse"
+                  },
+                  "title": "Response Get Note Chats By Id Api V1 Notes  Id  Chats Get"
                 }
               }
             }
@@ -13447,6 +14122,284 @@
         ]
       }
     },
+    "/api/v1/notifications/events": {
+      "get": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Get Notification Events",
+        "operationId": "get_notification_events_api_v1_notifications_events_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notifications/targets": {
+      "get": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Get Notification Targets",
+        "operationId": "get_notification_targets_api_v1_notifications_targets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Create Notification Target",
+        "operationId": "create_notification_target_api_v1_notifications_targets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationTargetForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/notifications/targets/{target_id}": {
+      "put": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Update Notification Target",
+        "operationId": "update_notification_target_api_v1_notifications_targets__target_id__put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationTargetForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Delete Notification Target",
+        "operationId": "delete_notification_target_api_v1_notifications_targets__target_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/targets/{target_id}/default": {
+      "put": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Set Default Notification Target",
+        "operationId": "set_default_notification_target_api_v1_notifications_targets__target_id__default_put",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/targets/{target_id}/test": {
+      "post": {
+        "tags": [
+          "notifications"
+        ],
+        "summary": "Test Notification Target",
+        "operationId": "test_notification_target_api_v1_notifications_targets__target_id__test_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "target_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Target Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/knowledge/": {
       "get": {
         "tags": [
@@ -13578,6 +14531,38 @@
               ],
               "default": 1,
               "title": "Page"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
             }
           }
         ],
@@ -17338,6 +18323,38 @@
             }
           },
           {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "required": false,
@@ -18667,6 +19684,88 @@
         "summary": "Get Shared Folder Chats",
         "description": "Get chats within a shared folder. Returns readonly flag based on permission.",
         "operationId": "get_shared_folder_chats_api_v1_folders__id__shared_chats_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Page"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "unread_updated_at",
+              "title": "Sort By"
+            }
+          },
+          {
+            "name": "sort_dir",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc",
+              "title": "Sort Dir"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/folders/{id}/read": {
+      "post": {
+        "tags": [
+          "folders"
+        ],
+        "summary": "Mark Folder Chats Read By Id",
+        "operationId": "mark_folder_chats_read_by_id_api_v1_folders__id__read_post",
         "security": [
           {
             "HTTPBearer": []
@@ -22705,13 +23804,13 @@
       }
     },
     "/api/v1/terminals/{server_id}/{path}": {
-      "patch": {
+      "get": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -22764,7 +23863,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -22811,66 +23910,13 @@
           }
         }
       },
-      "get": {
+      "patch": {
         "tags": [
           "terminals"
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -22923,7 +23969,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -22976,7 +24022,7 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -23029,7 +24075,60 @@
         ],
         "summary": "Proxy Terminal",
         "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__patch",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__get",
         "security": [
           {
             "HTTPBearer": []
@@ -23120,6 +24219,22 @@
                 }
               ],
               "title": "Status"
+            }
+          },
+          {
+            "name": "folder_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Folder Id"
             }
           },
           {
@@ -24515,6 +25630,92 @@
         ]
       }
     },
+    "/api/v1/messages/count_tokens": {
+      "post": {
+        "summary": "Count Message Tokens",
+        "operationId": "count_message_tokens_api_v1_messages_count_tokens_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/message/count_tokens": {
+      "post": {
+        "summary": "Count Message Tokens",
+        "operationId": "count_message_tokens_api_message_count_tokens_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/messages": {
       "post": {
         "summary": "Generate Messages",
@@ -25502,26 +26703,15 @@
             "type": "boolean",
             "title": "Allow Users",
             "default": true
+          },
+          "allow_groups": {
+            "type": "boolean",
+            "title": "Allow Groups",
+            "default": true
           }
         },
         "type": "object",
         "title": "AccessGrantsPermissions"
-      },
-      "ActiveChatsForm": {
-        "properties": {
-          "chat_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Chat Ids"
-          }
-        },
-        "type": "object",
-        "required": [
-          "chat_ids"
-        ],
-        "title": "ActiveChatsForm"
       },
       "AddMemoryForm": {
         "properties": {
@@ -25731,6 +26921,11 @@
           "ENABLE_CHANNELS": {
             "type": "boolean",
             "title": "Enable Channels"
+          },
+          "CHANNEL_MODEL_RESPONSE_MODE": {
+            "type": "string",
+            "title": "Channel Model Response Mode",
+            "default": "thread"
           },
           "ENABLE_CALENDAR": {
             "type": "boolean",
@@ -25946,6 +27141,17 @@
             "type": "string",
             "title": "Name"
           },
+          "folder_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Folder Id"
+          },
           "data": {
             "$ref": "#/components/schemas/AutomationData"
           },
@@ -25990,6 +27196,17 @@
           "user_id": {
             "type": "string",
             "title": "User Id"
+          },
+          "folder_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Folder Id"
           },
           "name": {
             "type": "string",
@@ -28146,6 +29363,18 @@
       },
       "ChatConfigForm": {
         "properties": {
+          "CONTEXT_COMPACTION_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Compaction Model",
+            "default": ""
+          },
           "ENABLE_CONTEXT_COMPACTION": {
             "type": "boolean",
             "title": "Enable Context Compaction"
@@ -28153,6 +29382,22 @@
           "CONTEXT_COMPACTION_TOKEN_THRESHOLD": {
             "type": "integer",
             "title": "Context Compaction Token Threshold"
+          },
+          "CONTEXT_COMPACTION_TOKEN_CAP": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Compaction Token Cap"
+          },
+          "CONTEXT_COMPACTION_RETENTION_PERCENTAGE": {
+            "type": "integer",
+            "title": "Context Compaction Retention Percentage",
+            "default": 40
           },
           "CONTEXT_COMPACTION_PROMPT_TEMPLATE": {
             "type": "string",
@@ -28190,6 +29435,18 @@
             "additionalProperties": true,
             "type": "object",
             "title": "Chat"
+          },
+          "variables": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables"
           },
           "folder_id": {
             "anyOf": [
@@ -28243,6 +29500,18 @@
             "type": "object",
             "title": "Chat"
           },
+          "variables": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Variables"
+          },
           "folder_id": {
             "anyOf": [
               {
@@ -28278,6 +29547,17 @@
             ],
             "title": "Pinned",
             "default": false
+          },
+          "current_message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Message Id"
           },
           "created_at": {
             "anyOf": [
@@ -28404,6 +29684,18 @@
               }
             ],
             "title": "Embeds"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
           },
           "done": {
             "type": "boolean",
@@ -28651,6 +29943,12 @@
             "title": "Meta",
             "default": {}
           },
+          "variables": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Variables",
+            "default": {}
+          },
           "folder_id": {
             "anyOf": [
               {
@@ -28684,6 +29982,29 @@
               }
             ],
             "title": "Summary"
+          },
+          "current_message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Message Id"
+          },
+          "context_usage": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context Usage"
           }
         },
         "type": "object",
@@ -28812,6 +30133,11 @@
               }
             ],
             "title": "Snippet"
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active",
+            "default": false
           }
         },
         "type": "object",
@@ -29285,6 +30611,20 @@
               }
             ],
             "title": "Content Extraction Engine"
+          },
+          "CONTENT_EXTRACTION_SUPPORTED_MEDIA_MIME_TYPES": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Extraction Supported Media Mime Types"
           },
           "PDF_EXTRACT_IMAGES": {
             "anyOf": [
@@ -31717,6 +33057,11 @@
             "title": "Is Expanded",
             "default": false
           },
+          "unread_count": {
+            "type": "integer",
+            "title": "Unread Count",
+            "default": 0
+          },
           "created_at": {
             "type": "integer",
             "title": "Created At"
@@ -31794,6 +33139,23 @@
         "type": "object",
         "title": "FolderUpdateForm"
       },
+      "ForkForm": {
+        "properties": {
+          "message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Id"
+          }
+        },
+        "type": "object",
+        "title": "ForkForm"
+      },
       "FunctionForm": {
         "properties": {
           "id": {
@@ -31859,7 +33221,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "name": {
@@ -31899,7 +33268,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "name",
           "type",
           "content",
@@ -31916,7 +33284,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "type": {
@@ -31950,7 +33325,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "type",
           "name",
           "meta",
@@ -31968,7 +33342,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "type": {
@@ -32012,7 +33393,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "type",
           "name",
           "meta",
@@ -32030,7 +33410,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "name": {
@@ -32082,7 +33469,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "name",
           "type",
           "content",
@@ -33043,6 +34429,17 @@
               }
             ]
           },
+          "file_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Count"
+          },
           "write_access": {
             "anyOf": [
               {
@@ -33562,6 +34959,21 @@
             ],
             "title": "Ciphers",
             "default": "ALL"
+          },
+          "enable_group_management": {
+            "type": "boolean",
+            "title": "Enable Group Management",
+            "default": false
+          },
+          "enable_group_creation": {
+            "type": "boolean",
+            "title": "Enable Group Creation",
+            "default": false
+          },
+          "attribute_for_groups": {
+            "type": "string",
+            "title": "Attribute For Groups",
+            "default": "memberOf"
           }
         },
         "type": "object",
@@ -35043,6 +36455,18 @@
               }
             ],
             "title": "Capabilities"
+          },
+          "knowledge": {
+            "anyOf": [
+              {
+                "items": {},
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Knowledge"
           }
         },
         "additionalProperties": true,
@@ -35725,6 +37149,82 @@
         ],
         "title": "NoteUserResponse"
       },
+      "NotificationTargetForm": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type"
+          },
+          "enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enabled"
+          },
+          "events": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Events"
+          },
+          "delivery": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delivery"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config"
+          }
+        },
+        "type": "object",
+        "title": "NotificationTargetForm"
+      },
       "OAuthClientRegistrationForm": {
         "properties": {
           "url": {
@@ -35789,6 +37289,17 @@
       },
       "OAuthConfigForm": {
         "properties": {
+          "ENABLE_OAUTH": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Oauth"
+          },
           "ENABLE_OAUTH_SIGNUP": {
             "anyOf": [
               {
@@ -37790,6 +39301,11 @@
             "title": "Public Notes",
             "default": true
           },
+          "folders": {
+            "type": "boolean",
+            "title": "Folders",
+            "default": false
+          },
           "public_chats": {
             "type": "boolean",
             "title": "Public Chats",
@@ -38314,6 +39830,49 @@
         "additionalProperties": true,
         "type": "object",
         "title": "SnapshotData"
+      },
+      "SubagentsConfigForm": {
+        "properties": {
+          "ENABLE_SUBAGENTS": {
+            "type": "boolean",
+            "title": "Enable Subagents"
+          },
+          "SUBAGENTS_BACKGROUND_ENABLED": {
+            "type": "boolean",
+            "title": "Subagents Background Enabled"
+          },
+          "SUBAGENTS_MAX_CONCURRENT": {
+            "type": "integer",
+            "title": "Subagents Max Concurrent"
+          },
+          "SUBAGENTS_MAX_ASYNC": {
+            "type": "integer",
+            "title": "Subagents Max Async"
+          },
+          "SUBAGENTS_MAX_ITERATIONS": {
+            "type": "integer",
+            "title": "Subagents Max Iterations"
+          },
+          "SUBAGENTS_MAX_OUTPUT": {
+            "type": "integer",
+            "title": "Subagents Max Output"
+          },
+          "SUBAGENTS_SYSTEM_PROMPT": {
+            "type": "string",
+            "title": "Subagents System Prompt"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ENABLE_SUBAGENTS",
+          "SUBAGENTS_BACKGROUND_ENABLED",
+          "SUBAGENTS_MAX_CONCURRENT",
+          "SUBAGENTS_MAX_ASYNC",
+          "SUBAGENTS_MAX_ITERATIONS",
+          "SUBAGENTS_MAX_OUTPUT",
+          "SUBAGENTS_SYSTEM_PROMPT"
+        ],
+        "title": "SubagentsConfigForm"
       },
       "SummaryResponse": {
         "properties": {
@@ -38888,18 +40447,6 @@
               }
             ],
             "title": "Policy Id"
-          },
-          "policy": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Policy"
           }
         },
         "additionalProperties": true,
@@ -38944,16 +40491,22 @@
             "title": "Policy Id"
           },
           "lifecycle_data": {
-            "additionalProperties": true,
-            "type": "object",
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Lifecycle Data"
           }
         },
         "type": "object",
         "required": [
           "url",
-          "policy_id",
-          "lifecycle_data"
+          "policy_id"
         ],
         "title": "TerminalServerLifecycleForm"
       },
@@ -38992,16 +40545,22 @@
             "title": "Policy Id"
           },
           "policy_data": {
-            "additionalProperties": true,
-            "type": "object",
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Policy Data"
           }
         },
         "type": "object",
         "required": [
           "url",
-          "policy_id",
-          "policy_data"
+          "policy_id"
         ],
         "title": "TerminalServerPolicyForm"
       },
@@ -39191,7 +40750,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "name": {
@@ -39243,7 +40809,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "name",
           "meta",
           "updated_at",
@@ -39335,7 +40900,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "name": {
@@ -39343,7 +40915,14 @@
             "title": "Name"
           },
           "content": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Content"
           },
           "specs": {
@@ -39376,9 +40955,7 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "name",
-          "content",
           "specs",
           "meta",
           "updated_at",
@@ -39393,7 +40970,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "name": {
@@ -39422,7 +41006,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "name",
           "meta",
           "updated_at",
@@ -39548,7 +41131,14 @@
             "title": "Id"
           },
           "user_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "User Id"
           },
           "name": {
@@ -39588,7 +41178,6 @@
         "type": "object",
         "required": [
           "id",
-          "user_id",
           "name",
           "meta",
           "updated_at",
@@ -40790,6 +42379,307 @@
         "type": "object",
         "title": "UserUpdateForm"
       },
+      "UserUsageHeatmapEntry": {
+        "properties": {
+          "date": {
+            "type": "string",
+            "title": "Date"
+          },
+          "messages": {
+            "type": "integer",
+            "title": "Messages",
+            "default": 0
+          },
+          "chats": {
+            "type": "integer",
+            "title": "Chats",
+            "default": 0
+          },
+          "tokens": {
+            "type": "integer",
+            "title": "Tokens",
+            "default": 0
+          },
+          "models": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Models"
+          }
+        },
+        "type": "object",
+        "required": [
+          "date"
+        ],
+        "title": "UserUsageHeatmapEntry"
+      },
+      "UserUsageInsights": {
+        "properties": {
+          "most_used_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Most Used Model"
+          },
+          "average_tokens_per_chat": {
+            "type": "number",
+            "title": "Average Tokens Per Chat",
+            "default": 0
+          },
+          "average_messages_per_active_day": {
+            "type": "number",
+            "title": "Average Messages Per Active Day",
+            "default": 0
+          },
+          "user_message_share": {
+            "type": "number",
+            "title": "User Message Share",
+            "default": 0
+          },
+          "assistant_message_share": {
+            "type": "number",
+            "title": "Assistant Message Share",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "UserUsageInsights"
+      },
+      "UserUsageModelEntry": {
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "title": "Model Id"
+          },
+          "messages": {
+            "type": "integer",
+            "title": "Messages",
+            "default": 0
+          },
+          "input_tokens": {
+            "type": "integer",
+            "title": "Input Tokens",
+            "default": 0
+          },
+          "output_tokens": {
+            "type": "integer",
+            "title": "Output Tokens",
+            "default": 0
+          },
+          "total_tokens": {
+            "type": "integer",
+            "title": "Total Tokens",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_id"
+        ],
+        "title": "UserUsageModelEntry"
+      },
+      "UserUsagePeriod": {
+        "properties": {
+          "start_date": {
+            "type": "integer",
+            "title": "Start Date"
+          },
+          "end_date": {
+            "type": "integer",
+            "title": "End Date"
+          },
+          "days": {
+            "type": "integer",
+            "title": "Days"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start_date",
+          "end_date",
+          "days"
+        ],
+        "title": "UserUsagePeriod"
+      },
+      "UserUsageResponse": {
+        "properties": {
+          "totals": {
+            "$ref": "#/components/schemas/UserUsageTotals"
+          },
+          "heatmap": {
+            "items": {
+              "$ref": "#/components/schemas/UserUsageHeatmapEntry"
+            },
+            "type": "array",
+            "title": "Heatmap"
+          },
+          "weekly_heatmap": {
+            "items": {
+              "$ref": "#/components/schemas/UserUsageHeatmapEntry"
+            },
+            "type": "array",
+            "title": "Weekly Heatmap"
+          },
+          "cumulative_heatmap": {
+            "items": {
+              "$ref": "#/components/schemas/UserUsageHeatmapEntry"
+            },
+            "type": "array",
+            "title": "Cumulative Heatmap"
+          },
+          "insights": {
+            "$ref": "#/components/schemas/UserUsageInsights"
+          },
+          "top_models": {
+            "items": {
+              "$ref": "#/components/schemas/UserUsageModelEntry"
+            },
+            "type": "array",
+            "title": "Top Models"
+          },
+          "top_tools": {
+            "items": {
+              "$ref": "#/components/schemas/UserUsageToolEntry"
+            },
+            "type": "array",
+            "title": "Top Tools",
+            "default": []
+          },
+          "period": {
+            "$ref": "#/components/schemas/UserUsagePeriod"
+          }
+        },
+        "type": "object",
+        "required": [
+          "totals",
+          "heatmap",
+          "weekly_heatmap",
+          "cumulative_heatmap",
+          "insights",
+          "top_models",
+          "period"
+        ],
+        "title": "UserUsageResponse"
+      },
+      "UserUsageToolEntry": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "count"
+        ],
+        "title": "UserUsageToolEntry"
+      },
+      "UserUsageTotals": {
+        "properties": {
+          "lifetime_tokens": {
+            "type": "integer",
+            "title": "Lifetime Tokens",
+            "default": 0
+          },
+          "input_tokens": {
+            "type": "integer",
+            "title": "Input Tokens",
+            "default": 0
+          },
+          "output_tokens": {
+            "type": "integer",
+            "title": "Output Tokens",
+            "default": 0
+          },
+          "peak_daily_tokens": {
+            "type": "integer",
+            "title": "Peak Daily Tokens",
+            "default": 0
+          },
+          "longest_chat_seconds": {
+            "type": "integer",
+            "title": "Longest Chat Seconds",
+            "default": 0
+          },
+          "current_streak": {
+            "type": "integer",
+            "title": "Current Streak",
+            "default": 0
+          },
+          "longest_streak": {
+            "type": "integer",
+            "title": "Longest Streak",
+            "default": 0
+          },
+          "total_chats": {
+            "type": "integer",
+            "title": "Total Chats",
+            "default": 0
+          },
+          "active_days": {
+            "type": "integer",
+            "title": "Active Days",
+            "default": 0
+          },
+          "models_used": {
+            "type": "integer",
+            "title": "Models Used",
+            "default": 0
+          },
+          "messages": {
+            "type": "integer",
+            "title": "Messages",
+            "default": 0
+          },
+          "user_messages": {
+            "type": "integer",
+            "title": "User Messages",
+            "default": 0
+          },
+          "assistant_messages": {
+            "type": "integer",
+            "title": "Assistant Messages",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "UserUsageTotals"
+      },
+      "UserVariablesForm": {
+        "properties": {
+          "variables": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "title": "UserVariablesForm"
+      },
+      "UserVariablesResponse": {
+        "properties": {
+          "variables": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Variables"
+          }
+        },
+        "type": "object",
+        "title": "UserVariablesResponse"
+      },
       "ValidationError": {
         "properties": {
           "loc": {
@@ -41000,6 +42890,17 @@
               }
             ],
             "title": "Searxng Language"
+          },
+          "OPENSERP_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Openserp Base Url"
           },
           "YACY_QUERY_URL": {
             "anyOf": [
