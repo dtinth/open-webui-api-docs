@@ -3348,101 +3348,57 @@
       }
     },
     "/openai/{path}": {
-      "delete": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "openai"
-        ],
-        "summary": "Proxy",
-        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__delete",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "tags": [
           "openai"
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -3486,7 +3442,51 @@
         ],
         "summary": "Proxy",
         "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
-        "operationId": "proxy_openai__path__delete",
+        "operationId": "proxy_openai__path__post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "openai"
+        ],
+        "summary": "Proxy",
+        "description": "Deprecated: proxy all requests to OpenAI API.\nDisabled by default. Set ENABLE_OPENAI_API_PASSTHROUGH=True to enable.",
+        "operationId": "proxy_openai__path__post",
         "security": [
           {
             "HTTPBearer": []
@@ -4434,19 +4434,39 @@
         ]
       }
     },
-    "/api/v1/images/config/url/verify": {
-      "get": {
+    "/api/v1/images/verify": {
+      "post": {
         "tags": [
           "images"
         ],
-        "summary": "Verify Url",
-        "operationId": "verify_url_api_v1_images_config_url_verify_get",
+        "summary": "Verify Connection",
+        "operationId": "verify_connection_api_v1_images_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/open_webui__routers__images__ConnectionVerificationForm"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -6385,10 +6405,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PromptSuggestion"
-                  },
-                  "type": "array",
+                  "additionalProperties": true,
+                  "type": "object",
                   "title": "Response Set Default Suggestions Api V1 Configs Suggestions Post"
                 }
               }
@@ -13927,6 +13945,36 @@
         }
       }
     },
+    "/api/v1/models/all": {
+      "get": {
+        "tags": [
+          "models"
+        ],
+        "summary": "Get All Model Records",
+        "operationId": "get_all_model_records_api_v1_models_all_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ModelResponse"
+                  },
+                  "type": "array",
+                  "title": "Response Get All Model Records Api V1 Models All Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/v1/models/base/tags": {
       "get": {
         "tags": [
@@ -14107,27 +14155,58 @@
         ],
         "summary": "Export Models",
         "operationId": "export_models_api_v1_models_export_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Ids"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ModelModel"
-                  },
                   "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelExportResponse"
+                  },
                   "title": "Response Export Models Api V1 Models Export Get"
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/models/import": {
@@ -19902,7 +19981,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/FolderResponse"
+                }
               }
             }
           },
@@ -24232,50 +24313,6 @@
         ]
       }
     },
-    "/api/v1/utils/pdf": {
-      "post": {
-        "tags": [
-          "utils"
-        ],
-        "summary": "Download Chat As Pdf",
-        "operationId": "download_chat_as_pdf_api_v1_utils_pdf_post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChatTitleMessagesForm"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
-      }
-    },
     "/api/v1/utils/db/download": {
       "get": {
         "tags": [
@@ -24328,112 +24365,6 @@
     },
     "/api/v1/terminals/{server_id}/{path}": {
       "head": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "terminals"
-        ],
-        "summary": "Proxy Terminal",
-        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
-        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "server_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Server Id"
-            }
-          },
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
         "tags": [
           "terminals"
         ],
@@ -24592,6 +24523,59 @@
           }
         }
       },
+      "get": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "terminals"
@@ -24646,6 +24630,59 @@
         }
       },
       "delete": {
+        "tags": [
+          "terminals"
+        ],
+        "summary": "Proxy Terminal",
+        "description": "Proxy a request to the admin terminal server identified by *server_id*.",
+        "operationId": "proxy_terminal_api_v1_terminals__server_id___path__head",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "server_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Server Id"
+            }
+          },
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
         "tags": [
           "terminals"
         ],
@@ -27411,6 +27448,11 @@
             "type": "string",
             "title": "Webui Url"
           },
+          "ENABLE_LOGIN_FORM": {
+            "type": "boolean",
+            "title": "Enable Login Form",
+            "default": true
+          },
           "ENABLE_SIGNUP": {
             "type": "boolean",
             "title": "Enable Signup"
@@ -27446,6 +27488,23 @@
               }
             ],
             "title": "Default Interface Settings"
+          },
+          "I18N": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "I18N"
           },
           "JWT_EXPIRES_IN": {
             "type": "string",
@@ -28042,6 +28101,23 @@
       },
       "BannerModel": {
         "properties": {
+          "i18n": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "I18N"
+          },
           "id": {
             "type": "string",
             "title": "Id"
@@ -30196,6 +30272,18 @@
             "title": "Pinned",
             "default": false
           },
+          "archived": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Archived",
+            "default": false
+          },
           "current_message_id": {
             "anyOf": [
               {
@@ -30786,6 +30874,11 @@
             "type": "boolean",
             "title": "Active",
             "default": false
+          },
+          "archived": {
+            "type": "boolean",
+            "title": "Archived",
+            "default": false
           }
         },
         "type": "object",
@@ -30796,28 +30889,6 @@
           "created_at"
         ],
         "title": "ChatTitleIdResponse"
-      },
-      "ChatTitleMessagesForm": {
-        "properties": {
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
-          "messages": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "type": "array",
-            "title": "Messages"
-          }
-        },
-        "type": "object",
-        "required": [
-          "title",
-          "messages"
-        ],
-        "title": "ChatTitleMessagesForm"
       },
       "ChatUsageStatsListResponse": {
         "properties": {
@@ -31908,6 +31979,11 @@
           "ENABLE_DIRECT_CONNECTIONS": {
             "type": "boolean",
             "title": "Enable Direct Connections"
+          },
+          "ENABLE_DIRECT_INTEGRATIONS": {
+            "type": "boolean",
+            "title": "Enable Direct Integrations",
+            "default": false
           },
           "ENABLE_BASE_MODELS_CACHE": {
             "type": "boolean",
@@ -33755,6 +33831,105 @@
         },
         "type": "object",
         "title": "FolderParentIdForm"
+      },
+      "FolderResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "parent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Items"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "is_expanded": {
+            "type": "boolean",
+            "title": "Is Expanded",
+            "default": false
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "access_grants": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Access Grants",
+            "default": []
+          },
+          "write_access": {
+            "type": "boolean",
+            "title": "Write Access",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "FolderResponse"
       },
       "FolderUpdateForm": {
         "properties": {
@@ -36712,6 +36887,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "pattern": "^\\S+$",
             "title": "Id"
           },
           "name": {
@@ -36964,10 +37140,86 @@
         ],
         "title": "ModelChatsResponse"
       },
+      "ModelExportResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "base_model_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Model Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "params": {
+            "$ref": "#/components/schemas/ModelParams"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/ModelMeta"
+          },
+          "access_grants": {
+            "items": {
+              "$ref": "#/components/schemas/AccessGrantModel"
+            },
+            "type": "array",
+            "title": "Access Grants"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "background_image_data": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Background Image Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "name",
+          "params",
+          "meta",
+          "is_active",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "ModelExportResponse"
+      },
       "ModelForm": {
         "properties": {
           "id": {
             "type": "string",
+            "pattern": "^\\S+$",
             "title": "Id"
           },
           "base_model_id": {
@@ -37091,6 +37343,17 @@
             ],
             "title": "Profile Image Url"
           },
+          "background_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Background Image Url"
+          },
           "description": {
             "anyOf": [
               {
@@ -37102,6 +37365,18 @@
             ],
             "title": "Description",
             "description": "User-facing description of the model."
+          },
+          "i18n": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "I18N"
           },
           "capabilities": {
             "anyOf": [
@@ -40339,11 +40614,30 @@
       "SetDefaultSuggestionsForm": {
         "properties": {
           "suggestions": {
-            "items": {
-              "$ref": "#/components/schemas/PromptSuggestion"
-            },
-            "type": "array",
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PromptSuggestion"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Suggestions"
+          },
+          "i18n": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "I18N"
           }
         },
         "type": "object",
@@ -40770,6 +41064,23 @@
       },
       "SkillMeta": {
         "properties": {
+          "i18n": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "I18N"
+          },
           "tags": {
             "anyOf": [
               {
@@ -41599,6 +41910,11 @@
             "title": "Auth Type",
             "default": "bearer"
           },
+          "forward_cookies": {
+            "type": "boolean",
+            "title": "Forward Cookies",
+            "default": false
+          },
           "config": {
             "anyOf": [
               {
@@ -42045,6 +42361,23 @@
       },
       "ToolMeta": {
         "properties": {
+          "i18n": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "I18N"
+          },
           "description": {
             "anyOf": [
               {
@@ -42230,6 +42563,11 @@
               }
             ],
             "title": "Auth Type"
+          },
+          "forward_cookies": {
+            "type": "boolean",
+            "title": "Forward Cookies",
+            "default": false
           },
           "headers": {
             "anyOf": [
@@ -44285,6 +44623,39 @@
             ],
             "title": "Tavily Api Key"
           },
+          "STAAN_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Staan Api Key"
+          },
+          "STAAN_MARKET": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Staan Market"
+          },
+          "STAAN_MAX_SNIPPETS": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Staan Max Snippets"
+          },
           "SEARCHAPI_API_KEY": {
             "anyOf": [
               {
@@ -44383,6 +44754,18 @@
               }
             ],
             "title": "Exa Api Key"
+          },
+          "EXA_MAX_CONTENT_LENGTH": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exa Max Content Length"
           },
           "PERPLEXITY_API_KEY": {
             "anyOf": [
@@ -44970,6 +45353,35 @@
           "content"
         ],
         "title": "MessageForm"
+      },
+      "open_webui__routers__images__ConnectionVerificationForm": {
+        "properties": {
+          "engine": {
+            "type": "string",
+            "title": "Engine"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "engine",
+          "url"
+        ],
+        "title": "ConnectionVerificationForm"
       },
       "open_webui__routers__ollama__ConnectionVerificationForm": {
         "properties": {
